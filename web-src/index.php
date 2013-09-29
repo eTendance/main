@@ -8,6 +8,6 @@
         Welcome to eTendance 1.0 Pre-Alpha!
         <br /><br />
         <a href="login.php">Login</a>
-        <a href="login.php">Register</a>
+        <a href="register.php">Register</a>
     </body>
 </html>

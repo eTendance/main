@@ -27,4 +27,9 @@ function check_auth($reqtype){
    
 }
 
+function showdashboard(){
+    header('Location: professordashboard.php');
+    exit;
+}
+
 ?>
