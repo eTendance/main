@@ -14,7 +14,7 @@ if(isset($_POST['createclass'])){
         if(!empty($_POST['classname'])){
             
             //insert the class and create the association with this professor
-            mysql_query('INSERT INTO classes (`name`) values ("'.mysql_real_escape_string($_POST['classname']).'")');
+            mysql_query('INSERT INTO classes (`name`,`enrollmentcode`) values ("'.mysql_real_escape_string($_POST['classname']).'","'.strtoupper(generateRandomString(10)).'")');
             mysql_query('INSERT INTO classowners (`professorid`, `classid`) values("'.$_SESSION['userdata']['id'].'","'.mysql_insert_id().'")');
             
         }    
@@ -39,11 +39,11 @@ if(isset($_GET['action'])){
         <title>Professor Dashboard</title>
     </head>
     <body>
-        <h1>Your Class List</h1>
-<br />
+        <h1>Professor Dashboard</h1>
+        <h2>Your classes</h2>
 <?php
 //select courses that this professor owns
-$result = mysql_query('SELECT * FROM classes join classowners on classes.id=classowners.classid WHERE professorid="'.  mysql_real_escape_string($_SESSION['userdata']['id']).'"') or die(mysql_error());
+$result = mysql_query('SELECT classes.id,classes.name FROM classes join classowners on classes.id=classowners.classid WHERE professorid="'.  mysql_real_escape_string($_SESSION['userdata']['id']).'"') or die(mysql_error());
 for($i=0; $row=mysql_fetch_assoc($result);$i++){
     echo $row['name'] . ' <a href="viewclass.php?id='.$row['id'].'">View Class</a> <a href="professordashboard.php?action=deleteclass&amp;classid='.$row['id'].'">Delete class</a><br />';
 }
