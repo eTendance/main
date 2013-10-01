@@ -57,3 +57,19 @@ nav li li a
 body
 {
 	padding-top: 1em;
+}
+#features
+{
+	float:left;
+	width:74%;
+	background-color:red;
+	border:solid;
+}
+
+#signUp
+{
+	width: 25%;
+	background-color:blue;
+	border:solid;
+	float:right;
+}
