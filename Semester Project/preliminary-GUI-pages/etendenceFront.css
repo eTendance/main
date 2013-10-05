@@ -15,9 +15,17 @@ nav ul
 }
 nav li
 {
+	float:right;
+	border:outset 1px;
+	margin-right:10px;
+}
+#logoPlacement
+{
 	float:left;
 	border:outset 1px;
-	margin-right:5px;
+	display:block;
+	padding.5em;
+	float:left;
 }
 nav li a
 {
@@ -26,12 +34,7 @@ nav li a
 	border:1px solid #f9f9f9;
 	padding:.5em;
 }
-nav li a:hover
-{
-	background-color:#333;
-	color: #fff;
-	text-decoration:none;
-}
+
 nav li ul
 {
 	display:none;
@@ -53,6 +56,10 @@ nav li li a
 	border:0;
 	border-left: 1px solid #ccc;
 	border-right:1px solid #ccc;
+}
+#studentLogin
+{
+	margin-right: 10em;
 }
 body
 {
