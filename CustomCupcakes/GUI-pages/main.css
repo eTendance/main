@@ -1,0 +1,17 @@
+#newUser
+{
+	display:block;
+	float:left;
+	width:25%
+}
+#returningUser
+{
+	display:block;
+	float:right;
+	width:25%;
+}
+footer
+{
+	float:right;
+	clear:both;
+}
