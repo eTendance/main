@@ -1,0 +1,62 @@
+nav
+{
+	position: absolute;
+	top: 0;
+	left:0;
+	width:100%;
+	border-bottom:2px solid #ccc;
+	background:#f9f9f9;
+}
+nav ul
+{
+	list-style:none;
+	margin:0;
+	padding: .3em;
+}
+nav li
+{
+	float:right;
+	border:outset 1px;
+	margin-right:10px;
+}
+#logoPlacement
+{
+	float:left;
+	border:outset 1px;
+	display:block;
+	padding.5em;
+	float:left;
+}
+nav li a
+{
+	display: block;
+	background-color:#f9f9f9;
+	border:1px solid #f9f9f9;
+	padding:.5em;
+}
+body
+{
+	padding-top: 1em;
+}
+#add
+{
+	float:left;
+	width:25%;
+	background-color:red;
+	margin-left: 5em;
+	margin-top:5em;
+}
+#classes
+{
+	float:right;
+	width:25%;
+	background-color:blue;
+	margin-right:5em;
+	margin-top:5em;
+}
+#classes table tr td
+{
+	float:none;
+	display:block;
+	background-color:white;
+}
