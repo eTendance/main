@@ -11,7 +11,7 @@
 				<img src="" alt="eTendence Logo" id="logoPlacement" />
 				<li id="studentLogin"><a>Student
 					<ul>
-						<li><a><form action="../web-src/login.php" method="get">
+						<li><a><form action="<?php echo $_SERVER['../web-src/login.php'] ?>" method="get">
 						<div> Username:<input type="text" name="username" value="" maxlength="30"/> </div>
 						<div> Password: <input type="text" name="password" value="" maxlength="30"/> </div>
 						<div><input type="submit" value="Submit"/></div>
@@ -20,7 +20,7 @@
 				</a></li>
 				<li><a>Professor
 					<ul>
-						<li><a><form action="../web-src/login.php" method="get">
+						<li><a><form action="<?php echo $_SERVER['../web-src/login.php'] ?>" method="get">
 						<div> Username:<input type="text" name="username" value="" maxlength="30"/> </div>
 						<div> Password: <input type="text" name="password" value="" maxlength="30"/> </div>
 						<div> <input type="submit" value="Submit"/> </div>
@@ -34,7 +34,7 @@
 		</div>
 		<div id="signUp">
 			<h2>Sign Up</h2>
-			<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+			<form action="<?php echo $_SERVER['../web-src/register.php'] ?>" method="post">
 			<table>
 				<tr>
 					<td>First Name:</td>
