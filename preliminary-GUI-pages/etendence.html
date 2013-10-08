@@ -9,24 +9,18 @@
 		<nav>
 			<ul>
 				<img src="" alt="eTendence Logo" id="logoPlacement" />
-				<li id="studentLogin"><a>Student
-					<ul>
-						<li><a><form action="<?php echo $_SERVER['../web-src/login.php'] ?>" method="get">
-						<div> Username:<input type="text" name="username" value="" maxlength="30"/> </div>
-						<div> Password: <input type="text" name="password" value="" maxlength="30"/> </div>
-						<div><input type="submit" value="Submit"/></div>
-						</form></a></li>
-					</ul>
-				</a></li>
-				<li><a>Professor
-					<ul>
-						<li><a><form action="<?php echo $_SERVER['../web-src/login.php'] ?>" method="get">
-						<div> Username:<input type="text" name="username" value="" maxlength="30"/> </div>
-						<div> Password: <input type="text" name="password" value="" maxlength="30"/> </div>
-						<div> <input type="submit" value="Submit"/> </div>
-						</form></a></li>
-					</ul>
-				</a></li>
+				<form action="<?php echo $_SERVER['../web-src/login.php'] ?>" method="get">
+				
+				<li>
+					<input type="submit" value="Submit"/>
+				</li>
+				<li>
+					Password: <input type="text" name="password" value="" maxlength="30"/>
+				</li>
+				<li>
+					Username:<input type="text" name="username" value="" maxlength="30"/>
+				</li>
+				</form>
 			</ul>
 		</nav>
 		<div id="features">

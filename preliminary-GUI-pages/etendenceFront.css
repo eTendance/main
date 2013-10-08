@@ -27,36 +27,7 @@ nav li
 	padding.5em;
 	float:left;
 }
-nav li a
-{
-	display: block;
-	background-color:#f9f9f9;
-	border:1px solid #f9f9f9;
-	padding:.5em;
-}
 
-nav li ul
-{
-	display:none;
-	position:absolute;
-	padding:0;
-}
-nav li:hover ul
-{
-	display:block;
-}
-
-nav li li
-{
-	float:none;
-	border-bottom: 1px solid #ccc;
-}
-nav li li a
-{
-	border:0;
-	border-left: 1px solid #ccc;
-	border-right:1px solid #ccc;
-}
 #studentLogin
 {
 	margin-right: 10em;
