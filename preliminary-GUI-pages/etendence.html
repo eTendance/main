@@ -9,16 +9,16 @@
 		<nav>
 			<ul>
 				<img src="" alt="eTendence Logo" id="logoPlacement" />
-				<form action="<?php echo $_SERVER['../web-src/login.php'] ?>" method="get">
+				<form action="../web-src/login.php" method="get">
 				
 				<li>
 					<input type="submit" value="Submit"/>
 				</li>
 				<li>
-					Password: <input type="text" name="password" value="" maxlength="30"/>
+					<label for="password">Password: <input type="text" name="password" id="password" value="" maxlength="30"/></label>
 				</li>
 				<li>
-					Username:<input type="text" name="username" value="" maxlength="30"/>
+					<label for="username">Username: <input type="text" name="username" id="username" value="" maxlength="30"/> </label>
 				</li>
 				</form>
 			</ul>
@@ -28,36 +28,42 @@
 		</div>
 		<div id="signUp">
 			<h2>Sign Up</h2>
-			<form action="<?php echo $_SERVER['../web-src/register.php'] ?>" method="post">
-			<table>
-				<tr>
-					<td>First Name:</td>
-					<td><input type="text" name="firstname" value="" maxlength="30"/></td>
-				</tr>
-				<tr>
-					<td>Last Name:</td>
-					<td><input type="text" name="lastname" value="" maxlength="30"/></td>
-				</tr>
-				<tr>
-					<td>e-mail:</td>
-					<td><input type="text" name="email" value="" maxlength="30"/> </td>
-				</tr>
-				<tr>
-					<td>Username: </td>
-					<td><input type="text" name="username" value="" maxlength="30"/></td>
-				</tr>
-				<tr>
-					<td>password:</td> 
-					<td><input type="text" name="password" value="" maxlength="30"/></td>
-				</tr>
-				<tr>
-					<td>Account type</td>
-					<td><select name="StudentorTeacher"> <option id="s">Student</option> <option id="p">Professor</option> </select></td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="Register"/></td>
-				</tr>
-			</table>
+			<form action="../web-src/register.php" method="post">
+			<div>
+					<span>
+					<label for="firstname">First Name: </label>
+					<input type="text" name="firstname" id="firstname" value="" maxlength="30"/>
+					</span>
+
+					<span>
+					<label for="lastname">Last Name: </label>
+					<input type="text" name="lastname" id="lastname" value="" maxlength="30"/>
+					</span>				
+
+					<span>
+					<label for="email">e-mail: </label>
+					<input type="text" name="email" id="email" value="" maxlength="30"/>
+					</span>
+
+					<span>
+					<label for="usernameS">Username: </label>
+					<input type="text" name="username" id="usernameS" value="" maxlength="30"/>
+					</span>
+
+					<span>
+					<label for="passwordS">Password: </label>
+					<input type="text" name="password" id="passwordS value="" maxlength="30"/>
+					</span>
+
+					<span>
+					Account type
+					<select name="StudentorTeacher"> <option id="s">Student</option> <option id="p">Professor</option> </select>
+					</span>
+					<span>
+					<input type="submit" value="Register"/>
+					</span>
+				
+			</div>
 			</form>
 		</div>
 	</body>

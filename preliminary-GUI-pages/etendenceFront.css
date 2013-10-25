@@ -51,3 +51,8 @@ body
 	border:solid;
 	float:right;
 }
+#signUp form div span
+{
+	float:left;
+	clear:both;
+}
