@@ -16,35 +16,33 @@
 			<h2>Add a Class</h2>
 			<div>
 				<form action="" method="POST">
-				<table>
-					<tr>
-						<td>Class Name: </td>
-						<td><input type="text" name="cName" value="" maxlength="30"/></td>
-					</tr>
-					<tr>
-						<td>Meeting times</td>
-					</tr>
-				</table>
-				<table id="meetTime">
-					<tr>
-						<td>Start Time: </td>
-						<td><input type="text" name="sTime" value="" maxlength="8"/></td>
-					</tr>
-					<tr>
-						<td>End Time: </td>
-						<td><input type="text" name="eTime" value="" maxlength="8"/></td>
-					</tr>
-					<tr>
-						<td>Days of the Week (use abreviated form): </td>
-						<td><input type="checkbox" name="days" value="Mo"/>Mo
+				<div>
+						<label for="cName">Class Name:</label>
+						<input type="text" name="cName" value="" maxlength="30"/>
+				</div>
+				<div>
+				<span>Meeting times</span>
+						<span class="meetTime">
+						<label for="sTime">Start Time:</label>
+						<input type="text" name="sTime" value="" maxlength="8"/>
+						</span>
+
+						<span class="meetTime">
+						<label for="eTime">End Time:</label> 
+						<input type="text" name="eTime" value="" maxlength="8"/>
+						</span>
+
+						<span class="meetTime" id="end">
+						<label for="days">Days of the Week:</label>
+						<input type="checkbox" name="days" value="Mo"/>Mo
 <input type="checkbox" name="days" value="Tu"/>Tu 
 <input type="checkbox" name="days" value="We"/>We 
 <input type="checkbox" name="days" value="Th"/>Th 
 <input type="checkbox" name="days" value="Fr"/>Fr 
 <input type="checkbox" name="days" value="Sa"/>Sa 
-<input type="checkbox" name="days" value="Su"/>Su</td>
-					</tr>
-				</table>
+<input type="checkbox" name="days" value="Su"/>Su
+						</span>
+				</div>
 				<table>
 					<tr>
 						<td>Brief Class description:</td>

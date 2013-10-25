@@ -49,11 +49,33 @@ body
 }
 #add div
 {
-	margin-left:5em;
+	margin-left:3em;
 }
-#meetTime
+#add div div span
+{
+	float:left;
+	clear: both;
+	display:block;
+}
+#add div div span label
+{
+	float:left;
+}
+#add div div span input
+{
+	float:left;
+}
+.meetTime
 {
 	margin-left:1em;
+}
+#end
+{
+	float:none;
+}
+#end
+{
+	float:none;
 }
 #classes
 {
