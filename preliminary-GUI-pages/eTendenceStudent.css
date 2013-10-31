@@ -43,14 +43,14 @@ body
 #add
 {
 	float:left;
-	width:35%;
+	width:45em;
 	background-color:cyan;
 	padding-bottom:3em;
 }
 #classes
 {
 	float:right;
-	width:50%;
+	width:50em;
 	background-color:cyan;
 	margin-right:5em;
 	margin-top:5em;
@@ -61,7 +61,7 @@ body
 	background-color:cyan;
 	float:left;
 	clear:left;
-	width:25%;
+	width:30em;
 }
 body div form
 {

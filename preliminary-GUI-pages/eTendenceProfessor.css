@@ -46,11 +46,12 @@ body div h2
 #add
 {
 	float:left;
-	width:35%;
+	width:35em;
 	background-color:salmon;
 	margin-left: 5em;
 	margin-top:5em;
 	padding-bottom:3em;
+	wrap:normal;
 }
 #add div
 {
@@ -102,11 +103,12 @@ body div h2
 #classes
 {
 	float:right;
-	width:25%;
+	width:25em;
 	background-color:salmon;
 	margin-right:5em;
 	margin-top:5em;
 	margin-bottom:5em;
+	wrap:normal;
 }
 #classes ul
 {
