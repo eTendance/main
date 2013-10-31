@@ -24,17 +24,17 @@
 				<span>Meeting times</span>
 						<span class="meetTime">
 						<label for="sTime">Start Time:</label>
-						<input type="text" name="sTime" value="" maxlength="8"/>
+						<span><input type="text" name="sTime" value="" maxlength="8"/></span>
 						</span>
 
 						<span class="meetTime">
 						<label for="eTime">End Time:</label> 
-						<input type="text" name="eTime" value="" maxlength="8"/>
+						<span><input type="text" name="eTime" value="" maxlength="8"/></span>
 						</span>
 
 						<span class="meetTime" id="end">
 						<label for="days">Days of the Week:</label>
-						<input type="checkbox" name="days" value="Mo"/>Mo
+<input type="checkbox" name="days" value="Mo"/>Mo
 <input type="checkbox" name="days" value="Tu"/>Tu 
 <input type="checkbox" name="days" value="We"/>We 
 <input type="checkbox" name="days" value="Th"/>Th 
@@ -43,28 +43,25 @@
 <input type="checkbox" name="days" value="Su"/>Su
 						</span>
 				</div>
-				<table>
-					<tr>
-						<td>Brief Class description:</td>
-						<td><textarea cols="50" rows="4" name="description" value=""></textarea></td>
-					</tr>
-					<tr>
-						<td><input type="submit" value="Submit"/></td>
-					</tr>
-				</table>
+				<div>
+					<label for="descr">Brief Class description:</label><textarea cols="50" rows="4" name="description" id="descr" value=""></textarea>
+				</div>
+				<div>
+					<input type="submit" value="Submit"/>
+				</div>
 				</form>
 			</div>
 		</div>
 		<div id="classes">
 			<h2>Classes</h2>
-			<table>
-				<tr>
-					<td>test</td>
-				</tr>
-				<tr>
-					<td>test</td>
-				</tr>
-			</table>
+			<ul>
+				<li>Test</li>
+				<li>Test1</li>
+			</ul>
+			<ul>
+				<li>Test3</li>
+				<li>Test4</li>
+			</ul>
 		</div>
 	</body>
 </html>

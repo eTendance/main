@@ -37,12 +37,17 @@ nav li a
 body
 {
 	padding-top: 1em;
+	background-color:red;
+}
+body div h2
+{
+	margin-left: 1em;
 }
 #add
 {
 	float:left;
 	width:35%;
-	background-color:red;
+	background-color:salmon;
 	margin-left: 5em;
 	margin-top:5em;
 	padding-bottom:3em;
@@ -57,6 +62,11 @@ body
 	clear: both;
 	display:block;
 }
+#add div div span
+{
+	display:block;
+	width:35em;
+}
 #add div div span label
 {
 	float:left;
@@ -65,13 +75,25 @@ body
 {
 	float:left;
 }
-.meetTime
+#add div div .meetTime label
 {
-	margin-left:1em;
+	float:left;
+	clear:none;
 }
-#end
+#add div div .meetTime input
 {
 	float:none;
+	clear:none;
+}
+.meetTime
+{
+	margin-left:2em;
+}
+.meetTime span
+{
+	float:right;
+	margin-left:2em;
+	margin-bottom:1em;
 }
 #end
 {
@@ -81,13 +103,21 @@ body
 {
 	float:right;
 	width:25%;
-	background-color:blue;
+	background-color:salmon;
 	margin-right:5em;
 	margin-top:5em;
+	margin-bottom:5em;
 }
-#classes table tr td
+#classes ul
 {
-	float:none;
-	display:block;
-	background-color:white;
+	list-style:none;
+}
+#classes li
+{
+	float:left;
+	margin-right:0.5em;
+}
+#classes li:nth-child(1)
+{
+	width:15em;
 }
