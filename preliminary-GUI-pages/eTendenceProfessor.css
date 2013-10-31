@@ -103,12 +103,16 @@ body div h2
 #classes
 {
 	float:right;
-	width:25em;
+	width:50em;
 	background-color:salmon;
 	margin-right:5em;
 	margin-top:5em;
 	margin-bottom:5em;
 	wrap:normal;
+}
+#classes form
+{
+	margin-left:3em;
 }
 #classes ul
 {
@@ -121,5 +125,5 @@ body div h2
 }
 #classes li:nth-child(1)
 {
-	width:15em;
+	width:30em;
 }

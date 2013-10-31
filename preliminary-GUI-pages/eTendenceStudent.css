@@ -54,6 +54,8 @@ body
 	background-color:cyan;
 	margin-right:5em;
 	margin-top:5em;
+	margin-bottom:5em;
+	wrap:normal;
 }
 #checkIn
 {
@@ -71,4 +73,21 @@ body div
 {
 	margin-top:5em;
 	margin-left:3em;
+}
+body div h2
+{
+	margin-left:2em;
+}
+#classes form ul
+{
+	list-style:none;
+}
+#classes form li
+{
+	float:left;
+	margin-right:0.5em;
+}
+#classes form li:nth-child(1)
+{
+	width:25em;
 }
