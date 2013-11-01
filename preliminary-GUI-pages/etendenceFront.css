@@ -55,4 +55,14 @@ body
 {
 	float:left;
 	clear:both;
+	display:block;
+	width:14em;
+}
+#signUp form div span label
+{
+	float:left;
+}
+#signUp form div span input
+{
+	float:right;
 }

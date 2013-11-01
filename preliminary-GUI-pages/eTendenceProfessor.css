@@ -65,14 +65,12 @@ body div h2
 }
 #add div div span
 {
+	float:left;
+	clear:both;
 	display:block;
 	width:35em;
 }
 #add div div span label
-{
-	float:left;
-}
-#add div div span input
 {
 	float:left;
 }
