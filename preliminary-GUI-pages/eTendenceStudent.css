@@ -5,7 +5,7 @@ nav
 	left:0;
 	width:100%;
 	border-bottom:2px solid #ccc;
-	background:#f9f9f9;
+	background:BLUE;
 }
 nav ul
 {
@@ -20,6 +20,12 @@ nav li
 	margin-right:10px;
 }
 
+#studName
+{
+	color:white;
+	box-shadow: 2px 2px 3px black;
+}
+
 #logoPlacement
 {
 	float:left;
@@ -27,6 +33,7 @@ nav li
 	display:block;
 	padding.5em;
 	float:left;
+	background:white;
 }
 nav li a
 {
@@ -37,21 +44,25 @@ nav li a
 }
 body
 {
-	background-color:blue;
 	padding-top: 1em;
 }
+
 #add
 {
+	border-radius:1em;
 	float:left;
 	width:45em;
 	background-color:cyan;
+	border:solid;
 	padding-bottom:3em;
 }
 #classes
 {
+	border-radius:1em;
 	float:right;
 	width:50em;
 	background-color:cyan;
+	border:solid;
 	margin-right:5em;
 	margin-top:5em;
 	margin-bottom:5em;
@@ -59,8 +70,10 @@ body
 }
 #checkIn
 {
+	border-radius:1em;
 	padding-bottom:2em;
 	background-color:cyan;
+	border:solid;
 	float:left;
 	clear:left;
 	width:30em;

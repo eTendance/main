@@ -28,16 +28,13 @@ nav li
 	float:left;
 }
 
-#studentLogin
-{
-	margin-right: 10em;
-}
 body
 {
 	padding-top: 4em;
 }
 #features
 {
+	border-radius: 1em;
 	float:left;
 	width:74%;
 	background-color:red;
@@ -46,8 +43,9 @@ body
 
 #signUp
 {
+	border-radius: 1em;
 	width: 25%;
-	background-color:blue;
+	background-color:cyan;
 	border:solid;
 	float:right;
 }

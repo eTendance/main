@@ -1,11 +1,11 @@
 nav
 {
+	background-color:red;
 	position: absolute;
 	top: 0;
 	left:0;
 	width:100%;
 	border-bottom:2px solid #ccc;
-	background:#f9f9f9;
 }
 nav ul
 {
@@ -19,8 +19,14 @@ nav li
 	border:outset 1px;
 	margin-right:10px;
 }
+#profName
+{
+	color:white;
+	box-shadow: 2px 2px 3px black;
+}
 #logoPlacement
 {
+	background-color:white;
 	float:left;
 	border:outset 1px;
 	display:block;
@@ -37,7 +43,6 @@ nav li a
 body
 {
 	padding-top: 1em;
-	background-color:red;
 }
 body div h2
 {
@@ -45,9 +50,11 @@ body div h2
 }
 #add
 {
+	border-radius:1em;
 	float:left;
 	width:35em;
 	background-color:salmon;
+	border:solid;
 	margin-left: 5em;
 	margin-top:5em;
 	padding-bottom:3em;
@@ -100,9 +107,11 @@ body div h2
 }
 #classes
 {
+	border-radius:1em;
 	float:right;
 	width:50em;
 	background-color:salmon;
+	border:solid;
 	margin-right:5em;
 	margin-top:5em;
 	margin-bottom:5em;
