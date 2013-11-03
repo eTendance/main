@@ -38,7 +38,8 @@ body
 	float:left;
 	width:74%;
 	background-color:red;
-	border:solid;
+	color:#f9f9f9;;
+	border:solid black;
 }
 
 #signUp

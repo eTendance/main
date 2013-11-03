@@ -21,7 +21,8 @@ nav li
 }
 #profName
 {
-	color:white;
+	border: black;
+	color:#f9f9f9;
 	box-shadow: 2px 2px 3px black;
 }
 #logoPlacement
