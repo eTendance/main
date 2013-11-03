@@ -11,7 +11,7 @@ nav ul
 {
 	list-style:none;
 	margin:0;
-	padding: .3em;
+	padding: 0%;
 }
 nav li
 {
@@ -24,7 +24,7 @@ nav li
 	float:left;
 	border:outset 1px;
 	display:block;
-	padding.5em;
+	padding:0%;
 	float:left;
 }
 
@@ -43,11 +43,11 @@ body
 }
 #features h3
 {
-	margin-left:2em;
+	margin-left:3%;
 }
 #features ul
 {
-	margin-left:2em;
+	margin-left:3%;
 }
 
 #signUp
@@ -63,7 +63,7 @@ body
 	float:left;
 	clear:both;
 	display:block;
-	width:15em;
+	width:55%;
 }
 #signUp form div span label
 {

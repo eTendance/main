@@ -11,7 +11,7 @@ nav ul
 {
 	list-style:none;
 	margin:0;
-	padding: .3em;
+	padding: 0.1%;
 }
 nav li
 {
@@ -31,7 +31,7 @@ nav li
 	float:left;
 	border:outset 1px;
 	display:block;
-	padding.5em;
+	padding:0%
 	float:left;
 }
 nav li a
@@ -39,31 +39,31 @@ nav li a
 	display: block;
 	background-color:#f9f9f9;
 	border:1px solid #f9f9f9;
-	padding:.5em;
+	padding:2%;
 }
 body
 {
-	padding-top: 1em;
+	padding-top: 1%;
 }
 body div h2
 {
-	margin-left: 1em;
+	margin-left: 2%;
 }
 #add
 {
 	border-radius:1em;
 	float:left;
-	width:35em;
+	width:35%;
 	background-color:salmon;
 	border:solid;
-	margin-left: 5em;
-	margin-top:5em;
-	padding-bottom:3em;
+	margin-left: 5%;
+	margin-top:5%;
+	padding-bottom:3%;
 	wrap:normal;
 }
 #add div
 {
-	margin-left:3em;
+	margin-left:5%;
 }
 #add div div span
 {
@@ -76,7 +76,7 @@ body div h2
 	float:left;
 	clear:both;
 	display:block;
-	width:35em;
+	width:95%;
 }
 #add div div span label
 {
@@ -99,8 +99,8 @@ body div h2
 .meetTime span
 {
 	float:right;
-	margin-left:2em;
-	margin-bottom:1em;
+	margin-left:5%;
+	margin-bottom:3%;
 }
 #end
 {
@@ -110,12 +110,12 @@ body div h2
 {
 	border-radius:1em;
 	float:right;
-	width:50em;
+	width:50%;
 	background-color:salmon;
 	border:solid;
-	margin-right:5em;
-	margin-top:5em;
-	margin-bottom:5em;
+	margin-right:5%;
+	margin-top:5%;
+	margin-bottom:5%;
 	wrap:normal;
 }
 #classes form
@@ -129,11 +129,11 @@ body div h2
 #classes li
 {
 	float:left;
-	margin-right:0.5em;
+	margin-right:1%;
 }
 #classes li:nth-child(1)
 {
-	width:30em;
+	width:50%;
 }
 .submit
 {

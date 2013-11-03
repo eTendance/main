@@ -51,45 +51,45 @@ body
 {
 	border-radius:1em;
 	float:left;
-	width:45em;
+	width:45%;
 	background-color:cyan;
 	border:solid;
-	padding-bottom:3em;
+	padding-bottom:2%;
 }
 #classes
 {
 	border-radius:1em;
 	float:right;
-	width:50em;
+	width:45%;
 	background-color:cyan;
 	border:solid;
-	margin-right:5em;
-	margin-top:5em;
-	margin-bottom:5em;
+	margin-right:2.5%;
+	margin-top:5%;
+	margin-bottom:2.5%;
 	wrap:normal;
 }
 #checkIn
 {
 	border-radius:1em;
-	padding-bottom:2em;
+	padding-bottom:2.5%;
 	background-color:cyan;
 	border:solid;
 	float:left;
 	clear:left;
-	width:30em;
+	width:30%;
 }
 body div form
 {
-	margin-left:5em;
+	margin-left:10%;
 }
 body div
 {
-	margin-top:5em;
-	margin-left:3em;
+	margin-top:5%;
+	margin-left:2.5%;
 }
 body div h2
 {
-	margin-left:2em;
+	margin-left:5%;
 }
 #classes form ul
 {
@@ -98,7 +98,7 @@ body div h2
 #classes form li
 {
 	float:left;
-	margin-right:0.5em;
+	margin-right:2%;
 }
 #classes form li:nth-child(1)
 {
@@ -108,7 +108,7 @@ body div h2
 {
 	background-color:white;
 	color:black;
-	border-radius: 0.5em;
+	border-radius: 0.5px;
 	border: solid black;
 	border-width:0.5px;
 }
