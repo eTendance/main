@@ -25,43 +25,57 @@
 		</nav>
 		<div id="features">
 			<h2>Features</h2>
+			<h3>Student Accounts</h3>
+			<ul>
+				<li>Register for a class via pin number</li>
+				<li>Remove a class</li>
+				<li>Enter a pin number to "sign the attendance sheet"</li>
+				<li>Check average attendance of self for class as well as the average attendance of all students for the class</li>
+			</ul>
+			<h3>Professor Accounts</h3>
+			<ul>
+				<li>Create a class</li>
+				<li>Delete a class</li>
+				<li>Manually alter the attendance sheet, if necessary</li>
+				<li>Check average attendance per student within a class, and by class as a whole.</li>
+			</ul>
 		</div>
 		<div id="signUp">
 			<h2>Sign Up</h2>
 			<form action="../web-src/register.php" method="post">
 			<div>
-					<span>
+				<span>
 					<label for="firstname">First Name: </label>
 					<input type="text" name="firstname" id="firstname" value="" maxlength="30"/>
-					</span>
+				</span>
 
-					<span>
+				<span>
 					<label for="lastname">Last Name: </label>
 					<input type="text" name="lastname" id="lastname" value="" maxlength="30"/>
-					</span>				
+				</span>				
 
-					<span>
+				<span>
 					<label for="email">e-mail: </label>
 					<input type="text" name="email" id="email" value="" maxlength="30"/>
-					</span>
+				</span>
 
-					<span>
+				<span>
 					<label for="usernameS">Username: </label>
 					<input type="text" name="username" id="usernameS" value="" maxlength="30"/>
-					</span>
+				</span>
 
-					<span>
+				<span>
 					<label for="passwordS">Password: </label>
 					<input type="text" name="password" id="passwordS value="" maxlength="30"/>
-					</span>
+				</span>
 
-					<span>
+				<span>
 					Account type
 					<select name="StudentorTeacher"> <option id="s">Student</option> <option id="p">Professor</option> </select>
-					</span>
-					<span>
+				</span>
+				<span>
 					<input type="submit" value="Register"/>
-					</span>
+				</span>
 				
 			</div>
 			</form>

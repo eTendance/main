@@ -36,10 +36,18 @@ body
 {
 	border-radius: 1em;
 	float:left;
-	width:74%;
+	width:70%;
 	background-color:red;
 	color:#f9f9f9;;
 	border:solid black;
+}
+#features h3
+{
+	margin-left:2em;
+}
+#features ul
+{
+	margin-left:2em;
 }
 
 #signUp
@@ -55,7 +63,7 @@ body
 	float:left;
 	clear:both;
 	display:block;
-	width:14em;
+	width:15em;
 }
 #signUp form div span label
 {
