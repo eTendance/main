@@ -21,6 +21,8 @@ if(!empty($_REQUEST['action'])){
             } else {
                 $enrollmenterror = 'Enrollment for that class is currently closed. Please contact your professor.';
             }
+        } else if(mysql_num_rows($result)==0){
+            $enrollmenterror = 'Invalid enrollment code';
         }
     }
  
