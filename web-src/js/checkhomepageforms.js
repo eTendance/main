@@ -3,9 +3,20 @@ window.onload = init;
 // The "onload" handler. Run after the page is fully loaded.
 function init() {
    // Attach "onsubmit" handler
+   document.getElementById("theform").onsubmit = validateRegForm;
+    
+   // Attach "onsubmit" handler
    document.getElementById("topLoginForm").onsubmit = validateForm;
    // Set initial focus
    document.getElementById("username").focus();
+}
+
+function validateRegForm() {
+   return (isNotEmpty("firstname", "Please enter your first name!")
+        && isNotEmpty("lastname", "Please enter your last name!")
+        && isValidEmail("email", "Enter a valid email!")
+        && isLengthMinMax("usernameS", "8 to 16 chars!", 8, 16)
+        && isLengthMinMax("passwordS", "Enter a valid password (8 to 16)!", 8, 16));
 }
 
 function validateForm() {

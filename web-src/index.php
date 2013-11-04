@@ -16,8 +16,7 @@
 <html lang="en">
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/etendenceFront.css" />
-		<script type="text/javascript" src='js/acctCreation.js'></script>
-                <script type="text/javascript" src='js/login.js'></script>
+                <script type="text/javascript" src='js/checkhomepageforms.js'></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>eTendence</title>
 	</head>
