@@ -3,17 +3,16 @@ window.onload = init;
 // The "onload" handler. Run after the page is fully loaded.
 function init() {
    // Attach "onsubmit" handler
-   document.getElementById("theForm").onsubmit = validateForm;
+   document.getElementById("theForm2").onsubmit = validateForm;
    // Set initial focus
-   document.getElementById("firstname").focus();
+   document.getElementById("username").focus();
 }
 
 function validateForm() {
-   return (isNotEmpty("firstname", "Please enter your first name!")
-        && isNotEmpty("lastname", "Please enter your last name!")
-        && isValidEmail("email", "Enter a valid email!")
-        && isLengthMinMax("usernameS", "8 to 16 chars!", 8, 16)
-        && isLengthMinMax("passwordS", "Enter a valid password (8 to 16)!", 8, 16));
+        && isLengthMinMax("username", "User name should have 8 to 16 chars!", 8, 16)
+        && isLengthMinMax("password", "Enter a valid password (8 to 16 chars)!", 8, 16)
+        && isAlphabetic("username", "User name should be Alphbetic Characters!")
+        && isAlphabetic("password", "Password should be Alphbetic Characters!"));
 }
  
 // Return true if the input value is not empty
