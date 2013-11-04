@@ -11,9 +11,13 @@ function init() {
 function validateForm() {
    return (isNotEmpty("firstname", "Please enter your first name!")
         && isNotEmpty("lastname", "Please enter your last name!")
+        && isLengthMinMax("firstname", "Your first name is oversized!", 1, 80)
+        && isLengthMinMax("lastname", "Your last name is oversized!", 1, 80)
         && isValidEmail("email", "Enter a valid email!")
-        && isLengthMinMax("usernameS", "8 to 16 chars!", 8, 16)
-        && isLengthMinMax("passwordS", "Enter a valid password (8 to 16)!", 8, 16));
+        && isLengthMinMax("usernameS", "User name should have 8 to 16 chars!", 8, 16)
+        && isLengthMinMax("passwordS", "Enter a valid password (8 to 16 chars)!", 8, 16)
+        && isAlphabetic("usernameS", "User name should be Alphbetic Characters!")
+        && isAlphabetic("passwordS", "Password should be Alphbetic Characters!"));
 }
  
 // Return true if the input value is not empty
