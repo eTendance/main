@@ -1,0 +1,123 @@
+nav
+{
+	position: absolute;
+	top: 0;
+	left:0;
+	width:100%;
+	border-bottom:2px solid #ccc;
+	background:BLUE;
+}
+nav ul
+{
+	list-style:none;
+	margin:0;
+	padding: .3em;
+}
+nav li
+{
+	float:right;
+	border:outset 1px;
+	margin-right:10px;
+}
+
+#studName
+{
+	color:#f9f9f9;
+	box-shadow: 2px 2px 3px black;
+}
+
+#logoPlacement
+{
+	float:left;
+	border:outset 1px;
+	display:block;
+	padding:.5em;
+	float:left;
+	background:white;
+}
+nav li a
+{
+	display: block;
+	background-color:#f9f9f9;
+	border:1px solid #f9f9f9;
+	padding:.5em;
+}
+body
+{
+	padding-top: 1em;
+}
+
+#add
+{
+	border-radius:1em;
+	float:left;
+	width:45%;
+	background-color:cyan;
+	border:solid;
+	padding-bottom:2%;
+}
+#classes
+{
+	border-radius:1em;
+	float:right;
+	width:45%;
+	background-color:cyan;
+	border:solid;
+	margin-right:2.5%;
+	margin-top:5%;
+	margin-bottom:2.5%;
+	wrap:normal;
+}
+#checkIn
+{
+	border-radius:1em;
+	padding-bottom:2.5%;
+	background-color:cyan;
+	border:solid;
+	float:left;
+	clear:left;
+	width:30%;
+}
+body div form
+{
+	margin-left:10%;
+}
+body div
+{
+	margin-top:5%;
+	margin-left:2.5%;
+}
+body div h2
+{
+	margin-left:5%;
+}
+#classes form ul
+{
+	list-style:none;
+}
+#classes form li
+{
+	float:left;
+	margin-right:2%;
+}
+#classes form li:nth-child(1)
+{
+	width:25em;
+}
+.submit
+{
+	background-color:white;
+	color:black;
+	border-radius: 0.5px;
+	border: solid black;
+	border-width:0.5px;
+}
+.submit:hover
+{
+	background-color:grey;
+	color:white;
+}
+.submit:active
+{
+	background-color:black;
+}

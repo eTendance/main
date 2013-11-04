@@ -1,0 +1,97 @@
+nav
+{
+	position: absolute;
+	top: 0;
+	left:0;
+	width:100%;
+	border-bottom:2px solid #ccc;
+	background:#f9f9f9;
+}
+nav ul
+{
+	list-style:none;
+	margin:0;
+	padding: 0%;
+}
+nav li
+{
+	border:outset 1px;
+	margin-right:10px;
+}
+#topLoginForm {
+    float:right;
+    position:relative;
+    top:11px;
+    margin-right:25px;
+}
+#logoPlacement
+{
+	float:left;
+	border:outset 1px;
+	display:block;
+	padding:0%;
+	float:left;
+}
+
+body
+{
+	padding-top: 4em;
+}
+#features
+{
+	border-radius: 1em;
+	float:left;
+	width:70%;
+	background-color:red;
+	color:#f9f9f9;;
+	border:solid black;
+}
+#features h3
+{
+	margin-left:3%;
+}
+#features ul
+{
+	margin-left:3%;
+}
+
+#signUp
+{
+	border-radius: 1em;
+	width: 25%;
+	background-color:cyan;
+	border:solid;
+	float:right;
+}
+#signUp form div span
+{
+	float:left;
+	clear:both;
+	display:block;
+	width:55%;
+}
+#signUp form div span label
+{
+	float:left;
+}
+#signUp form div span input
+{
+	float:right;
+}
+.submit
+{
+	background-color:white;
+	color:black;
+	border-radius: 0.5em;
+	border: solid black;
+	border-width:0.5px;
+}
+.submit:hover
+{
+	background-color:grey;
+	color:white;
+}
+.submit:active
+{
+	background-color:black;
+}

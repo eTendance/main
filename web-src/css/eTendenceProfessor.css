@@ -1,0 +1,137 @@
+nav
+{
+	background-color:red;
+	position: absolute;
+	top: 0;
+	left:0;
+	width:100%;
+	border-bottom:2px solid #ccc;
+}
+nav ul
+{
+	list-style:none;
+	margin:0;
+	padding: 0.1%;
+}
+nav li
+{
+	float:right;
+	border:outset 1px;
+	margin-right:10px;
+}
+#profName
+{
+	border: black;
+	color:#f9f9f9;
+	box-shadow: 2px 2px 3px black;
+}
+#logoPlacement
+{
+	background-color:white;
+	float:left;
+	border:outset 1px;
+	display:block;
+	padding:0%;
+	float:left;
+}
+nav li a
+{
+	display: block;
+	background-color:#f9f9f9;
+	border:1px solid #f9f9f9;
+	padding:2%;
+}
+body
+{
+	padding-top: 1%;
+}
+body div h2
+{
+	margin-left: 2%;
+}
+#add
+{
+	border-radius:1em;
+	float:left;
+	width:35%;
+	background-color:salmon;
+	border:solid;
+	margin-left: 5%;
+	margin-top:5%;
+	padding-bottom:3%;
+	wrap:normal;
+}
+#add div
+{
+	margin-left:5%;
+}
+#add div div span
+{
+	float:left;
+	clear: both;
+	display:block;
+}
+#add div div span
+{
+	float:left;
+	clear:both;
+	display:block;
+	width:95%;
+}
+#add div div span label
+{
+	float:left;
+}
+#add div div .meetTime label
+{
+	float:left;
+	clear:none;
+}
+#add div div .meetTime input
+{
+	float:none;
+	clear:none;
+}
+.meetTime
+{
+	margin-left:2em;
+}
+.meetTime span
+{
+	float:right;
+	margin-left:5%;
+	margin-bottom:3%;
+}
+#end
+{
+	float:none;
+}
+#classes
+{
+	border-radius:1em;
+	float:right;
+	width:50%;
+	background-color:salmon;
+	border:solid;
+	margin-right:5%;
+	margin-top:5%;
+	margin-bottom:5%;
+	wrap:normal;
+}
+.submit
+{
+	background-color:white;
+	color:black;
+	border-radius: 0.5em;
+	border: solid black;
+	border-width:0.5px;
+}
+.submit:hover
+{
+	background-color:grey;
+	color:white;
+}
+.submit:active
+{
+	background-color:black;
+}
