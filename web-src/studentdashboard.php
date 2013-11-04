@@ -16,8 +16,14 @@ if(!empty($_REQUEST['action'])){
         if(mysql_num_rows($result)==1){
             $row = mysql_fetch_assoc($result);
             if($row['enrollmentopen']=="true"){
-                $query = 'INSERT INTO enrollment (classid,userid) values("'.mysql_real_escape_string($row['id']).'","'.$_SESSION['userdata']['id'].'")';
-                mysql_query($query);
+                $query = 'SELECT * FROM enrollment WHERE classid ="'.mysql_real_escape_string($row['id']).'" AND userid ="'.$_SESSION['userdata']['id'].'"';
+                $result = mysql_query($query);
+        if(mysql_num_rows($result)==0){
+                    $query = 'INSERT INTO enrollment (classid,userid) values("'.mysql_real_escape_string($row['id']).'","'.$_SESSION['userdata']['id'].'")';
+                    mysql_query($query);
+        } else {
+            $enrollmenterror = 'You are already enrolled in this class.';
+        }
             } else {
                 $enrollmenterror = 'Enrollment for that class is currently closed. Please contact your professor.';
             }
