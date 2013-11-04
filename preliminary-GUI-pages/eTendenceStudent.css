@@ -70,7 +70,6 @@ body
 	background-color:cyan;
 	border:solid;
 	margin-right:2.5%;
-	margin-top:5%;
 	margin-bottom:2.5%;
 	wrap:normal;
 }
@@ -90,7 +89,7 @@ body div form
 }
 body div
 {
-	margin-top:5%;
+	margin-top:2%;
 	margin-left:2.5%;
 }
 body div h2
