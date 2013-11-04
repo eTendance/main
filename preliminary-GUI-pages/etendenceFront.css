@@ -21,6 +21,7 @@ nav li
 }
 #logoPlacement
 {
+	background-color:white;
 	float:left;
 	border:outset 1px;
 	display:block;
