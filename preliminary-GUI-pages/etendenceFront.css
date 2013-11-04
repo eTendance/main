@@ -33,6 +33,11 @@ body
 {
 	padding-top: 4em;
 }
+#field
+{
+	width: 1700px;
+	height:auto;
+}
 #features
 {
 	border-radius: 1em;
