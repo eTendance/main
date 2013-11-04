@@ -11,8 +11,8 @@ function init() {
 function validateForm() {
         return( isLengthMinMax("username", "User name should have 8 to 16 chars!", 8, 16)
         && isLengthMinMax("password", "Enter a valid password (8 to 16 chars)!", 8, 16)
-        && isAlphabetic("username", "User name should be Alphbetic Characters!")
-        && isAlphabetic("password", "Password should be Alphbetic Characters!"));
+        && isAlphanumeric("username", "User name should be alphanumeric Characters!")
+        && isAlphanumeric("password", "Password should be alphanumeric Characters!"));
 }
  
 // Return true if the input value is not empty

@@ -1,14 +1,14 @@
-window.onload = init;
+window.onload = initReg;
  
 // The "onload" handler. Run after the page is fully loaded.
-function init() {
+function initReg() {
    // Attach "onsubmit" handler
-   document.getElementById("theForm").onsubmit = validateForm;
+   document.getElementById("theform").onsubmit = validateRegForm;
    // Set initial focus
    document.getElementById("firstname").focus();
 }
 
-function validateForm() {
+function validateRegForm() {
    return (isNotEmpty("firstname", "Please enter your first name!")
         && isNotEmpty("lastname", "Please enter your last name!")
         && isValidEmail("email", "Enter a valid email!")
