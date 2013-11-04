@@ -25,8 +25,8 @@
 			<ul>
 				<img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="50px" />
 				<form action="login.php" method="post" id="topLoginForm">
-					<label for="username">Username: <input type="text" name="username" id="username" value="" maxlength="30"/> </label>
-					<label for="password">Password: <input type="password" name="password" id="password" value="" maxlength="30"/></label>
+					<input placeholder="Username" type="text" name="username" id="username" value="" maxlength="30"/> 
+					<input placeholder="Password" type="password" name="password" id="password" value="" maxlength="30"/>
 					<input type="submit" value="Login" class="submit"/>
 				
 				
@@ -53,43 +53,46 @@
 		</div>
 		<div id="signUp">
 			<h2>Sign Up</h2>
+			
+			<div title="large"> 
 			<form id="theform" action="register.php" method="post">
-			<div>
+			
 				<span>
-					<label for="firstname">First Name: </label>
-					<input type="text" name="firstname" id="firstname" value="" maxlength="30"/>
+					
+					<input  type="text" name="firstname" id="firstname" value="" maxlength="30" placeholder="First Name"/>
 				</span>
 
 				<span>
-					<label for="lastname">Last Name: </label>
-					<input type="text" name="lastname" id="lastname" value="" maxlength="30"/>
+					
+					<input type="text" name="lastname" id="lastname" value="" maxlength="30"placeholder="Last Name" />
 				</span>				
 
 				<span>
-					<label for="email">e-mail: </label>
-					<input type="text" name="email" id="email" value="" maxlength="30"/>
+					
+					<input type="text" name="email" id="email" value="" maxlength="30" placeholder="E-Mail" />
 				</span>
 
 				<span>
-					<label for="usernameS">Username: </label>
-					<input type="text" name="username" id="usernameS" value="" maxlength="30"/>
+					
+					<input type="text" name="username" id="usernameS" value="" maxlength="30" placeholder="Username" />
 				</span>
 
 				<span>
-					<label for="passwordS">Password: </label>
-					<input type="password" name="password" id="passwordS" value="" maxlength="30"/>
+					
+					<input type="password" name="password" id="passwordS" value="" maxlength="30" placeholder="Password" />
 				</span>
 
 				<span>
-					Account type
-					<select name="type"> <option id="s" value="s">Student</option> <option id="p" value="p">Professor</option> </select>
+					
+					<input type="radio" id="student" name="type" value="s"><label for="student"> Student</label>
+					<input type="radio" id="professor" name="type" value="p"><label for="professor"> Professor</label>
+					
 				</span>
 				<span>
-					<input type="submit" value="Register" class="submit"/>
+					<input id="RegButton" type="submit" value="Register" class="submit"/>
 				</span>
-				
+				</form>
 			</div>
-			</form>
 		</div>
 	</body>
 </html>

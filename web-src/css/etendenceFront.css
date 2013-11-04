@@ -36,15 +36,18 @@ nav li
 body
 {
 	padding-top: 4em;
+	background: #cccccc;
 }
 #features
 {
 	border-radius: 1em;
 	float:left;
 	width:70%;
-	background-color:red;
+	background-color:#d23737;
 	color:#f9f9f9;;
 	border:solid black;
+	border-color: #ec5151;
+
 }
 #features h3
 {
@@ -59,32 +62,35 @@ body
 {
 	border-radius: 1em;
 	width: 25%;
-	background-color:cyan;
+	height: 22em;
+	background-color:#2281e1;
 	border:solid;
 	float:right;
+	border-color: #63a9f1;
+	text-align: center;
 }
-#signUp form div span
+
+
+
+#signUp div form span
 {
-	float:left;
-	clear:both;
+	position: relative;
+	width:80%;
 	display:block;
-	width:55%;
+	margin-left: auto;
+	margin-right: auto;
 }
-#signUp form div span label
-{
-	float:left;
-}
-#signUp form div span input
-{
-	float:right;
-}
+
+
 .submit
 {
-	background-color:white;
+	
 	color:black;
 	border-radius: 0.5em;
 	border: solid black;
-	border-width:0.5px;
+	border-width:1px;
+	border-color:grey;
+	box-shadow: rgba(0,0,0,0.4) 3px 3px 10px 3px;
 }
 .submit:hover
 {
@@ -95,3 +101,40 @@ body
 {
 	background-color:black;
 }
+
+div[title="large"] input[type="text"],div[title="large"]  input[type="password"]
+{
+    position:relative;
+    font-size:1.5em;
+    
+
+}
+
+#signUp h2
+{
+	font-size: 2.5em;
+	margin-bottom: .2em;
+	margin-top: .2em;
+}
+
+#RegButton
+{
+	width:40%;
+	font-size: 1.3em;
+	margin-right: auto;
+	margin-left: auto;
+	background-color:#63a9f1;
+}
+
+
+div[title="large"] input[type="radio"]
+{
+	height:1.5em;
+	width:1.5em;
+}
+
+div[title="large"] label
+{
+	font-size: 1.5em;
+}
+
