@@ -34,7 +34,7 @@ function showdashboard() {
     if ($_SESSION['userdata']['usertype'] == 'p') {
         header('Location: professordashboard.php');
     } else {
-        headr('Location: studentdashboard.php');
+        header('Location: studentdashboard.php');
     }
     exit;
 }
