@@ -23,11 +23,11 @@
 	<body>
 		<nav>
 			<ul>
-				<img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="50px" />
+				<img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="100em" />
 				<form action="login.php" method="post" id="topLoginForm">
 					<input placeholder="Username" type="text" name="username" id="username" value="" maxlength="30"/> 
 					<input placeholder="Password" type="password" name="password" id="password" value="" maxlength="30"/>
-					<input type="submit" value="Login" class="submit"/>
+					<input type="submit" id="loginButton" value="Login" class="submit"/>
 				
 				
 				</form>
