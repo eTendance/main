@@ -48,8 +48,7 @@ body
 	width:70%;
 	background-color:#d23737;
 	color:#f9f9f9;;
-	border:solid black;
-	border-color: #ec5151;
+	border:solid #ec5151;
 
 }
 #features h3
@@ -66,9 +65,8 @@ body
 	border-radius: 1em;
 	width: 25%;
 	background-color:#2281e1;
-	border:solid;
+	border:solid #63a9f1;
 	float:right;
-	border-color: #63a9f1;
 }
 #signUp form div span
 {

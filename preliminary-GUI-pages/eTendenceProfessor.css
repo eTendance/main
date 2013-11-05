@@ -49,6 +49,7 @@ nav li a
 body
 {
 	padding-top: 1%;
+	background-color: #cccccc;
 }
 body div h2
 {
@@ -60,7 +61,7 @@ body div h2
 	float:left;
 	width:35%;
 	background-color:salmon;
-	border:solid;
+	border:solid #ec5151;
 	margin-left: 5%;
 	margin-top:5%;
 	padding-bottom:3%;
@@ -117,7 +118,7 @@ body div h2
 	float:right;
 	width:50%;
 	background-color:salmon;
-	border:solid;
+	border:solid #ec5151;
 	margin-right:5%;
 	margin-top:5%;
 	margin-bottom:5%;

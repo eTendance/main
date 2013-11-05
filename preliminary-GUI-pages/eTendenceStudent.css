@@ -45,6 +45,7 @@ nav li a
 body
 {
 	padding-top: 1em;
+	background-color: #cccccc;
 }
 
 #field
@@ -59,7 +60,7 @@ body
 	float:left;
 	width:45%;
 	background-color:cyan;
-	border:solid;
+	border:solid #63a9f1;
 	padding-bottom:2%;
 }
 #classes
@@ -68,7 +69,7 @@ body
 	float:right;
 	width:45%;
 	background-color:cyan;
-	border:solid;
+	border:solid #63a9f1;
 	margin-right:2.5%;
 	margin-bottom:2.5%;
 	wrap:normal;
@@ -78,7 +79,7 @@ body
 	border-radius:1em;
 	padding-bottom:2.5%;
 	background-color:cyan;
-	border:solid;
+	border:solid #63a9f1;
 	float:left;
 	clear:left;
 	width:30%;
