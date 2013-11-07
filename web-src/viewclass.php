@@ -101,7 +101,7 @@ while ($row = mysql_fetch_assoc($result)) {
                 for ($i = 0; $row = mysql_fetch_assoc($result); $i++) {
                     echo '<li>' . $row['code'] . ' for ' . $row['forclassday'] . ' ';
                     if ($row['checkinopen'] == 'true') {
-                        echo '[<a href="' . $_SERVER['PHP_SELF'] . '?action=closecheckin&id=' . $classdata['id'] . '&code=' . $row['code'] . '">Open</a>]<br /><img src="qr.php?encode='.$row['code'].'" />';
+                        echo '[<a href="' . $_SERVER['PHP_SELF'] . '?action=closecheckin&id=' . $classdata['id'] . '&code=' . $row['code'] . '">Open</a>]<br /><img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl='.$row['code'].'&choe=UTF-8" />';
                     } else {
                         echo '[<a href="' . $_SERVER['PHP_SELF'] . '?action=opencheckin&id=' . $classdata['id'] . '&code=' . $row['code'] . '">Closed</a>]';
                     }
