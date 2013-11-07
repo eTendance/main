@@ -50,7 +50,7 @@
 				<li>Generate a pin number for students to sign in for the day.</li>
 				<li>Check average attendance per student within a class, and by class as a whole.</li>
 			</ul>
-		</div>
+		</div> 
 		<div id="signUp">
 			<h2>Sign Up</h2>
 			
@@ -64,7 +64,7 @@
 
 				<span>
 					
-					<input type="text" name="lastname" id="lastname" value="" maxlength="30"placeholder="Last Name" />
+					<input type="text" name="lastname" id="lastname" value="" maxlength="30" placeholder="Last Name" />
 				</span>				
 
 				<span>

@@ -33,7 +33,7 @@ if (!empty($_REQUEST['action'])) {
 
 
     if ($_REQUEST['action'] == 'checkin' && !empty($_POST['checkincode'])) {
-        $query = 'SELECT * FROM checkincodes WHERE code="' . mysql_real_escape_string($_POST['checkincode']) . '""';
+        $query = 'SELECT * FROM checkincodes WHERE code="' . mysql_real_escape_string($_POST['checkincode']) . '"';
         $result = mysql_query($query);
         if (mysql_num_rows($result) > 0) {
             $row_checkincode = mysql_fetch_assoc($result);
@@ -48,6 +48,14 @@ if (!empty($_REQUEST['action'])) {
             }
         } else {
             $checkinerror[] = "The checkin code entered was invalid.";
+        }
+
+        if (!isset($checkinerror)) {
+            $query = 'SELECT * FROM checkins WHERE checkincodeid="' . $row_checkincode['id'] . '" and userid="' . $_SESSION['userdata']['id'] . '"';
+            $result = mysql_query($query);
+            if (mysql_num_rows($result) > 0) {
+                $checkinerror[] = "You have already checked in using that code.";
+            }
         }
 
 

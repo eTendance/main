@@ -29,6 +29,12 @@ if (!empty($_REQUEST['action'])) {
         mysql_query('UPDATE classes SET enrollmentcode="' . strtoupper(generateRandomString(10)) . '" WHERE id="' . $classdata['id'] . '"');
     }
 
+    if ($_GET['action'] == 'opencheckin') {
+        mysql_query('UPDATE checkincodes SET checkinopen="true" WHERE classid="' . $classdata['id'] . '" and code="'.mysql_real_escape_string($_GET['code']).'"');
+    } elseif ($_GET['action'] == "closecheckin") {
+        mysql_query('UPDATE checkincodes SET checkinopen="false" WHERE classid="' . $classdata['id'] . '" and code="'.mysql_real_escape_string($_GET['code']).'"');
+    }
+
     if ($_REQUEST['action'] == 'generatecheckin') {
         $checkincode = strtoupper(generateRandomString(10));
         $query = 'INSERT INTO checkincodes (`code`,`classid`,`forclassday`,`checkinopen`) values("' . $checkincode . '","' . $classdata['id'] . '","' . mysql_real_escape_string($_POST['codeday']) . '","' . mysql_real_escape_string($_POST['open']) . '")';
@@ -91,16 +97,16 @@ while ($row = mysql_fetch_assoc($result)) {
             <?php
 //select codes for this course
             $result = mysql_query('SELECT * from checkincodes WHERE classid="' . mysql_real_escape_string($classdata['id']) . '" ORDER BY creationtime DESC LIMIT 5') or die(mysql_error());
-            if(mysql_num_rows($result)>0){
-            for ($i = 0; $row = mysql_fetch_assoc($result); $i++) {
-                echo '<li>' . $row['code'] . ' for ' . $row['forclassday'];
-                if ($row['checkinopen'] == 'true') {
-                    echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=closecheckin&id=' . $classdata['id'] . '&code=">Open</a>';
-                } else {
-                    echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=openecheckin&id=' . $classdata['id'] . '&code=">Closed</a>';
+            if (mysql_num_rows($result) > 0) {
+                for ($i = 0; $row = mysql_fetch_assoc($result); $i++) {
+                    echo '<li>' . $row['code'] . ' for ' . $row['forclassday'] . ' ';
+                    if ($row['checkinopen'] == 'true') {
+                        echo '[<a href="' . $_SERVER['PHP_SELF'] . '?action=closecheckin&id=' . $classdata['id'] . '&code=' . $row['code'] . '">Open</a>]<br /><img src="qr.php?encode='.$row['code'].'" />';
+                    } else {
+                        echo '[<a href="' . $_SERVER['PHP_SELF'] . '?action=opencheckin&id=' . $classdata['id'] . '&code=' . $row['code'] . '">Closed</a>]';
+                    }
+                    echo '</li>';
                 }
-                echo '</li>';
-            }
             } else {
                 echo '<li>No checkin codes have been generated yet.</li>';
             }
