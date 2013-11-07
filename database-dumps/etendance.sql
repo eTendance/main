@@ -90,6 +90,7 @@ CREATE TABLE `classowners` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `professorid` int(11) NOT NULL,
   `classid` int(11) NOT NULL,
+  `superowner` enum('true','false') NOT NULL DEFAULT 'false',
   PRIMARY KEY (`id`),
   KEY `professorid` (`professorid`),
   KEY `classid` (`classid`),
@@ -150,4 +151,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-11-07  0:09:07
+-- Dump completed on 2013-11-07  0:26:54

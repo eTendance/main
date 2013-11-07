@@ -15,7 +15,7 @@ if(isset($_POST['createclass'])){
             
             //insert the class and create the association with this professor
             mysql_query('INSERT INTO classes (`name`,`enrollmentcode`) values ("'.mysql_real_escape_string($_POST['classname']).'","'.strtoupper(generateRandomString(10)).'")');
-            mysql_query('INSERT INTO classowners (`professorid`, `classid`) values("'.$_SESSION['userdata']['id'].'","'.mysql_insert_id().'")');
+            mysql_query('INSERT INTO classowners (`professorid`, `classid`,`superowner`) values("'.$_SESSION['userdata']['id'].'","'.mysql_insert_id().'","true")');
             
         }    
 }
