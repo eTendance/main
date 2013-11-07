@@ -28,13 +28,16 @@ CREATE TABLE `checkincodes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(45) NOT NULL,
   `classid` int(11) NOT NULL,
-  `creationtime` int(11) NOT NULL,
+  `creationtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `forclassday` date DEFAULT NULL,
   `checkinopen` enum('true','false') DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_code` (`code`),
+  UNIQUE KEY `unique_code_for_day` (`classid`,`forclassday`),
   KEY `index1` (`code`,`classid`),
-  CONSTRAINT `codeclassid` FOREIGN KEY (`id`) REFERENCES `classes` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Codes used for checkins';
+  KEY `codeclassid_idx` (`classid`),
+  CONSTRAINT `codeclassid` FOREIGN KEY (`classid`) REFERENCES `classes` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 COMMENT='Codes used for checkins';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,11 +49,17 @@ DROP TABLE IF EXISTS `checkins`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `checkins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` int(11) DEFAULT NULL,
-  `classid` int(11) DEFAULT NULL,
-  `checkincodeid` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Log of all checkins';
+  `userid` int(11) NOT NULL,
+  `classid` int(11) NOT NULL,
+  `checkincodeid` int(11) NOT NULL,
+  `checkintime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_checkin` (`userid`,`classid`,`checkincodeid`),
+  KEY `checkincodeid_idx` (`checkincodeid`),
+  KEY `checkins_classidfk_idx` (`classid`),
+  CONSTRAINT `checkincodeid` FOREIGN KEY (`checkincodeid`) REFERENCES `checkincodes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `checkins_classidfk` FOREIGN KEY (`classid`) REFERENCES `classes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COMMENT='Log of all checkins';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +76,7 @@ CREATE TABLE `classes` (
   `enrollmentopen` enum('true','false') NOT NULL DEFAULT 'true',
   PRIMARY KEY (`id`),
   UNIQUE KEY `enrollmentcode_UNIQUE` (`enrollmentcode`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1 COMMENT='Classes';
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1 COMMENT='Classes';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,7 +95,7 @@ CREATE TABLE `classowners` (
   KEY `classid` (`classid`),
   CONSTRAINT `classid` FOREIGN KEY (`classid`) REFERENCES `classes` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `professorid` FOREIGN KEY (`professorid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1 COMMENT='Links professors to classes';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1 COMMENT='Links professors to classes';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +116,7 @@ CREATE TABLE `enrollment` (
   KEY `userid` (`userid`),
   CONSTRAINT `enrollment_classid` FOREIGN KEY (`classid`) REFERENCES `classes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `enrollment_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,15 +128,17 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
-  `firstname` varchar(100) DEFAULT NULL,
-  `lastname` varchar(100) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `usertype` enum('s','p') DEFAULT NULL,
-  `active` enum('true','false') DEFAULT 'true',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='Users table';
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `firstname` varchar(100) NOT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `usertype` enum('s','p') NOT NULL DEFAULT 's',
+  `active` enum('true','false') NOT NULL DEFAULT 'true',
+  `creationtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1 COMMENT='Users table';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -139,4 +150,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-09-29 23:53:24
+-- Dump completed on 2013-11-07  0:09:07

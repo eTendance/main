@@ -137,8 +137,8 @@ while ($row = mysql_fetch_assoc($result)) {
         <form action="" method="post">
             <input type="hidden" name="action" value="generatecheckin" />
             Class Day: <input type="text" id="codeday" name="codeday" value="<?php echo date("Y-m-d"); ?>" /><br />
-            Status: <input type="radio" name="open" value="true"/>Open <input type="radio" name="open" value="false" /> Closed
-            <input type="submit" name="submit" value="Generate Code" />
+            Status: <input type="radio" name="open" value="true" checked="checked"/>Open <input type="radio" name="open" value="false" /> Closed
+            <br /><input type="submit" name="submit" value="Generate Code" />
         </form>
 
         <br />
