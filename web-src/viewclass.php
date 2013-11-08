@@ -9,7 +9,7 @@ if (!isset($_GET['id'])) {
 
 
 //check to make sure class exists and this professor owns it
-$result = mysql_query('SELECT classes.* FROM classes join classowners on classes.id=classowners.classid where professorid="' . mysql_real_escape_string($_SESSION['userdata']['id']) . '" and classes.id="' . mysql_real_escape_string($_GET['id']) . '"');
+$result = mysql_query('SELECT classes.*,classowners.superowner FROM classes join classowners on classes.id=classowners.classid where professorid="' . mysql_real_escape_string($_SESSION['userdata']['id']) . '" and classes.id="' . mysql_real_escape_string($_GET['id']) . '"');
 if (mysql_num_rows($result) < 1) {
     showdashboard();
 }
@@ -63,8 +63,23 @@ if (!empty($_REQUEST['action'])) {
         exit;
     }
 
-    if (!isset($NOREDIR))
-        header('Location: ' . $_SERVER['PHP_SELF'] . '?id=' . $_GET['id']);
+
+    if ($_REQUEST['action'] == 'addmanager' && $classdata['superowner'] == 'true') {
+        $query = 'SELECT * FROM users WHERE username="' . mysql_real_escape_string($_POST['username']) . '" and usertype="p"';
+        $result = mysql_query($query);
+        if (mysql_num_rows($result) > 0) {
+            if ($row['usertype']) {
+                $sql = 'INSERT INTO classowners (`professorid`,`classid`,`superowner`) values("' . mysql_real_escape_string($_POST['username']) . '","' . $classdata['id'] . '","false");';
+                $result = mysql_query($sql) or $addmanagererror = "There was an error adding this user as a manager. Please make sure this user is not already a manager.";
+            } else {
+                $addmanagererror = "The username specified does not exist or is not a professor.";
+            }
+            $NOREDIR = true;
+        }
+
+        if (!isset($NOREDIR))
+            header('Location: ' . $_SERVER['PHP_SELF'] . '?id=' . $_GET['id']);
+    }
 }
 
 
@@ -169,5 +184,20 @@ while ($row = mysql_fetch_assoc($result)) {
             So far, <b><span id="livecheckincount"></span></b> class members have checked in today.
         </div>
 
+        <?php if ($classdata['superowner'] == 'true'): ?>
+            <h2>Class Managers</h2>
+            <div>
+                Enter the username of another manager of the class. This person will be able to manage this class as you do, but will not have the ability to add or remove class managers.
+                <br />
+                <div><?php if (isset($addmanagererror)) {
+            echo $addmanagererror;
+        } ?></div>
+                <form action="" method="post">
+                    <input type="text" name="username" placeholder="Username" />
+                    <input type="hidden" name="action" value="addmanager" />
+                    <input type="submit" value="Add Manager"/>
+                </form>
+            </div>
+<?php endif; ?>
     </body>
 </html>
