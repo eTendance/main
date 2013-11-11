@@ -1,0 +1,70 @@
+nav
+{
+	position: absolute;
+	top: 0%;
+	left:0%;
+	width:100%;
+	border-bottom:2px solid #ccc;
+	background:#f9f9f9;
+	height: auto;
+}
+nav ul
+{
+	list-style:none;
+	margin:0%;
+	padding: 0%;
+}
+nav a
+{
+	float:right;
+}
+body
+{
+	padding-top: 8em;
+	padding-right: 3em;
+	background: #cccccc;
+}
+#forgotName
+{
+	margin-left:20%;
+	border-radius: 1em;
+	float:left;
+	width:25%;
+	background-color:#2281e1;
+	border:solid #63a9f1;
+	text-align: center;
+}
+#forgotPass
+{
+	margin-right:20%;
+	border-radius: 1em;
+	float:right;
+	width:25%;
+	background-color:#2281e1;
+	border:solid #63a9f1;
+	text-align: center;
+}
+div form li
+{
+	list-style-type:none;
+	margin-right:10%;
+}
+.submit
+{
+	
+	color:black;
+	border-radius: 0.5em;
+	border: solid black;
+	border-width:1px;
+	border-color:grey;
+	box-shadow: rgba(0,0,0,0.4) 3px 3px 10px 3px;
+}
+.submit:hover
+{
+	background-color:grey;
+	color:white;
+}
+.submit:active
+{
+	background-color:black;
+}

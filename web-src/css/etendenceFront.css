@@ -1,8 +1,8 @@
 nav
 {
 	position: absolute;
-	top: 0;
-	left:0;
+	top: 0%;
+	left:0%;
 	width:100%;
 	border-bottom:2px solid #ccc;
 	background:#f9f9f9;
@@ -11,13 +11,24 @@ nav
 nav ul
 {
 	list-style:none;
-	margin:0;
+	margin:0%;
 	padding: 0%;
 }
 nav li
 {
 	border:outset 1px;
 	margin-right:10px;
+}
+#forgotten
+{
+	clear:both;
+	float:right;
+	margin-right:5%;
+	width:25%;
+}
+#forgotten a:first-child
+{
+	margin-right:20%;
 }
 #topLoginForm {
     float:right;
