@@ -1,65 +1,41 @@
-nav
-{
-	position: absolute;
-	top: 0%;
-	left:0%;
+header
+{	
 	width:100%;
-	border-bottom:2px solid #ccc;
 	background:#f9f9f9;
-	height: auto;
+	margin-bottom: 2%;
 }
-nav ul
-{
-	list-style:none;
-	margin:0%;
-	padding: 0%;
-}
-nav li
-{
-	border:outset 1px;
-	margin-right:10px;
-}
+
 #forgotten
 {
-	clear:both;
-	float:right;
+	position:relative;
+	left: 50%;
+	margin-top: -4%;
 	margin-right:5%;
 	width:25%;
 }
-#forgotten a:first-child
-{
-	margin-right:20%;
-}
+
 #topLoginForm {
-    float:right;
     position:relative;
-    top:2em;
-    margin-right:25px;
+    left: 50%;
+    bottom: 4em;
+
 }
-#logoPlacement
-{
-	float:left;
-	border:outset 1px;
-	display:block;
-	padding:0%;
-	float:left;
-}
+
 
 body
 {
-	padding-top: 8em;
-	padding-right: 3em;
+	
+	padding: 0%;
+	margin:0%;
 	background: #cccccc;
 }
 #features
 {
-	border-radius: 1em;
-	float:left;
-	width:70%;
-	background-color:#d23737;
-	color:#f9f9f9;;
-	border:solid black;
-	border-color: #ec5151;
+	position: relative;
+	text-align: center;
+	top:2em;
+	left: 5%;
+	width: 50%;
 
 }
 #features h3
@@ -78,8 +54,10 @@ body
 	height: 22em;
 	background-color:#2281e1;
 	border:solid;
-	float:right;
-	border-color: #63a9f1;
+	position:relative;
+	left: 65%;
+	bottom:20em;
+	border-color: #003e7e;
 	text-align: center;
 
 }

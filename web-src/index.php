@@ -1,16 +1,3 @@
-<!--<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
-    </head>
-    <body>
-        Welcome to eTendance 1.0 Pre-Alpha!
-        <br /><br />
-        <a href="login.php">Login</a>
-        <a href="register.php">Register</a>
-    </body>
-</html>-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,21 +8,21 @@
 		<title>eTendence</title>
 	</head>
 	<body>
-		<nav>
-			<ul>
+		<header>
 				<img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="100em" />
+
 				<form action="login.php" method="post" id="topLoginForm">
 					<input placeholder="Username" type="text" name="username" id="username" value="" maxlength="30"/> 
 					<input placeholder="Password" type="password" name="password" id="password" value="" maxlength="30"/>
 					<input type="submit" id="loginButton" value="Login" class="submit"/>
-				
-				
 				</form>
-			</ul>
-			<ul id="forgotten">
+			
+			<div id="forgotten">
 				<a href="forgotten.php">Forgot your Username or Password?</a>
-			</ul>
-		</nav>
+			</div>
+		</header>
+
+		
 		<div id="features">
 			<h2>Features</h2>
 			<h3>Student Accounts</h3>
@@ -97,5 +84,6 @@
 				</form>
 			</div>
 		</div>
+
 	</body>
 </html>

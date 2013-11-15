@@ -2,47 +2,59 @@
 
 require_once('global.php');
 
-if (isset($_POST('user')) && isset($_POST('pass')) ){
-	$name = mysql_escape_string($_POST('user'));
-	$pass = mysql_escape_string($_POST('pass'));
+$userID = "1";
 
-	$mysql = mysql_query($user = "SELECT * FROM users WHERE username = '$name' AND password = '$pass'");
+if (isset($_REQUEST['user']) && isset($_REQUEST['pass']) ){
+        $name = mysql_escape_string($_REQUEST['user']);
+        $pass = mysql_escape_string($_REQUEST['pass']);
+        $mysql = mysql_query("SELECT * FROM users WHERE username = '$name' AND password = '$pass'");
 
-	if(mysql_num_rows($mysql) < 1){
-		echo 0;
-		exit;
+        if(mysql_num_rows($mysql) < 1){
+                echo "0";
+                exit;
 
-	}else{
+        }else{
 
-		if($_POST('activity') == "login"){
+              	if($_REQUEST['activity'] == "login"){
 
-			echo 1;
-			exit;
-		}
+                        echo "1";
+                        exit;
+                }
+        $user = mysql_fetch_array($mysql);
+        $userID = $user['id'];
 
-	}
+        }
 
 } else {
-	echo 0;
-	exit
+        echo "0";
+        exit;
 }
 
-$userID = mysql_escape_string($user['id']);
 
-if($_POST('activity') == "view_classes"){
-	$class_list = mysql_query('SELECT * FROM enrollment WHERE userid = '$userID'');
+if($_REQUEST['activity'] == "view_classes"){
+        $class_list = mysql_query("SELECT * FROM enrollment JOIN classes ON(enrollment.classid = classes.id)  WHERE enrollment.userid = '$userID'");
 
-	echo json_encode($class_list);
-	exit
+        $data_array = array();
+        $counter = 0;
+
+        while ($next = mysql_fetch_assoc($class_list)) {
+              $data_array[$counter] = $next;
+              $counter++;
+        }
+
+
+
+        echo json_encode($data_array);
+        exit;
 
 }
-
 /*
-	login - on success echo 1, else 0
-	view_classes - list of classes student is enrolled in, json encode
+  	login - on success echo 1, else 0
+        view_classes - list of classes student is enrolled in, json encode
 
 
 */
 
-	
+
 ?>
+
