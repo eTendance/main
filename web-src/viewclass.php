@@ -76,10 +76,9 @@ if (!empty($_REQUEST['action'])) {
             }
             $NOREDIR = true;
         }
-
-        if (!isset($NOREDIR))
-            header('Location: ' . $_SERVER['PHP_SELF'] . '?id=' . $_GET['id']);
     }
+    if (!isset($NOREDIR))
+        header('Location: ' . $_SERVER['PHP_SELF'] . '?id=' . $_GET['id']);
 }
 
 
@@ -189,9 +188,11 @@ while ($row = mysql_fetch_assoc($result)) {
             <div>
                 Enter the username of another manager of the class. This person will be able to manage this class as you do, but will not have the ability to add or remove class managers.
                 <br />
-                <div><?php if (isset($addmanagererror)) {
-            echo $addmanagererror;
-        } ?></div>
+                <div><?php
+            if (isset($addmanagererror)) {
+                echo $addmanagererror;
+            }
+            ?></div>
                 <form action="" method="post">
                     <input type="text" name="username" placeholder="Username" />
                     <input type="hidden" name="action" value="addmanager" />
