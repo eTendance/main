@@ -32,6 +32,9 @@
 				
 				</form>
 			</ul>
+			<ul id="forgotten">
+				<a href="forgotten.php">Forgot your Username or Password?</a>
+			</ul>
 		</nav>
 		<div id="features">
 			<h2>Features</h2>
