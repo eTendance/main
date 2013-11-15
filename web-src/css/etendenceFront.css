@@ -24,7 +24,6 @@ header
 
 body
 {
-	
 	padding: 0%;
 	margin:0%;
 	background: #cccccc;
@@ -143,3 +142,10 @@ div[title="large"] label
 	font-size: 1.5em;
 }
 
+#container
+{
+	width:1500px;
+	margin-left:auto;
+	margin-right:auto;
+	height:auto;
+}
