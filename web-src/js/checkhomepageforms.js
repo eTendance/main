@@ -2,6 +2,8 @@ window.onload = init;
  
 // The "onload" handler. Run after the page is fully loaded.
 function init() {
+   radio = document.getElementById("student");
+   radio.checked = true;
    // Attach "onsubmit" handler
    document.getElementById("theform").onsubmit = validateRegForm;
     

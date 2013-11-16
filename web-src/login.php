@@ -33,22 +33,4 @@ if(isset($_POST['username'])){
 }
 
 ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
-    </head>
-    <body>
-Login to the system
-        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-            Username: <input type="text" name="username"/>
-            Password: <input type="text" name="password"/>
-            <select name="type">
-                <option value="s">Student</option>
-                <option value="p">Professor</option>
-            </select>
-            <input type="submit" value="Login" />
-        </form>
-    </body>
-</html>
+

@@ -22,7 +22,7 @@
 			</div>
 		</header>
 
-		
+	<div id="container">
 		<div id="features">
 			<h2>Features</h2>
 			<h3>Student Accounts</h3>
@@ -84,6 +84,6 @@
 				</form>
 			</div>
 		</div>
-
+	</div>
 	</body>
 </html>

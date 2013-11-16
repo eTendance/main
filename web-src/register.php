@@ -38,26 +38,3 @@ if (isset($_POST['firstname'])) {
 
 exit;
 ?>
-<!--registration form here -->
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
-    </head>
-    <body>
-        Login to the system
-        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-            First Name: <input type="text" name="firstname" /><br />
-            Last Name: <input type="text" name="lastname" /><br />
-            Email: <input type="text" name="email" /><br />
-            Username: <input type="text" name="username"/><br />
-            Password: <input type="text" name="password"/><br />
-            Account type: <select name="type">
-                <option value="s">Student</option>
-                <option value="p">Professor</option>
-            </select><br />
-            <input type="submit" value="Register" />
-        </form>
-    </body>
-</html>

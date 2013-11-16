@@ -74,10 +74,11 @@ for($i=0; $row=mysql_fetch_assoc($result);$i++){
         <nav>
             <ul>
                 <img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="50px"/>
-                <li><form action="login.php" method="get"><input type="hidden" name="logout" value="1" /><input type="submit" value="Logout" class="submit"/></form></li>
+                <li><form action="login.php" method="get"><input type="hidden" name="logout" value="1" /><input type="submit" value="Logout" id="loginButton" class="submit"/></form></li>
                 <li><span id="profName"><?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname'] ?></span></li>
             </ul>
         </nav>
+	<div id="container">
         <div id="add">
             <h2>Create a Class</h2>
             <div>
@@ -113,7 +114,7 @@ for($i=0; $row=mysql_fetch_assoc($result);$i++){
                         <label for="descr">Brief Class description:</label><textarea cols="50" rows="4" name="description" id="descr" value=""></textarea>
                     </div>-->
                     <div>
-                        <input type="submit" name="createclass" value="Create" class="submit" />
+                        <input type="submit" name="createclass" value="Create" id="create-class" class="submit" />
                     </div>
                 </form>
             </div>
@@ -125,10 +126,11 @@ for($i=0; $row=mysql_fetch_assoc($result);$i++){
 //select courses that this professor owns
 $result = mysql_query('SELECT classes.id,classes.name FROM classes join classowners on classes.id=classowners.classid WHERE professorid="'.  mysql_real_escape_string($_SESSION['userdata']['id']).'"') or die(mysql_error());
 for($i=0; $row=mysql_fetch_assoc($result);$i++){
-    echo '<li>'.$row['name'] . ' <a href="viewclass.php?id='.$row['id'].'">View Class</a> <a href="professordashboard.php?action=deleteclass&amp;classid='.$row['id'].'">Delete class</a></li>';
+    	echo '<li>'.$row['name'] . ' <a href="viewclass.php?id='.$row['id'].'">View Class</a> <a href="professordashboard.php?action=deleteclass&amp;classid='.$row['id'].'">Delete class</a></li>';
 }
 ?>
             </ul>
         </div>
+	</div>
     </body>
 </html>
