@@ -38,8 +38,11 @@ function draw_calendar($month,$year){
 
 			/** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! **/
 			$calendar.= str_repeat('<p> </p>',2);
-			
-		$calendar.= 'example</td>';
+		if($day_counter == 14):	
+			$calendar.= 'Today</td>';
+		elseif($day_counter != 15):
+			$calendar.='</td>';
+		endif;
 		if($running_day == 6):
 			$calendar.= '</tr>';
 			if(($day_counter+1) != $days_in_month):
