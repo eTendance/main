@@ -151,6 +151,9 @@ while ($row = mysql_fetch_assoc($result)) {
 
 
             });
+             $(function() {
+                $( "#tabs" ).tabs();
+             });
         </script>
     </head>
     <body>
@@ -161,8 +164,18 @@ while ($row = mysql_fetch_assoc($result)) {
 			<li><span id="profName"><?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname']?></span></li>
 		</ul>
 	</header>
+
+	<div id="container">
+        <div id="tabs">
+            <ul>
+                <li><a href="#RegStudents">Registered Students</a></li>
+                <li><a href="#Codes">Checkin Codes</a></li>
+                <li><a href="#LiveCodes">Live Checkin Codes</a></li>
+                <li><a href="#EnrollCodes">Enrollment Code</a></li>
+            </ul>
         <h1><?php echo $classdata['name'] ?></h1><br />
 
+        <div id="RegStudents">
         <h2>Students</h2>
         <?php
         foreach ($classusers as $user) {
@@ -175,7 +188,9 @@ while ($row = mysql_fetch_assoc($result)) {
             <iframe id="attendanceBookIframe" src="" style="width:100%;height:95%;border:none"></iframe>
         </div>
         <button id="bookBtn">Open Attendance Book</button>
+        </div>
 
+        <div id="EnrollCodes">
         <h2>Enrollment Code</h2>
         Enrollment code for this course is <b><?php echo $classdata['enrollmentcode'] ?></b> [<?php
         if ($classdata['enrollmentopen'] == 'true') {
@@ -185,8 +200,9 @@ while ($row = mysql_fetch_assoc($result)) {
         }
         ?>] <br />
         <form action="" method="get"><input type="hidden" name="id" value="<?php echo $classdata['id'] ?>" /><input type="hidden" name="action" value="newenrollmentcode" /><input type="submit" value="Generate New Enrollment Code" /></form>
-
-
+        </div>
+        
+        <div id="Codes">
         <h2>Checkin Codes</h2>
 
         Generate checkin codes for class days below.
@@ -220,7 +236,9 @@ while ($row = mysql_fetch_assoc($result)) {
                 }
                 ?></ul>
         </div>
-
+        </div>
+        
+        <div id="LiveCodes">
         <h2>Live Checkin Count</h2>
         <div>
             So far, <b><span id="livecheckincount"></span></b> class members have checked in today.
@@ -264,5 +282,9 @@ while ($row = mysql_fetch_assoc($result)) {
         <?php endif; ?>
 	<div><input type="button" value="Back" id="backButton"/>
 	</div>
+        </div>
+	</div>
+        
+        </div>
     </body>
 </html>
