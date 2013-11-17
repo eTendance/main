@@ -14,7 +14,7 @@ if (mysql_num_rows($result) < 1) {
     showdashboard();
 }
 $classdata = mysql_fetch_assoc($result);
-
+$absent = NULL;
 
 if (!empty($_REQUEST['action'])) {
 
@@ -69,7 +69,7 @@ if (!empty($_REQUEST['action'])) {
         $result = mysql_query($query);
         if (mysql_num_rows($result) > 0) {
             if ($row['usertype']) {
-                $sql = 'INSERT INTO classowners (`professorid`,`classid`,`superowner`) values("' . mysql_real_escape_string($_POST['username']) . '","' . $classdata['id'] . '","false");';
+                $sql = 'INSERT INTO  classowners (`professorid`,`classid`,`superowner`) values("' . mysql_real_escape_string($_POST['username']) . '","' . $classdata['id'] . '","false");';
                 $result = mysql_query($sql) or $addmanagererror = "There was an error adding this user as a manager. Please make sure this user is not already a manager.";
             } else {
                 $addmanagererror = "The username specified does not exist or is not a professor.";
@@ -77,6 +77,19 @@ if (!empty($_REQUEST['action'])) {
             $NOREDIR = true;
         }
     }
+
+
+    if($_REQUEST['action']=="getabsent" ){
+        $query =  'SELECT firstname, lastname from enrollment left JOIN  (SELECT userid,checkins.id from checkins left join checkincodes on checkins.checkincodeid = checkincodes.id where forclassday="' . mysql_real_escape_string($_REQUEST['date'] ) . ' " AS inattendance on inattendance.userid = enrollment.userid JOIN users ON enrollment.userid = users.id WHERE inattendance.id IS NULL and classid = "' . mysql_real_escape_string($_REQUEST['id']) . '";' ;
+        $absent = mysql_query($query);
+
+    }else
+        echo "DERP";
+
+
+
+
+
     if (!isset($NOREDIR))
         header('Location: ' . $_SERVER['PHP_SELF'] . '?id=' . $_GET['id']);
 }
@@ -157,7 +170,7 @@ while ($row = mysql_fetch_assoc($result)) {
         <div class="errormsg"><?php if (isset($checkingenerationerror)) echo $checkingenerationerror; ?></div>
         <form action="" method="post">
             <input type="hidden" name="action" value="generatecheckin" />
-            Class Day: <input type="text" id="codeday" name="codeday" value="<?php echo date("Y-m-d"); ?>" /><br />
+            Class Day: <input type="date" id="codeday" name="codeday" value="<?php echo date("Y-m-d"); ?>" /><br />
             Status: <input type="radio" name="open" value="true" checked="checked"/>Open <input type="radio" name="open" value="false" /> Closed
             <br /><input type="submit" name="submit" value="Generate Code" />
         </form>
@@ -189,6 +202,25 @@ while ($row = mysql_fetch_assoc($result)) {
         <div>
             So far, <b><span id="livecheckincount"></span></b> class members have checked in today.
         </div>
+
+        <h2>Absent</h2>
+
+        <div id="absent">
+
+
+            <form action="absent.php" method="POST">
+                <input type="date" name="date">
+                <input type="hidden" name="action" value="getabsent">
+                <input type="hidden" name="id" value=<?php echo '"' . $classdata["id"] . '"' ?> >
+                <input type="submit" value="Get Absenses">
+            </form>
+
+
+           
+
+        </div>
+
+
 
         <?php if ($classdata['superowner'] == 'true'): ?>
             <h2>Class Managers</h2>

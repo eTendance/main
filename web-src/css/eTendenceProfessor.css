@@ -169,3 +169,30 @@ body div h2
 	margin-right:auto;
 	height:auto;
 }
+
+#absent
+{
+	border:solid;
+	border-radius: 1em;
+	border-color: #d23737;
+	background: #cccccc;
+	padding:1em;
+	width:15%;
+	
+}
+
+#absent ul
+{
+
+	border:solid;
+	border-radius: 1em;
+	width:auto;
+	margin-right: 1px;
+	list-style: none;
+	padding:5%;
+
+}
+#bottom{
+
+	border-bottom: solid black;
+}
