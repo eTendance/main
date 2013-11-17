@@ -27,7 +27,6 @@ body
 	padding: 0%;
 	margin:0%;
 	background: #cccccc;
-
 }
 #features
 {
@@ -37,7 +36,6 @@ body
 	left: 5%;
 	width: 50%;
 
-
 }
 #features h3
 {
@@ -46,7 +44,7 @@ body
 #features ul
 {
 	margin-left:3%;
-	list-style: none;
+	list-style:none;
 }
 
 #signUp
