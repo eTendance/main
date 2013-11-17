@@ -96,7 +96,7 @@ if (!empty($_REQUEST['action'])) {
 
 
 //get all students currently in class
-$result = mysql_query('SELECT * FROM users 
+$result = mysql_query('SELECT users.* FROM users 
 join enrollment on users.id=enrollment.userid
 join classes on classes.id=enrollment.classid
 where classes.id="' . mysql_real_escape_string($_GET['id']) . '"');
@@ -111,6 +111,7 @@ while ($row = mysql_fetch_assoc($result)) {
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
         <link rel="stylesheet" type="text/css" href="css/viewClass.css" />
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script>
@@ -132,6 +133,23 @@ while ($row = mysql_fetch_assoc($result)) {
                 setInterval(function() {
                     updatecheckincount();
                 }, 10000);
+
+                $("#attendancedialog").dialog({
+                    autoOpen: false,
+                    modal: true,
+                    height: 800,
+                    width:1000,
+                    title:"Attendance Book",
+                    open: function(ev, ui) {
+                        $('#attendanceBookIframe').attr('src', 'attendancebook.php?id=<?php echo $classdata['id'] ?>');
+                    }
+                });
+
+                $('#bookBtn').click(function() {
+                    $('#attendancedialog').dialog('open');
+                });
+
+
             });
         </script>
     </head>
@@ -152,6 +170,11 @@ while ($row = mysql_fetch_assoc($result)) {
             echo '<br />';
         }
         ?>
+
+        <div id="attendancedialog" style="overflow-x:hidden">
+            <iframe id="attendanceBookIframe" src="" style="width:100%;height:95%;border:none"></iframe>
+        </div>
+        <button id="bookBtn">Open Attendance Book</button>
 
         <h2>Enrollment Code</h2>
         Enrollment code for this course is <b><?php echo $classdata['enrollmentcode'] ?></b> [<?php
@@ -228,17 +251,17 @@ while ($row = mysql_fetch_assoc($result)) {
                 Enter the username of another manager of the class. This person will be able to manage this class as you do, but will not have the ability to add or remove class managers.
                 <br />
                 <div><?php
-            if (isset($addmanagererror)) {
-                echo $addmanagererror;
-            }
-            ?></div>
+                    if (isset($addmanagererror)) {
+                        echo $addmanagererror;
+                    }
+                    ?></div>
                 <form action="" method="post">
                     <input type="text" name="username" placeholder="Username" />
                     <input type="hidden" name="action" value="addmanager" />
                     <input type="submit" value="Add Manager"/>
                 </form>
             </div>
-<?php endif; ?>
+        <?php endif; ?>
 	<div><input type="button" value="Back" id="backButton"/>
 	</div>
     </body>
