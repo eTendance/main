@@ -164,44 +164,16 @@ while ($row = mysql_fetch_assoc($result)) {
 			<li><span id="profName"><?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname']?></span></li>
 		</ul>
 	</header>
-
-	<div id="container">
+        <div id="container">
         <div id="tabs">
             <ul>
-                <li><a href="#RegStudents">Registered Students</a></li>
                 <li><a href="#Codes">Checkin Codes</a></li>
-                <li><a href="#LiveCodes">Live Checkin Codes</a></li>
+                <li><a href="#RegStudents">Registered Students</a></li>
                 <li><a href="#EnrollCodes">Enrollment Code</a></li>
+                <li><a href="#classManagers">Class Managers</a></li>
             </ul>
         <h1><?php echo $classdata['name'] ?></h1><br />
 
-        <div id="RegStudents">
-        <h2>Students</h2>
-        <?php
-        foreach ($classusers as $user) {
-            echo $user['firstname'] . ' ' . $user['lastname'];
-            echo '<br />';
-        }
-        ?>
-
-        <div id="attendancedialog" style="overflow-x:hidden">
-            <iframe id="attendanceBookIframe" src="" style="width:100%;height:95%;border:none"></iframe>
-        </div>
-        <button id="bookBtn">Open Attendance Book</button>
-        </div>
-
-        <div id="EnrollCodes">
-        <h2>Enrollment Code</h2>
-        Enrollment code for this course is <b><?php echo $classdata['enrollmentcode'] ?></b> [<?php
-        if ($classdata['enrollmentopen'] == 'true') {
-            echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=closeenrollment&id=' . $_GET['id'] . '">Open</a>';
-        } else {
-            echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=openenrollment&id=' . $_GET['id'] . '">Closed</a>';
-        }
-        ?>] <br />
-        <form action="" method="get"><input type="hidden" name="id" value="<?php echo $classdata['id'] ?>" /><input type="hidden" name="action" value="newenrollmentcode" /><input type="submit" value="Generate New Enrollment Code" /></form>
-        </div>
-        
         <div id="Codes">
         <h2>Checkin Codes</h2>
 
@@ -236,9 +208,7 @@ while ($row = mysql_fetch_assoc($result)) {
                 }
                 ?></ul>
         </div>
-        </div>
-        
-        <div id="LiveCodes">
+
         <h2>Live Checkin Count</h2>
         <div>
             So far, <b><span id="livecheckincount"></span></b> class members have checked in today.
@@ -258,11 +228,37 @@ while ($row = mysql_fetch_assoc($result)) {
 
 
            
-
+        </div>
         </div>
 
+        <div id="RegStudents">
+        <h2>Students</h2>
+        <?php
+        foreach ($classusers as $user) {
+            echo $user['firstname'] . ' ' . $user['lastname'];
+            echo '<br />';
+        }
+        ?>
 
-
+        <div id="attendancedialog" style="overflow-x:hidden">
+            <iframe id="attendanceBookIframe" src="" style="width:100%;height:95%;border:none"></iframe>
+        </div>
+        <button id="bookBtn">Open Attendance Book</button>
+        </div>
+        
+        <div id="EnrollCodes">
+        <h2>Enrollment Code</h2>
+        Enrollment code for this course is <b><?php echo $classdata['enrollmentcode'] ?></b> [<?php
+        if ($classdata['enrollmentopen'] == 'true') {
+            echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=closeenrollment&id=' . $_GET['id'] . '">Open</a>';
+        } else {
+            echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=openenrollment&id=' . $_GET['id'] . '">Closed</a>';
+        }
+        ?>] <br />
+        <form action="" method="get"><input type="hidden" name="id" value="<?php echo $classdata['id'] ?>" /><input type="hidden" name="action" value="newenrollmentcode" /><input type="submit" value="Generate New Enrollment Code" /></form>
+        </div>
+        
+        <div id="classManagers">
         <?php if ($classdata['superowner'] == 'true'): ?>
             <h2>Class Managers</h2>
             <div>
@@ -283,8 +279,8 @@ while ($row = mysql_fetch_assoc($result)) {
 	<div><input type="button" value="Back" id="backButton"/>
 	</div>
         </div>
-	</div>
         
+        </div>
         </div>
     </body>
 </html>
