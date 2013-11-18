@@ -82,21 +82,9 @@ body
 {
 	padding-top: 1%;
 }
-body div h2
-{
-	margin-left: 2%;
-}
 #add
 {
-	border-radius:1em;
-	float:left;
 	width:35%;
-	background-color:salmon;
-	border:solid;
-	margin-left: 5%;
-	margin-top:5%;
-	padding-bottom:3%;
-	wrap:normal;
 }
 #add div
 {
@@ -143,18 +131,6 @@ body div h2
 {
 	float:none;
 }
-#classes
-{
-	border-radius:1em;
-	float:right;
-	width:50%;
-	background-color:salmon;
-	border:solid;
-	margin-right:5%;
-	margin-top:5%;
-	margin-bottom:5%;
-	wrap:normal;
-}
 .submit
 {
 	color:black;
@@ -176,10 +152,11 @@ body div h2
 
 #container
 {
-	width:1500px;
+	width:1024px;
 	margin-left:auto;
 	margin-right:auto;
 	height:auto;
+        clear:both;
 }
 
 #absent
@@ -207,4 +184,14 @@ body div h2
 #bottom{
 
 	border-bottom: solid black;
+}
+.dashboardbox {
+    	border-radius:1em;
+	float:left;
+	width:50%;
+	background-color:salmon;
+	border:solid;
+        margin:1%;
+margin-top:90px;
+    padding:20px;
 }

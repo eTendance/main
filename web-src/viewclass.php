@@ -79,11 +79,10 @@ if (!empty($_REQUEST['action'])) {
     }
 
 
-    if($_REQUEST['action']=="getabsent" ){
-        $query =  'SELECT firstname, lastname from enrollment left JOIN  (SELECT userid,checkins.id from checkins left join checkincodes on checkins.checkincodeid = checkincodes.id where forclassday="' . mysql_real_escape_string($_REQUEST['date'] ) . ' " AS inattendance on inattendance.userid = enrollment.userid JOIN users ON enrollment.userid = users.id WHERE inattendance.id IS NULL and classid = "' . mysql_real_escape_string($_REQUEST['id']) . '";' ;
+    if ($_REQUEST['action'] == "getabsent") {
+        $query = 'SELECT firstname, lastname from enrollment left JOIN  (SELECT userid,checkins.id from checkins left join checkincodes on checkins.checkincodeid = checkincodes.id where forclassday="' . mysql_real_escape_string($_REQUEST['date']) . ' " AS inattendance on inattendance.userid = enrollment.userid JOIN users ON enrollment.userid = users.id WHERE inattendance.id IS NULL and classid = "' . mysql_real_escape_string($_REQUEST['id']) . '";';
         $absent = mysql_query($query);
-
-    }else
+    } else
         echo "DERP";
 
 
@@ -122,11 +121,21 @@ while ($row = mysql_fetch_assoc($result)) {
                 });
             }
             $(function() {
-                $("#codeday").datepicker({
+                $("#codeday_text").datepicker({
                     showOn: "button",
                     buttonImage: "img/calendar.gif",
                     buttonImageOnly: true,
-                    dateFormat: "yy-mm-dd"
+                    dateFormat: "mm-dd-yy",
+                    altField: "#codeday",
+                    altFormat: "yy-mm-dd"
+                });
+                $("#studentsabsenton_text").datepicker({
+                    showOn: "button",
+                    buttonImage: "img/calendar.gif",
+                    buttonImageOnly: true,
+                    dateFormat: "mm-dd-yy",
+                    altField: "#studentsabsenton",
+                    altFormat: "yy-mm-dd"
                 });
             });
             $(document).ready(function() {
@@ -139,8 +148,8 @@ while ($row = mysql_fetch_assoc($result)) {
                     autoOpen: false,
                     modal: true,
                     height: 800,
-                    width:1000,
-                    title:"Attendance Book",
+                    width: 1000,
+                    title: "Attendance Book",
                     open: function(ev, ui) {
                         $('#attendanceBookIframe').attr('src', 'attendancebook.php?id=<?php echo $classdata['id'] ?>');
                     }
@@ -149,12 +158,13 @@ while ($row = mysql_fetch_assoc($result)) {
                 $('#bookBtn').click(function() {
                     $('#attendancedialog').dialog('open');
                 });
-
+                $('#tabs').tabs({
+                    beforeActivate: function(event, ui) {
+                        window.location.hash = ui.newPanel.selector;
+                    }
+                });
 
             });
-             $(function() {
-                $( "#tabs" ).tabs();
-             });
         </script>
     </head>
     <body>
@@ -162,126 +172,122 @@ while ($row = mysql_fetch_assoc($result)) {
             <ul>
                 <li><span id="profName">Welcome, <?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname'] ?><form action="login.php" method="get"><input type="hidden" name="logout" value="1" /><input type="submit" value="Logout" id="loginButton" class="submit"/></form></span></li>
             </ul>
-            
+
             <div id="breadcrumbs"><a href="professordashboard.php">Professor Dashboard</a> > Viewing <?php echo $classdata['name'] ?></div>
         </nav>
         <div id="container">
-        <div id="tabs">
-            <ul>
-                <li><a href="#Codes">Checkin Codes</a></li>
-                <li><a href="#RegStudents">Registered Students</a></li>
-                <li><a href="#EnrollCodes">Enrollment Code</a></li>
-                <li><a href="#classManagers">Class Managers</a></li>
-            </ul>
-        <h1><?php echo $classdata['name'] ?></h1><br />
+            <div id="tabs">
+                <ul>
+                    <li><a href="#Codes">Checkin Codes</a></li>
+                    <li><a href="#RegStudents">Registered Students</a></li>
+                    <li><a href="#EnrollCodes">Enrollment Code</a></li>
+                    <?php if ($classdata['superowner'] == 'true'): ?><li><a href="#classManagers">Class Managers</a></li><?php endif; ?>
+                </ul>
 
-        <div id="Codes">
-        <h2>Checkin Codes</h2>
+                <div id="Codes">
+                    <h2>Checkin Codes</h2>
 
-        Generate checkin codes for class days below.
-        <div class="errormsg"><?php if (isset($checkingenerationerror)) echo $checkingenerationerror; ?></div>
-        <form action="" method="post">
-            <input type="hidden" name="action" value="generatecheckin" />
-            Class Day: <input type="date" id="codeday" name="codeday" value="<?php echo date("Y-m-d"); ?>" /><br />
-            Status: <input type="radio" name="open" value="true" checked="checked"/>Open <input type="radio" name="open" value="false" /> Closed
-            <br /><input type="submit" name="submit" value="Generate Code" />
-        </form>
+                    Generate checkin codes for class days below.
+                    <div class="errormsg"><?php if (isset($checkingenerationerror)) echo $checkingenerationerror; ?></div>
+                    <form action="" method="post">
+                        <input type="hidden" name="action" value="generatecheckin" />
+                        Class Day: <input type="text" id="codeday_text" name="codeday" value="<?php echo date("m-d-Y"); ?>" /><input type="hidden" name="codeday" id="codeday" /><br />
+                        Status: <input type="radio" name="open" value="true" checked="checked"/>Open <input type="radio" name="open" value="false" /> Closed
+                        <br /><input type="submit" name="submit" value="Generate Code" />
+                    </form>
 
-        <br />
+                    <br />
 
-        <div>
-            Last 5 codes generated:<ul>
-                <?php
+                    <div>
+                        Last 5 codes generated:<ul>
+                            <?php
 //select and output the last 5 checkin codes created
-                $result = mysql_query('SELECT * from checkincodes WHERE classid="' . mysql_real_escape_string($classdata['id']) . '" ORDER BY creationtime DESC LIMIT 5') or die(mysql_error());
-                if (mysql_num_rows($result) > 0) {
-                    for ($i = 0; $row = mysql_fetch_assoc($result); $i++) {
-                        echo '<li>' . $row['code'] . ' for ' . $row['forclassday'] . ' ';
-                        if ($row['checkinopen'] == 'true') {
-                            echo '[<a href="' . $_SERVER['PHP_SELF'] . '?action=closecheckin&id=' . $classdata['id'] . '&code=' . $row['code'] . '">Open</a>]<br /><img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' . $row['code'] . '&choe=UTF-8" />';
-                        } else {
-                            echo '[<a href="' . $_SERVER['PHP_SELF'] . '?action=opencheckin&id=' . $classdata['id'] . '&code=' . $row['code'] . '">Closed</a>]';
-                        }
-                        echo '</li>';
+                            $result = mysql_query('SELECT * from checkincodes WHERE classid="' . mysql_real_escape_string($classdata['id']) . '" ORDER BY creationtime DESC LIMIT 5') or die(mysql_error());
+                            if (mysql_num_rows($result) > 0) {
+                                for ($i = 0; $row = mysql_fetch_assoc($result); $i++) {
+                                    echo '<li>' . $row['code'] . ' for ' . $row['forclassday'] . ' ';
+                                    if ($row['checkinopen'] == 'true') {
+                                        echo '[<a href="' . $_SERVER['PHP_SELF'] . '?action=closecheckin&id=' . $classdata['id'] . '&code=' . $row['code'] . '">Open</a>]<br /><img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' . $row['code'] . '&choe=UTF-8" />';
+                                    } else {
+                                        echo '[<a href="' . $_SERVER['PHP_SELF'] . '?action=opencheckin&id=' . $classdata['id'] . '&code=' . $row['code'] . '">Closed</a>]';
+                                    }
+                                    echo '</li>';
+                                }
+                            } else {
+                                echo '<li>No checkin codes have been generated yet.</li>';
+                            }
+                            ?></ul>
+                    </div>
+
+                    <h2>Live Checkin Count</h2>
+                    <div>
+                        So far, <b><span id="livecheckincount"></span></b> class members have checked in today.
+                    </div>
+
+                    <h2>Absent</h2>
+
+                    <div id="absent">
+
+
+                        <form action="absent.php" method="POST">
+                            <input type="text" id="studentsabsenton_text" value="<?php echo date('m-d-Y'); ?>">
+                            <input type="hidden" name="date" id="studentsabsenton" />
+                            <input type="hidden" name="action" value="getabsent">
+                            <input type="hidden" name="id" value=<?php echo '"' . $classdata["id"] . '"' ?> >
+                            <input type="submit" value="Get Absenses">
+                        </form>
+
+
+
+                    </div>
+                </div>
+
+                <div id="RegStudents">
+                    <h2>Students</h2>
+                    <?php
+                    foreach ($classusers as $user) {
+                        echo $user['firstname'] . ' ' . $user['lastname'];
+                        echo '<br />';
                     }
-                } else {
-                    echo '<li>No checkin codes have been generated yet.</li>';
-                }
-                ?></ul>
-        </div>
+                    ?>
 
-        <h2>Live Checkin Count</h2>
-        <div>
-            So far, <b><span id="livecheckincount"></span></b> class members have checked in today.
-        </div>
+                    <div id="attendancedialog" style="overflow-x:hidden">
+                        <iframe id="attendanceBookIframe" src="" style="width:100%;height:95%;border:none"></iframe>
+                    </div>
+                    <button id="bookBtn">Open Attendance Book</button>
+                </div>
 
-        <h2>Absent</h2>
-
-        <div id="absent">
-
-
-            <form action="absent.php" method="POST">
-                <input type="date" name="date">
-                <input type="hidden" name="action" value="getabsent">
-                <input type="hidden" name="id" value=<?php echo '"' . $classdata["id"] . '"' ?> >
-                <input type="submit" value="Get Absenses">
-            </form>
-
-
-           
-        </div>
-        </div>
-
-        <div id="RegStudents">
-        <h2>Students</h2>
-        <?php
-        foreach ($classusers as $user) {
-            echo $user['firstname'] . ' ' . $user['lastname'];
-            echo '<br />';
-        }
-        ?>
-
-        <div id="attendancedialog" style="overflow-x:hidden">
-            <iframe id="attendanceBookIframe" src="" style="width:100%;height:95%;border:none"></iframe>
-        </div>
-        <button id="bookBtn">Open Attendance Book</button>
-        </div>
-        
-        <div id="EnrollCodes">
-        <h2>Enrollment Code</h2>
-        Enrollment code for this course is <b><?php echo $classdata['enrollmentcode'] ?></b> [<?php
-        if ($classdata['enrollmentopen'] == 'true') {
-            echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=closeenrollment&id=' . $_GET['id'] . '">Open</a>';
-        } else {
-            echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=openenrollment&id=' . $_GET['id'] . '">Closed</a>';
-        }
-        ?>] <br />
-        <form action="" method="get"><input type="hidden" name="id" value="<?php echo $classdata['id'] ?>" /><input type="hidden" name="action" value="newenrollmentcode" /><input type="submit" value="Generate New Enrollment Code" /></form>
-        </div>
-        
-        <div id="classManagers">
-        <?php if ($classdata['superowner'] == 'true'): ?>
-            <h2>Class Managers</h2>
-            <div>
-                Enter the username of another manager of the class. This person will be able to manage this class as you do, but will not have the ability to add or remove class managers.
-                <br />
-                <div><?php
-                    if (isset($addmanagererror)) {
-                        echo $addmanagererror;
+                <div id="EnrollCodes">
+                    <h2>Enrollment Code</h2>
+                    Enrollment code for this course is <b><?php echo $classdata['enrollmentcode'] ?></b> [<?php
+                    if ($classdata['enrollmentopen'] == 'true') {
+                        echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=closeenrollment&id=' . $_GET['id'] . '">Open</a>';
+                    } else {
+                        echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=openenrollment&id=' . $_GET['id'] . '">Closed</a>';
                     }
-                    ?></div>
-                <form action="" method="post">
-                    <input type="text" name="username" placeholder="Username" />
-                    <input type="hidden" name="action" value="addmanager" />
-                    <input type="submit" value="Add Manager"/>
-                </form>
+                    ?>] <br />
+                    <form action="" method="get"><input type="hidden" name="id" value="<?php echo $classdata['id'] ?>" /><input type="hidden" name="action" value="newenrollmentcode" /><input type="submit" value="Generate New Enrollment Code" /></form>
+                </div>
+                <?php if ($classdata['superowner'] == 'true'): ?>
+                    <div id="classManagers"> 
+                        <h2>Class Managers</h2>
+                        <div>
+                            Enter the username of another manager of the class. This person will be able to manage this class as you do, but will not have the ability to add or remove class managers.
+                            <br />
+                            <div><?php
+                                if (isset($addmanagererror)) {
+                                    echo $addmanagererror;
+                                }
+                                ?></div>
+                            <form action="" method="post">
+                                <input type="text" name="username" placeholder="Username" />
+                                <input type="hidden" name="action" value="addmanager" />
+                                <input type="submit" value="Add Manager"/>
+                            </form>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
-        <?php endif; ?>
-	<div><input type="button" value="Back" id="backButton"/>
-	</div>
-        </div>
-        
-        </div>
         </div>
     </body>
 </html>

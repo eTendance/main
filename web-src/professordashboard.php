@@ -48,7 +48,7 @@ if(isset($_GET['action'])){
             <div id="breadcrumbs">Professor Dashboard</div>
         </nav>
 	<div id="container">
-        <div id="add">
+        <div id="add" class="dashboardbox">
             <h2>Create a Class</h2>
             <div>
                 <form action="professordashboard.php" method="POST">
@@ -62,7 +62,7 @@ if(isset($_GET['action'])){
                 </form>
             </div>
         </div>
-        <div id="classes">
+        <div id="classes" class="dashboardbox">
             <h2>Classes</h2>
             <ul>
             <?php
