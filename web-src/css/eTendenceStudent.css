@@ -67,6 +67,13 @@ input[type="text"]
     float:right;
 }
 
+#container
+{
+	width:1500px;
+	margin-left:auto;
+	margin-right:auto;
+	height:auto;
+}
 #logoPlacement
 {
 	float:left;
@@ -83,10 +90,6 @@ nav li a
 	border:1px solid #f9f9f9;
 	padding:.5em;
 }
-body
-{
-	padding-top: 1%;
-}
 
 #add
 {
@@ -95,10 +98,18 @@ body
 	width:45%;
 	background-color:cyan;
 	border:solid;
-	margin-left: 2.5%;
-	margin-top:5%;
+        margin-left:2.5%;
+	margin-top:10%;
 	padding-bottom:3%;
 	wrap:normal;
+}
+#add h2
+{
+    margin-left:5%;
+}
+#add form
+{
+    margin-left:10%;
 }
 #classes
 {
@@ -108,32 +119,35 @@ body
 	background-color:cyan;
 	border:solid;
 	margin-right:2.5%;
-	margin-top:5%;
-	margin-bottom:2.5%;
+	margin-top:10%;
 	wrap:normal;
+}
+#classes h2
+{
+    margin-left:5%;
+}
+#classes form
+{
+    margin-left:10%;
 }
 #checkIn
 {
 	border-radius:1em;
-	padding-bottom:2.5%;
 	background-color:cyan;
 	border:solid;
 	float:left;
 	clear:left;
 	width:30%;
+        margin-top:5%;
+        margin-left:2.5%;
 }
-body div form
+#checkIn h2
 {
-	margin-left:10%;
+    margin-left:5%;
 }
-body div
+#checkIn form
 {
-	margin-top:5%;
-	margin-left:2.5%;
-}
-body div h2
-{
-	margin-left:5%;
+    margin-left:10%;
 }
 #classes form ul
 {
@@ -165,11 +179,4 @@ body div h2
 .submit:active
 {
 	background-color:black;
-}
-#container
-{
-	width:1500px;
-	margin-left:auto;
-	margin-right:auto;
-	height:auto;
 }
