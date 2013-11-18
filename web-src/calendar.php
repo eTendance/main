@@ -51,11 +51,11 @@ function draw_calendar($month,$year){
 					WHERE checkins.checkintime IS NULL AND checkincodes.
 					forclassday = \"'. mysql_real_escape_string($year).
 					'-'.mysql_real_escape_string($month).
-					'-'.mysql_real_escape_string($day_counter+1).'\"';
+					'-'.mysql_real_escape_string($list_day).'\"';
 			$query_result = mysql_query($query);
+			$result = mysql_fetch_assoc($query_result);
 			
-			
-		    $calendar.= $query_result;
+		    $calendar.= $result[0];
 		    $calendar.= '</td>';
 		    
 		if($running_day == 6):
@@ -96,7 +96,7 @@ $query = 'SELECT count(enrollment.userid) FROM checkincodes JOIN
 					WHERE checkins.checkintime IS NULL AND checkincodes.
 					forclassday = "'. mysql_real_escape_string($year).
 					'-'.mysql_real_escape_string($month).
-					'-'.mysql_real_escape_string($year).'"';
+					'-'.mysql_real_escape_string($day).'"';
 $query_result = mysql_query($query);
 
 echo $query;
