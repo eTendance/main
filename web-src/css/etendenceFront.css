@@ -2,23 +2,19 @@ header
 {	
 	width:100%;
 	background:#f9f9f9;
-	margin-bottom: 2%;
+        min-width:1500px;
+        overflow:hidden;
 }
 
 #forgotten
 {
-	position:relative;
-	left: 50%;
-	margin-top: -4%;
-	margin-right:5%;
-	width:25%;
+    
 }
 
 #topLoginForm {
-    position:relative;
-    left: 50%;
-    bottom: 4em;
-
+    float:right;
+    margin-top:20px;
+    margin-right:10px;
 }
 
 
