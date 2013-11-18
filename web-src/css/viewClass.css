@@ -1,39 +1,4 @@
-header
-{
-	background-color:red;
-	position: absolute;
-	top: 0;
-	left:0;
-	width:100%;
-	border-bottom:2px solid #ccc;
-}
-header ul
-{
-	list-style:none;
-	margin:0;
-	padding:0.1%;
-}
-header li
-{
-	float:right;
-	border:outset 1px;
-	margin-right:10px;
-}
-#logoPlacement
-{
-	background-color:white;
-	float:left;
-	border:outset 1px;
-	display:block;
-	padding:0%;
-	float:left;
-}
-#profName
-{
-	border: black;
-	color:#f9f9f9;
-	box-shadow: 2px 2px 3px black;
-}
+
 #container
 {
 	margin-top:7em;

@@ -111,6 +111,7 @@ while ($row = mysql_fetch_assoc($result)) {
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
         <link rel="stylesheet" type="text/css" href="css/viewClass.css" />
+        <link rel="stylesheet" type="text/css" href="css/eTendenceProfessor.css" />
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -157,13 +158,13 @@ while ($row = mysql_fetch_assoc($result)) {
         </script>
     </head>
     <body>
-	<header>
-		<img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="100em" />
-		<ul>
-			<li><form action="login.php" method="get"><input type="hidden" name="logout" value="1" /><input type="submit" value="Logout" id="loginButton" class="submit"/></form></li>
-			<li><span id="profName"><?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname']?></span></li>
-		</ul>
-	</header>
+        <nav><img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="50px"/>
+            <ul>
+                <li><span id="profName">Welcome, <?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname'] ?><form action="login.php" method="get"><input type="hidden" name="logout" value="1" /><input type="submit" value="Logout" id="loginButton" class="submit"/></form></span></li>
+            </ul>
+            
+            <div id="breadcrumbs"><a href="professordashboard.php">Professor Dashboard</a> > Viewing <?php echo $classdata['name'] ?></div>
+        </nav>
         <div id="container">
         <div id="tabs">
             <ul>

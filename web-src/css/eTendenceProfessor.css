@@ -16,8 +16,13 @@ nav ul
 nav li
 {
 	float:right;
-	border:outset 1px;
 	margin-right:10px;
+}
+nav #breadcrumbs {
+    background-color:#ccc;
+    clear:both;
+    font-size:1.5em;
+    padding:5px;
 }
 #loginButton
 {
@@ -48,8 +53,15 @@ input[type="text"]
 {
 	border: black;
 	color:#f9f9f9;
-	box-shadow: 2px 2px 3px black;
+        margin-right:10px;
+        margin-top:5px;
+        float:left;
 }
+#profName form {
+    margin-left:10px;
+    display:inline-block;
+}
+
 #logoPlacement
 {
 	background-color:white;

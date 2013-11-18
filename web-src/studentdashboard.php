@@ -106,56 +106,53 @@ Enter the code provided by your professor.
     </head>
     <body>
         <nav>
+            <img src="img//eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="50px"/>
             <ul>
-                <img src="img//eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="50px"/>
                 <li><form action="login.php" method="get"><input type="hidden" name="logout" value="1" /><input type="submit" id="loginButton" value="Logout" class="submit"/></form></li>
                 <li><span id="studName"><?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname'] ?></span></li>
             </ul>
         </nav>
-	<div id="container">
-        <div id="add">
-            <h2>Enroll in a Class</h2>
-            <div><?php echo isset($enrollmenterror) ? $enrollmenterror : ""; ?></div>
-            <p>Enter the enrollment code provided by your professor to enroll in a course.</p>
-            <form action="studentdashboard.php" method="POST">
-                <input type="hidden" name="action" value="enroll" />
-                <input type="text" name="enrollmentcode" placeholder="Class enrollment code"/><input type="submit" id="enroll" class="submit" value="Enroll" />
-            </form>
-        </div>
-        <div id="classes">
-            <h2>Your Classes</h2>
-            <ul>
-                <?php
-                $query = 'SELECT classes.*, classowners.professorid, users.firstname, users.lastname FROM etendance.classes 
+        <div id="container">
+            <div id="add">
+                <h2>Enroll in a Class</h2>
+                <div><?php echo isset($enrollmenterror) ? $enrollmenterror : ""; ?></div>
+                <p>Enter the enrollment code provided by your professor to enroll in a course.</p>
+                <form action="studentdashboard.php" method="POST">
+                    <input type="hidden" name="action" value="enroll" />
+                    <input type="text" name="enrollmentcode" placeholder="Class enrollment code"/><input type="submit" id="enroll" class="submit" value="Enroll" />
+                </form>
+            </div>
+            <div id="classes">
+                <h2>Your Classes</h2>
+                <ul>
+                    <?php
+                    $query = 'SELECT classes.*, classowners.professorid, users.firstname, users.lastname FROM etendance.classes 
     join enrollment on classes.id=enrollment.classid 
     join classowners on classes.id=classowners.classid 
     join users on classowners.professorid=users.id 
     WHERE enrollment.userid="' . $_SESSION['userdata']['id'] . '"';
-                $result = mysql_query($query);
+                    $result = mysql_query($query);
 
-		if(mysql_num_rows($result) > 0)
-		{
-                while ($row = mysql_fetch_assoc($result)) {
-                    echo '<li>' . $row['name'] . ' - ' . $row['firstname'] . ' ' . $row['lastname'] . '</li>';
-                 }
-		}
-		else
-		{
-			echo '<div>You are current not signed up for any classes.</div>';
-                }
-		?>
-            </ul>
+                    if (mysql_num_rows($result) > 0) {
+                        while ($row = mysql_fetch_assoc($result)) {
+                            echo '<li>' . $row['name'] . ' - ' . $row['firstname'] . ' ' . $row['lastname'] . '</li>';
+                        }
+                    } else {
+                        echo '<div>You are current not signed up for any classes.</div>';
+                    }
+                    ?>
+                </ul>
+            </div>
+            <div id="checkIn">
+                <h2>Check In to class</h2>
+                <div><?php echo isset($checkinerror) ? $checkinerror[0] : ""; ?></div>
+                <form action="" method="post">
+                    <label for="checkincode">Check In Pin:</label>
+                    <input type="hidden" name="action" value="checkin" />
+                    <input type="text" name="checkincode" id="checkincode" value="" maxlength="30"/>
+                    <input type="submit" value="Checkin" id="check-In" class="submit"/>
+                </form>
+            </div>
         </div>
-        <div id="checkIn">
-            <h2>Check In to class</h2>
-            <div><?php echo isset($checkinerror) ? $checkinerror[0] : ""; ?></div>
-            <form action="" method="post">
-                <label for="checkincode">Check In Pin:</label>
-                <input type="hidden" name="action" value="checkin" />
-                <input type="text" name="checkincode" id="checkincode" value="" maxlength="30"/>
-                <input type="submit" value="Checkin" id="check-In" class="submit"/>
-            </form>
-        </div>
-	</div>
     </body>
 </html>
