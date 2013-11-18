@@ -6,7 +6,7 @@
 <?php
 
 ini_set('display_errors', 'On');
-require_once('settings.php');
+require_once('settings.template.php');
 mysql_connect($settings['mysql_host'], $settings['mysql_username'], $settings['mysql_password']);
 mysql_select_db($settings['mysql_database']);
 
@@ -46,16 +46,16 @@ function draw_calendar($month,$year){
 			$calendar.= str_repeat('<p> </p>',2);
 			
 			$query = 'SELECT count(enrollment.userid) FROM checkincodes JOIN
-					enrollment LEFT JOIN checkins ON enrollment.userid = 
+					enrollment LEFT JOIN checkins ON enrollment.userid =
 					checkins.userid AND enrollment.classid = checkins.classid
 					WHERE checkins.checkintime IS NULL AND checkincodes.
-					forclassday = \"'. mysql_real_escape_string($year).
+					forclassday = "'. mysql_real_escape_string($year).
 					'-'.mysql_real_escape_string($month).
-					'-'.mysql_real_escape_string($list_day).'\"';
-			$query_result = mysql_query($query);
-			$result = mysql_fetch_assoc($query_result);
+					'-'.mysql_real_escape_string($list_day).'"';
+			$query_result = mysql_query($query) or die(mysql_error());
+			$result = mysql_fetch_array($query_result);
 			
-		    $calendar.= $result[0];
+		    $calendar.= $result['count(enrollment.userid)'];
 		    $calendar.= '</td>';
 		    
 		if($running_day == 6):
@@ -86,20 +86,6 @@ function draw_calendar($month,$year){
 	return $calendar;
 }echo draw_calendar(11, 2013);
 
-$month = '11';
-$day = '17';
-$year = '2013';
-
-$query = 'SELECT count(enrollment.userid) FROM checkincodes JOIN
-					enrollment LEFT JOIN checkins ON enrollment.userid =
-					checkins.userid AND enrollment.classid = checkins.classid
-					WHERE checkins.checkintime IS NULL AND checkincodes.
-					forclassday = "'. mysql_real_escape_string($year).
-					'-'.mysql_real_escape_string($month).
-					'-'.mysql_real_escape_string($day).'"';
-$query_result = mysql_query($query);
-
-echo $query;
 ?>
 </body>
 </html>
