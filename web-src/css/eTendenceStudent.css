@@ -1,32 +1,40 @@
-nav
+header
 {
 	position: absolute;
-	top: 0;
-	left:0;
+	top: 0px;
+	left:0px;
 	width:100%;
 	border-bottom:2px solid #ccc;
-	background:BLUE;
+	background-color:BLUE;
 }
-nav ul
+header ul
 {
-	list-style:none;
-	margin:0;
-	padding: .3em;
+	list-style:none outside none;
+	margin:0px;
+	padding: 0.1%;
 }
-nav li
+header li
 {
 	float:right;
 	margin-right:10px;
 }
+header #breadcrumbs
+{
+    background-color: rgb(204, 204, 204);
+    clear: both;
+    font-size: 1.5em;
+    padding: 5px;
+    margin-top:0px;
+    margin-left:0px;
+}
 #loginButton
 {
 
-	width:100%;
-	font-size: 1.0em;
-	margin-right: auto;
-	margin-left: auto;
-	margin-top: .4em;
-	background-color:#cccccc;
+	width: 100%;
+        font-size: 1em;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: rgb(204, 204, 204);
 }
 #enroll
 {
@@ -48,15 +56,23 @@ input[type="text"]
 
 #studName
 {
-	color:#f9f9f9;
+    color:#f9f9f9;
+    border: medium none black;
+    margin-right: 10px;
+    margin-top: 5px;
+    float: left;
+}
+#studName form
+{
+    float:right;
 }
 
 #logoPlacement
 {
 	float:left;
-	border:none;
+	border:outset 1px;
 	display:block;
-	padding:.5em;
+	padding:0px;
 	float:left;
 	background:white;
 }
@@ -69,7 +85,7 @@ nav li a
 }
 body
 {
-	padding-top: 1em;
+	padding-top: 1%;
 }
 
 #add
@@ -79,7 +95,10 @@ body
 	width:45%;
 	background-color:cyan;
 	border:solid;
-	padding-bottom:2%;
+	margin-left: 2.5%;
+	margin-top:5%;
+	padding-bottom:3%;
+	wrap:normal;
 }
 #classes
 {
