@@ -84,7 +84,7 @@ function draw_calendar($month,$year){
 	
 	/* all done, return result */
 	return $calendar;
-}echo draw_calendar(11, 2013);
+}echo draw_calendar(date("m"), date("y"));
 
 ?>
 </body>
