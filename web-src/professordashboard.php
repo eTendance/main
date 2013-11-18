@@ -72,11 +72,13 @@ for($i=0; $row=mysql_fetch_assoc($result);$i++){
     </head>
     <body>
         <header>
+            <img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="50px"/>
             <ul>
-                <img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="50px"/>
-                <li><form action="login.php" method="get"><input type="hidden" name="logout" value="1" /><input type="submit" value="Logout" id="loginButton" class="submit"/></form></li>
-                <li><span id="profName"><?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname'] ?></span></li>
+                <li><span id="profName">Welcome, <?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname'] ?><form action="login.php" method="get"><input type="hidden" name="logout" value="1" /><input type="submit" id="loginButton" value="Logout" class="submit"/></form></span></li>
             </ul>
+            <div id="breadcrumbs">
+                Professor Dashboard
+            </div>
         </header>
 	<div id="container">
         <div id="add">
