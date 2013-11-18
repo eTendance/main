@@ -168,13 +168,16 @@ while ($row = mysql_fetch_assoc($result)) {
         </script>
     </head>
     <body>
-        <nav><img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="50px"/>
+        <header>
+            <img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="50px"/>
             <ul>
-                <li><span id="profName">Welcome, <?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname'] ?><form action="login.php" method="get"><input type="hidden" name="logout" value="1" /><input type="submit" value="Logout" id="loginButton" class="submit"/></form></span></li>
+                <li><span id="profName">Welcome, <?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname'] ?><form action="login.php" method="get"><input type="hidden" name="logout" value="1" /><input type="submit" id="loginButton" value="Logout" class="submit"/></form></span></li>
             </ul>
 
-            <div id="breadcrumbs"><a href="professordashboard.php">Professor Dashboard</a> > Viewing <?php echo $classdata['name'] ?></div>
-        </nav>
+            <div id="breadcrumbs">
+		<a href="professordashboard.php">Professor Dashboard</a> > Viewing <?php echo $classdata['name'] ?>
+            </div>
+        </header>
         <div id="container">
             <div id="tabs">
                 <ul>

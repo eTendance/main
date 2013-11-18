@@ -1,4 +1,66 @@
+header
+{
+	position: absolute;
+	top: 0px;
+	left:0px;
+	width:100%;
+	border-bottom:2px solid #ccc;
+	background-color:RED;
+}
+header ul
+{
+	list-style:none outside none;
+	margin:0px;
+	padding: 0.1%;
+}
+header li
+{
+	float:right;
+	margin-right:10px;
+}
+header #breadcrumbs
+{
+    background-color: rgb(204, 204, 204);
+    clear: both;
+    font-size: 1.5em;
+    padding: 5px;
+    margin-top:0px;
+    margin-left:0px;
+}
+#loginButton
+{
 
+	width: 100%;
+        font-size: 1em;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: rgb(204, 204, 204);
+}
+li > #loginButton
+{
+	border:none;
+}
+#profName
+{
+    color:#f9f9f9;
+    border: medium none black;
+    margin-right: 10px;
+    margin-top: 5px;
+    float: left;
+}
+#profName form
+{
+    float:right;
+}
+#logoPlacement
+{
+	background-color:white;
+	float:left;
+	border:outset 1px;
+	display:block;
+	padding:0%;
+	float:left;
+}
 #container
 {
 	margin-top:7em;
