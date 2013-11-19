@@ -31,11 +31,31 @@ $(document).ready(function() {
 	    }
 	    console.log(date);
 
+	    /*var URL = "absent.php";
+	    $.ajax({
+		type: "POST",
+		url: URL,
+		dataType:"json",
+		data: {
+			json:JSON.stringify({dates: date})
+		},
+		success: function(data) {
+			console.log('success');
+			var popup = window.open(URL, 'mywindow', "width=400, height=800");
+			var innerH = popup.document.body.innerHTML;
+			console.log(innerH);
+			popup.document.body.innerHTML = '<div id="theDate">' + data.dates + '</div>' + innerH;
+	    		popup.focus();
+				
+		}
+	    });*/
+
+	    $popup = window.open("absent.php", 'mywindow', "width=400, height=800");
+	    $popup.focus();
+
 	    /*$.post('absent.php', {"action": "getabsent";"date": date; "id": "test"}, function() {
 		//$_REQUEST['id'] //is class ID, and not sure how to get this nor pass this yet... probably need to tie
 		//calendar into the actual viewclass.php
-		$popup = window.open("absent.php", 'mywindow', "width=400, height=800");
-		$popup.focus();
 	    });*/
 	};
     });  
