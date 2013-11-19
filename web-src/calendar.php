@@ -1,22 +1,26 @@
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="calendar.css">
+	<link rel="stylesheet" type="text/css" href="css/calendar.css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script type="text/javascript" src="js/calender.js"></script>
+	<meta charset=UTF-8>
 </head>
 <body>
 <?php
 
 ini_set('display_errors', 'On');
-require_once('settings.template.php');
+require_once('settings.php');
 mysql_connect($settings['mysql_host'], $settings['mysql_username'], $settings['mysql_password']);
 mysql_select_db($settings['mysql_database']);
 
 /* draws a calendar */
 function draw_calendar($month,$year){
 
+	
 	/* draw table */
 	$calendar = '<table cellpadding="0" cellspacing="0" class="calendar">';
-
 	/* table headings */
+	$calendar.= '<tr class="calendar-row"><td class="calendar-day-head">Month: <span id="month">'.$month.'</span> Year: <span id="year">'.$year.'</span></td></tr>';
 	$headings = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 	$calendar.= '<tr class="calendar-row"><td class="calendar-day-head">'.implode('</td><td class="calendar-day-head">',$headings).'</td></tr>';
 
