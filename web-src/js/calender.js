@@ -14,21 +14,20 @@ $(document).ready(function() {
 	    var day = $days[i].innerHTML;
 	    var date;
 
-	    var checker = day.charAt(1);
-	    if(checker === null)
-	    {
-		console.log("I am null");
-	    }
-	    if(checker === undefined) {
-		console.log("I am undefined");
-	    }
-	    if(checker === 0) {
-		console.log("i am 0");
-	    }
-	    if(checker !== null && checker !== undefined) {
-		date = month +"-" + day + "-20" + year;
+	    if(month < 10) {
+		date = "0" + month;
 	    } else {
-		date = month +"-0" + day + "-20" + year;
+		date = month;
+	    }
+	    if(day < 10) {
+		date = date +"-0" + day;
+	    } else {
+		date = date + "-" + day;
+	    }
+	    if(year < 10) {
+		date = date + "-200" + year;
+	    } else {
+		date = date + "-20" + year;
 	    }
 	    console.log(date);
 
