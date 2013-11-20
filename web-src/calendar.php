@@ -8,10 +8,9 @@
 <body>
 <?php
 
-ini_set('display_errors', 'On');
-require_once('settings.php');
-mysql_connect($settings['mysql_host'], $settings['mysql_username'], $settings['mysql_password']);
-mysql_select_db($settings['mysql_database']);
+require_once('global.php');
+
+check_auth('p');
 
 /* draws a calendar */
 function draw_calendar($month,$year){
