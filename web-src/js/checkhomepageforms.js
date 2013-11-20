@@ -17,12 +17,12 @@ function validateRegForm() {
    return (isNotEmpty("firstname", "Please enter your first name!")
         && isNotEmpty("lastname", "Please enter your last name!")
         && isValidEmail("email", "Enter a valid email!")
-        && isLengthMinMax("usernameS", "8 to 16 chars!", 8, 16)
-        && isLengthMinMax("passwordS", "Enter a valid password (8 to 16)!", 8, 16));
+        && isLengthMinMax("usernameS", "User name should have 8 to 16 chars!", 8, 16)
+        && isLengthMinMax("passwordS", "Enter a valid password (8 to 16 chars)!", 8, 16));
 }
 
 function validateForm() {
-        return( isLengthMinMax("username", "User name should have 8 to 16 chars!", 8, 16)
+	return( isLengthMinMax("username", "User name should have 8 to 16 chars!", 8, 16)
         && isLengthMinMax("password", "Enter a valid password (8 to 16 chars)!", 8, 16)
         && isAlphanumeric("username", "User name should be alphanumeric Characters!")
         && isAlphanumeric("password", "Password should be alphanumeric Characters!"));
