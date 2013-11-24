@@ -54,6 +54,16 @@ if($_REQUEST['activity'] == "view_classes"){
 
 
 */
+if($_REQUEST['action'] == "getAbsent") {
+	$studentsAbsent = mysql_query(SELECT firstname, lastname from enrollment left JOIN  (SELECT userid,checkins.id from checkins left join checkincodes on checkins.checkincodeid = checkincodes.id where forclassday="' . mysql_real_escape_string($_REQUEST['date'] ) . ' " )AS inattendance on inattendance.userid = enrollment.userid JOIN users ON enrollment.userid = users.id WHERE inattendance.id IS NULL and classid = "' . mysql_real_escape_string($_REQUEST['id']) . '";' ;
+	$data_array = array();
+	$counter = 0;
+
+	while($next = mysql_fetch_assoc($studentsAbsent)) {
+		$data_array[$counter] = $next;
+		$counter++;
+	}
+}
 
 
 ?>
