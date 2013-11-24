@@ -1,3 +1,15 @@
+function dataPass(dat, pop) {
+	$.ajax({
+		type: "POST",
+		url: "./API.php",
+		window: pop,
+		data: {action: "getAbsent"},
+		success: function(date){
+			var jsonDateData = JSON.parse(date);
+			console.log(jsonDateData);
+		}
+}
+
 $(document).ready(function() {
 
 	var month = document.getElementById("month").innerHTML;
@@ -8,6 +20,10 @@ $(document).ready(function() {
 
 	$days.each(function(i) {
 	var dayCast = $dayButtons[i];
+
+//make a function and pass a parameter with either the date or prepared list of abscences
+//or make an ajax call.
+//take a look at order.js
 
 	dayCast.onclick = function() {
 	    console.log("I am clicked");
@@ -31,27 +47,9 @@ $(document).ready(function() {
 	    }
 	    console.log(date);
 
-	    /*var URL = "absent.php";
-	    $.ajax({
-		type: "POST",
-		url: URL,
-		dataType:"json",
-		data: {
-			json:JSON.stringify({dates: date})
-		},
-		success: function(data) {
-			console.log('success');
-			var popup = window.open(URL, 'mywindow', "width=400, height=800");
-			var innerH = popup.document.body.innerHTML;
-			console.log(innerH);
-			popup.document.body.innerHTML = '<div id="theDate">' + data.dates + '</div>' + innerH;
-	    		popup.focus();
-				
-		}
-	    });*/
-
 	    $popup = window.open("absent.php", 'mywindow', "width=400, height=800");
 	    $popup.focus();
+	    dataPass(date, $popup);
 
 	    /*$.post('absent.php', {"action": "getabsent";"date": date; "id": "test"}, function() {
 		//$_REQUEST['id'] //is class ID, and not sure how to get this nor pass this yet... probably need to tie
