@@ -12,6 +12,17 @@ require_once('global.php');
 
 check_auth('p');
 
+if (!isset($_GET['id'])) {
+	showdashboard();
+}
+
+//check to make sure class exists and this professor owns it
+$result = mysql_query('SELECT classes.*,classowners.superowner FROM classes join classowners on classes.id=classowners.classid where professorid="' . mysql_real_escape_string($_SESSION['userdata']['id']) . '" and classes.id="' . mysql_real_escape_string($_GET['id']) . '"');
+if (mysql_num_rows($result) < 1) {
+	showdashboard();
+}
+$classdata = mysql_fetch_assoc($result);
+
 /* draws a calendar */
 function draw_calendar($month,$year){
 
@@ -51,9 +62,9 @@ function draw_calendar($month,$year){
 			$query = 'SELECT count(enrollment.userid) FROM checkincodes JOIN
 					enrollment LEFT JOIN checkins ON enrollment.userid =
 					checkins.userid AND enrollment.classid = checkins.classid
-					WHERE checkins.checkintime IS NULL AND checkincodes.
-					forclassday = "'. mysql_real_escape_string($year).
-					'-'.mysql_real_escape_string($month).
+					WHERE enrollment.classid = '.mysql_real_escape_string($_GET['id']).
+					' and checkins.checkintime IS NULL AND checkincodes.forclassday = "'. 
+					mysql_real_escape_string($year).'-'.mysql_real_escape_string($month).
 					'-'.mysql_real_escape_string($list_day).'"';
 			$query_result = mysql_query($query) or die(mysql_error());
 			$result = mysql_fetch_array($query_result);
