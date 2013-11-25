@@ -26,11 +26,11 @@ $classdata = mysql_fetch_assoc($result);
 /* draws a calendar */
 function draw_calendar($month,$year){
 
-	
+	$id = $_GET['id'];
 	/* draw table */
 	$calendar = '<table cellpadding="0" cellspacing="0" class="calendar">';
 	/* table headings */
-	$calendar.= '<tr class="calendar-row"><td class="calendar-day-head">Month: <span id="month">'.$month.'</span> Year: <span id="year">'.$year.'</span></td></tr>';
+	$calendar.= '<tr class="calendar-row"><td class="calendar-day-head">Month: <span id="month">'.$month.'</span> Year: <span id="year">'.$year.'</span></td><td class="calendar-day-head"><span id="id">'.$id.'</td></tr>';
 	$headings = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 	$calendar.= '<tr class="calendar-row"><td class="calendar-day-head">'.implode('</td><td class="calendar-day-head">',$headings).'</td></tr>';
 

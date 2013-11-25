@@ -149,6 +149,24 @@ if($_REQUEST['activity'] ==  "checkin_with_PIN"){
 
 */
 
+if($_REQUEST['action'] == "getAbsent") {
+	$classID = $_REQUEST['classID'];
+	$date = $_REQUEST['date'];
+	$url = $_REQUEST['urk'];
+	$query = 'SELECT firstname, lastname from enrollment left JOIN  (SELECT userid,checkins.id from checkins left join checkincodes on checkins.checkincodeid = checkincodes.id where forclassday="' . mysql_real_escape_string($date) . ' " )AS inattendance on inattendance.userid = enrollment.userid JOIN users ON enrollment.userid = users.id WHERE inattendance.id IS NULL and classid = "' . mysql_real_escape_string($classID) . '";' ;
+	$absent = mysql_query($query);
+	$data_array = array();
+	$counter = 0;
+	while($row = mysql_fetch_assoc($absent)){
+		$data_array[$counter]= '<li>' . $row['firstname'] .' ' . $row['lastname'] . '</li>';
+		$counter++;
+	}
+
+	echo json_encode($data_array);
+	exit;
+	
+}
+
 
 ?>
 
