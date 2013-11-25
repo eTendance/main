@@ -15,7 +15,7 @@ if (isset($_REQUEST['user']) && isset($_REQUEST['pass']) ){
 
         }else{
 
-              	if($_REQUEST['activity'] == "login"){
+                if($_REQUEST['activity'] == "login"){
 
                         echo "1";
                         exit;
@@ -47,23 +47,107 @@ if($_REQUEST['activity'] == "view_classes"){
         echo json_encode($data_array);
         exit;
 
+
+
 }
+if($_REQUEST['activity'] == 'get_absences_for_student'){
+
+    $classID = mysql_escape_string($_REQUEST['classid']);
+
+
+    $dates_absent = mysql_query("SELECT forclassday from (SELECT * from checkins where checkins.userid = '$userID')  AS attendance RIGHT JOIN checkincodes ON( attendance.checkincodeid = checkincodes.id) WHERE checkincodes.classid='$classID' AND checkincodeid IS NULL ");
+
+    $data_array = array();
+    $counter = 0;
+
+    while( $next = mysql_fetch_assoc($dates_absent)){
+         $data_array[$counter] =  $next;
+         $counter++;
+      }
+
+    echo json_encode($data_array);
+    exit;
+    
+}
+
+
+if($_REQUEST['activity']== "get_checkin_PIN"){
+
+
+    $datePull = getdate();
+
+  
+
+    $date = $datePull['year'] . '-' . $datePull['mon'] . '-' . $datePull['mday'];
+
+    
+
+    $classID = mysql_escape_string($_REQUEST['classid']);
+
+    $query = "SELECT code FROM  checkincodes WHERE checkinopen='true' AND classid = '$classID' AND  forclassday= '$date' ";
+
+    $data_array = array();
+
+    $codes = mysql_query($query);
+
+    $data_array[0] = mysql_fetch_assoc($codes);
+
+    echo json_encode(  $data_array ) ;
+    exit;
+
+}
+
+if($_REQUEST['activity'] ==  "checkin_with_PIN"){
+
+    $code = $_REQUEST['checkincode'];
+
+    $query1 = " SELECT * from checkincodes WHERE code='$code'" ;
+
+    $result = mysql_query($query1);
+
+    $holder =  mysql_fetch_assoc($result);
+
+    if($holder['checkinopen'] == 'true'){
+        
+        $classID = $holder['classid'];
+        $codeId = $holder['id'];
+
+
+        $checkError = mysql_query("INSERT INTO checkins(userid, classid, checkincodeid) VALUE('$userID', '$classID', '$codeId' ) " )  ;
+
+        echo $checkError;
+
+        if($checkError == NULL){
+        echo "already_checked_in"; # code for already exists
+        }
+
+        if($checkError == 1){
+            echo "checkin_success"; #self explanatory
+        }
+
+
+    } else {
+    
+        echo "checkin_closed";
+        
+       
+
+
+    }
+
+
+
+}
+
+
+
+
 /*
-  	login - on success echo 1, else 0
+    login - on success echo 1, else 0
         view_classes - list of classes student is enrolled in, json encode
 
 
 */
-if($_REQUEST['action'] == "getAbsent") {
-	$studentsAbsent = mysql_query(SELECT firstname, lastname from enrollment left JOIN  (SELECT userid,checkins.id from checkins left join checkincodes on checkins.checkincodeid = checkincodes.id where forclassday="' . mysql_real_escape_string($_REQUEST['date'] ) . ' " )AS inattendance on inattendance.userid = enrollment.userid JOIN users ON enrollment.userid = users.id WHERE inattendance.id IS NULL and classid = "' . mysql_real_escape_string($_REQUEST['id']) . '";' ;
-	$data_array = array();
-	$counter = 0;
-
-	while($next = mysql_fetch_assoc($studentsAbsent)) {
-		$data_array[$counter] = $next;
-		$counter++;
-	}
-}
 
 
 ?>
