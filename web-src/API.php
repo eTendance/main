@@ -7,7 +7,7 @@ $userID = "1";
 if (isset($_REQUEST['user']) && isset($_REQUEST['pass']) ){
         $name = mysql_escape_string($_REQUEST['user']);
         $pass = mysql_escape_string($_REQUEST['pass']);
-        $mysql = mysql_query("SELECT * FROM users WHERE username = '$name' AND password = '$pass'");
+        $mysql = mysql_query("SELECT * FROM users WHERE username = '".$name."' AND password = '".$pass."'");
 
         if(mysql_num_rows($mysql) < 1){
                 echo "0";
@@ -32,7 +32,7 @@ if (isset($_REQUEST['user']) && isset($_REQUEST['pass']) ){
 
 
 if($_REQUEST['activity'] == "view_classes"){
-        $class_list = mysql_query("SELECT * FROM enrollment JOIN classes ON(enrollment.classid = classes.id)  WHERE enrollment.userid = '$userID'");
+        $class_list = mysql_query("SELECT * FROM enrollment JOIN classes ON(enrollment.classid = classes.id)  WHERE enrollment.userid = '".$userID."'");
 
         $data_array = array();
         $counter = 0;
@@ -55,7 +55,7 @@ if($_REQUEST['activity'] == 'get_absences_for_student'){
     $classID = mysql_escape_string($_REQUEST['classid']);
 
 
-    $dates_absent = mysql_query("SELECT forclassday from (SELECT * from checkins where checkins.userid = '$userID')  AS attendance RIGHT JOIN checkincodes ON( attendance.checkincodeid = checkincodes.id) WHERE checkincodes.classid='$classID' AND checkincodeid IS NULL ");
+    $dates_absent = mysql_query("SELECT forclassday from (SELECT * from checkins where checkins.userid = '".$userID."')  AS attendance RIGHT JOIN checkincodes ON( attendance.checkincodeid = checkincodes.id) WHERE checkincodes.classid='".$classID."' AND checkincodeid IS NULL ");
 
     $data_array = array();
     $counter = 0;
@@ -84,7 +84,7 @@ if($_REQUEST['activity']== "get_checkin_PIN"){
 
     $classID = mysql_escape_string($_REQUEST['classid']);
 
-    $query = "SELECT code FROM  checkincodes WHERE checkinopen='true' AND classid = '$classID' AND  forclassday= '$date' ";
+    $query = "SELECT code FROM  checkincodes WHERE checkinopen='true' AND classid = '".$classID."' AND  forclassday= '".$date."' ";
 
     $data_array = array();
 
@@ -101,7 +101,7 @@ if($_REQUEST['activity'] ==  "checkin_with_PIN"){
 
     $code = $_REQUEST['checkincode'];
 
-    $query1 = " SELECT * from checkincodes WHERE code='$code'" ;
+    $query1 = " SELECT * from checkincodes WHERE code='".$code."'" ;
 
     $result = mysql_query($query1);
 
@@ -113,7 +113,7 @@ if($_REQUEST['activity'] ==  "checkin_with_PIN"){
         $codeId = $holder['id'];
 
 
-        $checkError = mysql_query("INSERT INTO checkins(userid, classid, checkincodeid) VALUE('$userID', '$classID', '$codeId' ) " )  ;
+        $checkError = mysql_query("INSERT INTO checkins(userid, classid, checkincodeid) VALUE('".$userID."', '".$classID."', '".$codeId."' ) " )  ;
 
         echo $checkError;
 
