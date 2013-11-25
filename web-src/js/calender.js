@@ -1,10 +1,8 @@
-function dataPass(dat, pop, id) {
+function dataPass(dat, pop) {
 	$.ajax({
 		type: "POST",
 		url: "./API.php",
-		date: dat,
 		window: pop,
-		classID: id,
 		data: {action: "getAbsent"},
 		success: function(date){
 			var jsonDateData = JSON.parse(date);
@@ -16,7 +14,6 @@ $(document).ready(function() {
 
 	var month = document.getElementById("month").innerHTML;
 	var year = document.getElementById("year").innerHTML;
-	var id = document.getElementById("id").innerHTML;
 
 	$days = $('.day-number');
 	$dayButtons = $('.calendar-day');
@@ -52,7 +49,7 @@ $(document).ready(function() {
 
 	    $popup = window.open("absent.php", 'mywindow', "width=400, height=800");
 	    $popup.focus();
-	    dataPass(date, $popup, id);
+	    dataPass(date, $popup);
 
 	    /*$.post('absent.php', {"action": "getabsent";"date": date; "id": "test"}, function() {
 		//$_REQUEST['id'] //is class ID, and not sure how to get this nor pass this yet... probably need to tie
