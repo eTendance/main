@@ -111,61 +111,11 @@ while ($row = mysql_fetch_assoc($result)) {
         <title></title>
         <link rel="stylesheet" type="text/css" href="css/viewClass.css" />
         <link rel="stylesheet" type="text/css" href="css/eTendenceProfessor.css" />
+        <link rel="stylesheet" type="text/css" href="css/calendar.css" />
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-        <script>
-            function updatecheckincount() {
-                $.get("viewclass.php?id=<?php echo $_GET['id'] ?>&date=<?php echo date("Y-m-d"); ?>&action=getdatecheckinsajax", function(data) {
-                    $("#livecheckincount").html(data);
-                });
-            }
-            $(function() {
-                $("#codeday_text").datepicker({
-                    showOn: "button",
-                    buttonImage: "img/calendar.gif",
-                    buttonImageOnly: true,
-                    dateFormat: "mm-dd-yy",
-                    altField: "#codeday",
-                    altFormat: "yy-mm-dd"
-                });
-                $("#studentsabsenton_text").datepicker({
-                    showOn: "button",
-                    buttonImage: "img/calendar.gif",
-                    buttonImageOnly: true,
-                    dateFormat: "mm-dd-yy",
-                    altField: "#studentsabsenton",
-                    altFormat: "yy-mm-dd"
-                });
-            });
-            $(document).ready(function() {
-                updatecheckincount();
-                setInterval(function() {
-                    updatecheckincount();
-                }, 10000);
-
-                $("#attendancedialog").dialog({
-                    autoOpen: false,
-                    modal: true,
-                    height: 800,
-                    width: 1000,
-                    title: "Attendance Book",
-                    open: function(ev, ui) {
-                        $('#attendanceBookIframe').attr('src', 'attendancebook.php?id=<?php echo $classdata['id'] ?>');
-                    }
-                });
-
-                $('#bookBtn').click(function() {
-                    $('#attendancedialog').dialog('open');
-                });
-                $('#tabs').tabs({
-                    beforeActivate: function(event, ui) {
-                        window.location.hash = ui.newPanel.selector;
-                    }
-                });
-
-            });
-        </script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/viewClass.js"></script>
     </head>
     <body>
         <header>
@@ -231,7 +181,6 @@ while ($row = mysql_fetch_assoc($result)) {
 
                     <div id="absent">
 
-
                         <form action="absent.php" method="POST">
                             <input type="text" id="studentsabsenton_text" value="<?php echo date('m-d-Y'); ?>">
                             <input type="hidden" name="date" id="studentsabsenton" />
@@ -240,9 +189,16 @@ while ($row = mysql_fetch_assoc($result)) {
                             <input type="submit" value="Get Absenses">
                         </form>
 
-
-
                     </div>
+
+                    <div id="absent-calendar">
+                        <?php
+                        require_once('calendar.php');
+
+                        ?>
+                    </div>
+
+
                 </div>
 
                 <div id="RegStudents">
