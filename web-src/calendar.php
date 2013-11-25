@@ -1,36 +1,12 @@
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="css/calendar.css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-	<script type="text/javascript" src="js/calender.js"></script>
-	<meta charset=UTF-8>
-</head>
-<body>
 <?php
+	require_once('global.php');
+	function draw_calendar($month,$year){
 
-require_once('global.php');
-
-check_auth('p');
-
-if (!isset($_GET['id'])) {
-	showdashboard();
-}
-
-//check to make sure class exists and this professor owns it
-$result = mysql_query('SELECT classes.*,classowners.superowner FROM classes join classowners on classes.id=classowners.classid where professorid="' . mysql_real_escape_string($_SESSION['userdata']['id']) . '" and classes.id="' . mysql_real_escape_string($_GET['id']) . '"');
-if (mysql_num_rows($result) < 1) {
-	showdashboard();
-}
-$classdata = mysql_fetch_assoc($result);
-
-/* draws a calendar */
-function draw_calendar($month,$year){
-
-	
+	$id = $_GET['id'];
 	/* draw table */
 	$calendar = '<table cellpadding="0" cellspacing="0" class="calendar">';
 	/* table headings */
-	$calendar.= '<tr class="calendar-row"><td class="calendar-day-head">Month: <span id="month">'.$month.'</span> Year: <span id="year">'.$year.'</span></td></tr>';
+	$calendar.= '<tr class="calendar-row"><td class="calendar-day-head">Month: <span id="month">'.$month.'</span> Year: <span id="year">'.$year.'</span></td><td class="calendar-day-head"><span id="id">'.$id.'</span></td></tr>';
 	$headings = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 	$calendar.= '<tr class="calendar-row"><td class="calendar-day-head">'.implode('</td><td class="calendar-day-head">',$headings).'</td></tr>';
 
@@ -98,7 +74,36 @@ function draw_calendar($month,$year){
 	
 	/* all done, return result */
 	return $calendar;
-}echo draw_calendar(date("m"), date("y"));
+}
+?>
+
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/calendar.css">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script type="text/javascript" src="js/calender.js"></script>
+	<meta charset=UTF-8>
+</head>
+<body>
+<?php
+
+require_once('global.php');
+
+check_auth('p');
+
+if (!isset($_GET['id'])) {
+	showdashboard();
+}
+
+//check to make sure class exists and this professor owns it
+$result = mysql_query('SELECT classes.*,classowners.superowner FROM classes join classowners on classes.id=classowners.classid where professorid="' . mysql_real_escape_string($_SESSION['userdata']['id']) . '" and classes.id="' . mysql_real_escape_string($_GET['id']) . '"');
+if (mysql_num_rows($result) < 1) {
+	showdashboard();
+}
+$classdata = mysql_fetch_assoc($result);
+
+/* draws a calendar */
+echo draw_calendar(date("m"), date("y"));
 
 ?>
 </body>
