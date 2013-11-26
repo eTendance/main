@@ -55,17 +55,8 @@ $(document).ready(function() {
             console.log(date);
 
             dataPass(date, "absent.php", id);
-            popup = window.open("absent.php", 'mywindow', "width=400, height=800");
+            var popup = window.open("absent.php", 'mywindow', "width=400, height=800");
             popup.focus();
-
-            $.post("absent.php",
-                    {action: "getAbsent", dat: date, classID: id},
-            function(dat, classID) {
-                var jsonDateData = JSON.parse(dat);
-                var jsonIDData = classID;
-            });
-            $popup = window.open("absent.php", 'mywindow', "width=400, height=800");
-            $popup.focus();
 
             /*$.post('absent.php', {"action": "getabsent";"date": date; "id": "test"}, function() {
              //$_REQUEST['id'] //is class ID, and not sure how to get this nor pass this yet... probably need to tie
