@@ -115,7 +115,59 @@ while ($row = mysql_fetch_assoc($result)) {
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-        <script type="text/javascript" src="js/viewClass.js"></script>
+        <script type="text/javascript" src="js/calender.js"></script>
+        <script>
+                        function updatecheckincount() {
+                $.get("viewclass.php?id=<?php echo $_GET['id'] ?>&date=<?php echo date("Y-m-d"); ?>&action=getdatecheckinsajax", function(data) {
+                    $("#livecheckincount").html(data);
+                });
+            }
+            $(function() {
+                $("#codeday_text").datepicker({
+                    showOn: "button",
+                    buttonImage: "img/calendar.gif",
+                    buttonImageOnly: true,
+                    dateFormat: "mm-dd-yy",
+                    altField: "#codeday",
+                    altFormat: "yy-mm-dd"
+                });
+                $("#studentsabsenton_text").datepicker({
+                    showOn: "button",
+                    buttonImage: "img/calendar.gif",
+                    buttonImageOnly: true,
+                    dateFormat: "mm-dd-yy",
+                    altField: "#studentsabsenton",
+                    altFormat: "yy-mm-dd"
+                });
+            });
+            $(document).ready(function() {
+                updatecheckincount();
+                setInterval(function() {
+                    updatecheckincount();
+                }, 10000);
+
+                $("#attendancedialog").dialog({
+                    autoOpen: false,
+                    modal: true,
+                    height: 800,
+                    width: 1000,
+                    title: "Attendance Book",
+                    open: function(ev, ui) {
+                        $('#attendanceBookIframe').attr('src', 'attendancebook.php?id=<?php echo $classdata['id'] ?>');
+                    }
+                });
+
+                $('#bookBtn').click(function() {
+                    $('#attendancedialog').dialog('open');
+                });
+                $('#tabs').tabs({
+                    beforeActivate: function(event, ui) {
+                        window.location.hash = ui.newPanel.selector;
+                    }
+                });
+
+            });
+        </script>
     </head>
     <body>
         <header>
@@ -134,6 +186,7 @@ while ($row = mysql_fetch_assoc($result)) {
                     <li><a href="#Codes">Checkin Codes</a></li>
                     <li><a href="#RegStudents">Registered Students</a></li>
                     <li><a href="#EnrollCodes">Enrollment Code</a></li>
+                    <li><a href="calender.php">calender</a></li>
                     <?php if ($classdata['superowner'] == 'true'): ?><li><a href="#classManagers">Class Managers</a></li><?php endif; ?>
                 </ul>
 
@@ -191,14 +244,6 @@ while ($row = mysql_fetch_assoc($result)) {
 
                     </div>
 
-                    <div id="absent-calendar">
-                        <?php
-                        require_once('calendar.php');
-
-                        ?>
-                    </div>
-
-
                 </div>
 
                 <div id="RegStudents">
@@ -246,6 +291,18 @@ while ($row = mysql_fetch_assoc($result)) {
                         </div>
                     </div>
                 <?php endif; ?>
+                
+                <div id="absent-calendar">
+                    <?PHP
+                        include_once('calendar.php');
+                    ?>
+                </div>
+            </div>
+            <div id="DayInfo" style="display:hidden">
+                <div id="modAbscence">
+                    
+                </div>
+                
             </div>
         </div>
     </body>
