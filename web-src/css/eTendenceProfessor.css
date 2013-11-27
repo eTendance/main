@@ -1,40 +1,38 @@
-header
+nav
 {
+	background-color:red;
 	position: absolute;
-	top: 0px;
-	left:0px;
+	top: 0;
+	left:0;
 	width:100%;
 	border-bottom:2px solid #ccc;
-	background-color:RED;
 }
-header ul
+nav ul
 {
-	list-style:none outside none;
-	margin:0px;
+	list-style:none;
+	margin:0;
 	padding: 0.1%;
 }
-header li
+nav li
 {
 	float:right;
 	margin-right:10px;
 }
-header #breadcrumbs
-{
-    background-color: rgb(204, 204, 204);
-    clear: both;
-    font-size: 1.5em;
-    padding: 5px;
-    margin-top:0px;
-    margin-left:0px;
+nav #breadcrumbs {
+    background-color:#ccc;
+    clear:both;
+    font-size:1.5em;
+    padding:5px;
 }
 #loginButton
 {
 
-	width: 100%;
-        font-size: 1em;
-        margin-right: auto;
-        margin-left: auto;
-        background-color: rgb(204, 204, 204);
+	width:100%;
+	font-size: 1.0em;
+	margin-right: auto;
+	margin-left: auto;
+	background-color:#cccccc;
+
 }
 li > #loginButton
 {
@@ -46,17 +44,22 @@ li > #loginButton
 	font-size:1.0em;
 	background-color:#cccccc;
 }
+input[type="text"]
+{
+	position:relative;
+	font-size:1.5em;
+}
 #profName
 {
-    color:#f9f9f9;
-    border: medium none black;
-    margin-right: 10px;
-    margin-top: 5px;
-    float: left;
+	border: black;
+	color:#f9f9f9;
+        margin-right:10px;
+        margin-top:5px;
+        float:left;
 }
-#profName form
-{
-    float:right;
+#profName form {
+    margin-left:10px;
+    display:inline-block;
 }
 
 #logoPlacement
@@ -68,21 +71,20 @@ li > #loginButton
 	padding:0%;
 	float:left;
 }
+nav li a
+{
+	display: block;
+	background-color:#f9f9f9;
+	border:1px solid #f9f9f9;
+	padding:2%;
+}
 body
 {
 	padding-top: 1%;
 }
 #add
 {
-	border-radius:1em;
-	float:left;
-	width:45%;
-	background-color:red;
-	border:solid;
-        margin-left:2.5%;
-	margin-top:10%;
-	padding-bottom:3%;
-	wrap:normal;
+	width:35%;
 }
 #add div
 {
@@ -129,25 +131,6 @@ body
 {
 	float:none;
 }
-#classes
-{
-	border-radius:1em;
-	float:right;
-	width:45%;
-	background-color:red;
-	border:solid;
-	margin-right:2.5%;
-	margin-top:10%;
-	wrap:normal;
-}
-#classes h2
-{
-    margin-left:5%;
-}
-#classes form
-{
-    margin-left:10%;
-}
 .submit
 {
 	color:black;
@@ -169,10 +152,11 @@ body
 
 #container
 {
-	width:1500px;
+	width:1024px;
 	margin-left:auto;
 	margin-right:auto;
 	height:auto;
+        clear:both;
 }
 
 #absent
@@ -202,17 +186,12 @@ body
 	border-bottom: solid black;
 }
 .dashboardbox {
-    border-radius:1em;
-    float:left;
-    width:50%;
-    background-color:salmon;
-    border:solid;
-    margin:1%;
-    margin-top:90px;
+    	border-radius:1em;
+	float:left;
+	width:50%;
+	background-color:salmon;
+	border:solid;
+        margin:1%;
+margin-top:90px;
     padding:20px;
-}
-input[type="text"]
-{
-	position:relative;
-	font-size:1.5em;
 }

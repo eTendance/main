@@ -32,37 +32,6 @@ if(isset($_GET['action'])){
 }
 
 ?>
-<!--<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Professor Dashboard</title>
-    </head>
-    <body>
-        <h1>Professor Dashboard</h1>
-        <h2>Your classes</h2>
-<?php
-//select courses that this professor owns
-$result = mysql_query('SELECT classes.id,classes.name FROM classes join classowners on classes.id=classowners.classid WHERE professorid="'.  mysql_real_escape_string($_SESSION['userdata']['id']).'"') or die(mysql_error());
-for($i=0; $row=mysql_fetch_assoc($result);$i++){
-    echo $row['name'] . ' <a href="viewclass.php?id='.$row['id'].'">View Class</a> <a href="professordashboard.php?action=deleteclass&amp;classid='.$row['id'].'">Delete class</a><br />';
-}
-?>
-
-<br /><br />
-<h2>Create a class</h2>
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
-<input type="text" name="classname" placeholder="Class name" /><input type="submit" name="createclass" value="Create" />
-</form>
-
-<br /><br /><br />
-<a href="login.php?logout=1">Logout</a>
-
-    </body>
-</html>-->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -71,17 +40,15 @@ for($i=0; $row=mysql_fetch_assoc($result);$i++){
         <title>eTendence - Professor Dashboard</title>
     </head>
     <body>
-        <header>
-            <img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="50px"/>
+        <nav><img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="50px"/>
             <ul>
-                <li><span id="profName">Welcome, <?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname'] ?><form action="login.php" method="get"><input type="hidden" name="logout" value="1" /><input type="submit" id="loginButton" value="Logout" class="submit"/></form></span></li>
+                <li><span id="profName">Welcome, <?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname'] ?><form action="login.php" method="get"><input type="hidden" name="logout" value="1" /><input type="submit" value="Logout" id="loginButton" class="submit"/></form></span></li>
             </ul>
-            <div id="breadcrumbs">
-                Professor Dashboard
-            </div>
-        </header>
+            
+            <div id="breadcrumbs">Professor Dashboard</div>
+        </nav>
 	<div id="container">
-        <div id="add">
+        <div id="add" class="dashboardbox">
             <h2>Create a Class</h2>
             <div>
                 <form action="professordashboard.php" method="POST">
@@ -89,39 +56,13 @@ for($i=0; $row=mysql_fetch_assoc($result);$i++){
                         <label for="cName">Class Name:</label>
                         <input id="cName" type="text" name="classname" value="" maxlength="30"/>
                     </div>
-                    <!--<div>
-                        <span>Meeting times</span>
-                        <span class="meetTime">
-                            <label for="sTime">Start Time:</label>
-                            <span><input id="sTime" type="text" name="sTime" value="" maxlength="8"/></span>
-                        </span>
-
-                        <span class="meetTime">
-                            <label for="eTime">End Time:</label> 
-                            <span><input id="eTime" type="text" name="eTime" value="" maxlength="8"/></span>
-                        </span>
-
-                        <span class="meetTime" id="end">
-                            Days of the Week:
-                            <input type="checkbox" name="days" value="Mo"/>Mo
-                            <input type="checkbox" name="days" value="Tu"/>Tu 
-                            <input type="checkbox" name="days" value="We"/>We 
-                            <input type="checkbox" name="days" value="Th"/>Th 
-                            <input type="checkbox" name="days" value="Fr"/>Fr 
-                            <input type="checkbox" name="days" value="Sa"/>Sa 
-                            <input type="checkbox" name="days" value="Su"/>Su
-                        </span>
-                    </div>
-                    <div>
-                        <label for="descr">Brief Class description:</label><textarea cols="50" rows="4" name="description" id="descr" value=""></textarea>
-                    </div>-->
                     <div>
                         <input type="submit" name="createclass" value="Create" id="create-class" class="submit" />
                     </div>
                 </form>
             </div>
         </div>
-        <div id="classes">
+        <div id="classes" class="dashboardbox">
             <h2>Classes</h2>
             <ul>
             <?php
