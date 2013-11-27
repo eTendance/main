@@ -79,11 +79,26 @@ if (!empty($_REQUEST['action'])) {
     }
 
 
-    if ($_REQUEST['action'] == "getabsent") {
-        $query = 'SELECT firstname, lastname from enrollment left JOIN  (SELECT userid,checkins.id from checkins left join checkincodes on checkins.checkincodeid = checkincodes.id where forclassday="' . mysql_real_escape_string($_REQUEST['date']) . ' " AS inattendance on inattendance.userid = enrollment.userid JOIN users ON enrollment.userid = users.id WHERE inattendance.id IS NULL and classid = "' . mysql_real_escape_string($_REQUEST['id']) . '";';
+    if ($_REQUEST['action'] == "getabsentjson") {
+        $query = 'select * from enrollment
+left join checkins on enrollment.userid=checkins.userid and enrollment.classid=checkins.classid
+left join checkincodes on checkincodes.id=checkins.checkincodeid
+left join users on users.id=enrollment.userid
+where enrollment.classid="' . mysql_real_escape_string($_REQUEST['id']) . '"
+and (checkincodes.forclassday="' . mysql_real_escape_string($_REQUEST['date']) . ' " or checkincodes.forclassday IS NULL)
+    and checkins.checkintime IS NULL';
+        $query = 'SELECT firstname, lastname from enrollment left JOIN  (SELECT userid,checkins.id from checkins left join checkincodes on checkins.checkincodeid = checkincodes.id where forclassday="' . mysql_real_escape_string($_REQUEST['date']) . '" and checkincodes.classid=' . mysql_real_escape_string($_REQUEST['id']) . ' )AS inattendance on inattendance.userid = enrollment.userid JOIN users ON enrollment.userid = users.id WHERE inattendance.id IS NULL and classid = "' . mysql_real_escape_string($_REQUEST['id']) . '";';
+//$query = 'SELECT firstname, lastname from enrollment left JOIN  (SELECT userid,checkins.id from checkins left join checkincodes on checkins.checkincodeid = checkincodes.id where forclassday="' . mysql_real_escape_string($_REQUEST['date']) . ' " )AS inattendance on inattendance.userid = enrollment.userid JOIN users ON enrollment.userid = users.id WHERE inattendance.id IS NULL and classid = "' . mysql_real_escape_string($_REQUEST['id']) . '";';
         $absent = mysql_query($query);
-    } else
-        echo "DERP";
+
+        $absentpeople = array();
+        while ($row = mysql_fetch_assoc($absent)) {
+            $absentpeople[] = $row;
+        }
+
+        echo json_encode($absentpeople);
+        exit;
+    }
 
 
 
@@ -117,7 +132,7 @@ while ($row = mysql_fetch_assoc($result)) {
         <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script type="text/javascript" src="js/calender.js"></script>
         <script>
-                        function updatecheckincount() {
+            function updatecheckincount() {
                 $.get("viewclass.php?id=<?php echo $_GET['id'] ?>&date=<?php echo date("Y-m-d"); ?>&action=getdatecheckinsajax", function(data) {
                     $("#livecheckincount").html(data);
                 });
@@ -177,7 +192,7 @@ while ($row = mysql_fetch_assoc($result)) {
             </ul>
 
             <div id="breadcrumbs">
-		<a href="professordashboard.php">Professor Dashboard</a> > Viewing <?php echo $classdata['name'] ?>
+                <a href="professordashboard.php">Professor Dashboard</a> > Viewing <?php echo $classdata['name'] ?>
             </div>
         </header>
         <div id="container">
@@ -186,7 +201,7 @@ while ($row = mysql_fetch_assoc($result)) {
                     <li><a href="#Codes">Checkin Codes</a></li>
                     <li><a href="#RegStudents">Registered Students</a></li>
                     <li><a href="#EnrollCodes">Enrollment Code</a></li>
-                    <li><a href="calender.php">calender</a></li>
+                    <li><a href="#CalendarTab">Calendar View</a></li>
                     <?php if ($classdata['superowner'] == 'true'): ?><li><a href="#classManagers">Class Managers</a></li><?php endif; ?>
                 </ul>
 
@@ -228,20 +243,6 @@ while ($row = mysql_fetch_assoc($result)) {
                     <h2>Live Checkin Count</h2>
                     <div>
                         So far, <b><span id="livecheckincount"></span></b> class members have checked in today.
-                    </div>
-
-                    <h2>Absent</h2>
-
-                    <div id="absent">
-
-                        <form action="absent.php" method="POST">
-                            <input type="text" id="studentsabsenton_text" value="<?php echo date('m-d-Y'); ?>">
-                            <input type="hidden" name="date" id="studentsabsenton" />
-                            <input type="hidden" name="action" value="getabsent">
-                            <input type="hidden" name="id" value=<?php echo '"' . $classdata["id"] . '"' ?> >
-                            <input type="submit" value="Get Absenses">
-                        </form>
-
                     </div>
 
                 </div>
@@ -291,18 +292,18 @@ while ($row = mysql_fetch_assoc($result)) {
                         </div>
                     </div>
                 <?php endif; ?>
-                
-                <div id="absent-calendar">
+
+                <div id="CalendarTab">
                     <?PHP
-                        include_once('calendar.php');
+                    include_once('calendar.php');
                     ?>
                 </div>
             </div>
             <div id="DayInfo" style="display:hidden">
                 <div id="modAbscence">
-                    
+
                 </div>
-                
+
             </div>
         </div>
     </body>

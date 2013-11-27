@@ -65,3 +65,16 @@ li > #loginButton
 {
 	margin-top:7em;
 }
+.highlight-class-day {
+    background-color:#c4ffc4;
+}
+.highlight-class-day .absences-number {
+    color:#d23737;
+    font-weight:bold;
+    font-size:15px;
+    margin-left:auto;
+    margin-right:auto;
+}
+#calendarselectmonth {
+    text-align:center;
+}

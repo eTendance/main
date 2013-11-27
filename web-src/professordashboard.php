@@ -53,8 +53,7 @@ if(isset($_GET['action'])){
             <div>
                 <form action="professordashboard.php" method="POST">
                     <div>
-                        <label for="cName">Class Name:</label>
-                        <input id="cName" type="text" name="classname" value="" maxlength="30"/>
+                        <input id="cName" type="text" name="classname" value="" maxlength="30" placeholder="Class Name"/>
                     </div>
                     <div>
                         <input type="submit" name="createclass" value="Create" id="create-class" class="submit" />
