@@ -299,7 +299,7 @@ while ($row = mysql_fetch_assoc($result)) {
                     ?>
                 </div>
             </div>
-            <div id="DayInfo" style="display:hidden">
+            <div id="DayInfo" class="hidden">
                 <div id="modAbscence">
 
                 </div>

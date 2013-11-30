@@ -78,3 +78,6 @@ li > #loginButton
 #calendarselectmonth {
     text-align:center;
 }
+.hidden {
+    display:hidden;
+}
