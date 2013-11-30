@@ -12,17 +12,13 @@ function openWindow(date, classid) {
             var string = "";
             for(var i = 0; i < jsonData.length; i++) {
                 var first = jsonData[i]["firstname"];
-                console.log(first);
                 var last = jsonData[i]["lastname"];
-                console.log(last);
                 string = string + first + " " + last + "<br>";
             }
             if(jsonData.length === 0) {
                 string = "No students absent";
             }
             var dayI = document.getElementById("DayInfo");
-            console.log(dayI.innerHTML);
-            console.log(dayI.className);
             if(dayI.className === "hidden") {
                 dayI.className = "";
             }
@@ -30,8 +26,6 @@ function openWindow(date, classid) {
             ab.innerHTML = "<h2>Students Absent for "+date+"</h2><br>" + string;
             
             $('#DayInfo').dialog();
-            
-            console.log(response);
         });
   
 }
