@@ -3,6 +3,7 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" type="text/css" href="css/etendenceFront.css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script type="text/javascript" src='js/checkhomepageforms.js'></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>eTendence</title>
@@ -71,10 +72,14 @@
 
                             <input type="password" name="password" id="passwordS" value="" maxlength="30" placeholder="Password" />
                         </span>
+                        <span>
+
+                            <input type="password" name="passwordConf" id="passwordConf" value="" maxlength="30" placeholder="Confirm Password" />
+                        </span>
 
                         <span>
 
-                            <input type="radio" id="student" name="type" value="s"><label for="student"> Student</label>
+                            <input type="radio" id="student" name="type" value="s" checked="checked"><label for="student"> Student</label>
                             <input type="radio" id="professor" name="type" value="p"><label for="professor"> Professor</label>
 
                         </span>
