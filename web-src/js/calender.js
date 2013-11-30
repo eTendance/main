@@ -27,7 +27,7 @@ function openWindow(date, classid) {
                 dayI.className = "";
             }
             var ab = document.getElementById("modAbscence");
-            ab.innerHTML = "<h2>Students Absent</h2><br>" + string;
+            ab.innerHTML = "<h2>Students Absent for "+date+"</h2><br>" + string;
             
             $('#DayInfo').dialog();
             
