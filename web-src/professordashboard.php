@@ -23,8 +23,8 @@ if(isset($_GET['action'])){
     
     if($_GET['action']=='deleteclass' && !empty($_GET['classid'])){
         //delete the class, mysql will take care of deleting from the other tables because of foreign keys
-        $query='DELETE classes FROM classes left join classowners on classes.id=classowners.classid WHERE classowners.classid="'.  mysql_real_escape_string($_GET['classid']).'" and classowners.professorid="'.$_SESSION['userdata']['id'].'"';
-        mysql_query($query);
+        $query='DELETE FROM classes left join classowners on classes.id=classowners.classid WHERE classowners.classid="'.  mysql_real_escape_string($_GET['classid']).'" and classowners.professorid="'.$_SESSION['userdata']['id'].'"';
+        mysql_query($query) or die(mysql_error());
         //die($query);
         showdashboard();
     }

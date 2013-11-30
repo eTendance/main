@@ -21,12 +21,13 @@ $classdata = mysql_fetch_assoc($result);
 
 function draw_calendar($month, $year) {
     global $classdata, $classusers;
-    $query = 'SELECT forclassday FROM checkincodes WHERE classid="' . $classdata['id'] . '"';
+    $query = 'SELECT forclassday, code, checkinopen FROM checkincodes WHERE classid="' . $classdata['id'] . '"';
     $result = mysql_query($query) or die(mysql_error());
     $classdays = array();
-
+$checkincodes=array();
     while ($row = mysql_fetch_row($result)) {
         $classdays[] = $row[0];
+        $checkincodes[] = array($row[1],$row[2]);
     }
 
     $id = $_GET['id'];
@@ -66,20 +67,25 @@ function draw_calendar($month, $year) {
     /* keep going with days.... */
     for ($list_day = 1; $list_day <= $days_in_month; $list_day++):
         $date = DateTime::createFromFormat('Y-m-d', $year . '-' . $month . '-' . $list_day);
-        if (in_array($date->format('Y-m-d'), $classdays)) {
+        if (($result=array_search($date->format('Y-m-d'), $classdays)) !== false) {
             $class = "calendar-day highlight-class-day";
             $isclassday = true;
+            $code = $checkincodes[$result][0];
+            $checkinopen = $checkincodes[$result][1];
         } else {
             $class = "calendar-day";
             $isclassday = false;
+            $code="";
+            $checkinopen = '';
         }
-        $calendar.= '<td class="' . $class . '" date="' . $date->format('Y-m-d') . '" classid="'.$classdata['id'].'">';
+        if($checkinopen=='true') $status='open'; else $status='closed';
+        $calendar.= '<td class="' . $class . '" date="' . $date->format('Y-m-d') . '" classid="' . $classdata['id'] . '" code="'.$code.'" status="'.$status.'">';
         /* add in the day number */
         $calendar.= '<div class="day-number">' . $list_day . '</div>';
 
         /** QUERY THE DATABASE FOR AN ENTRY FOR THIS DAY !!  IF MATCHES FOUND, PRINT THEM !! * */
         $calendar.= str_repeat('<p> </p>', 2);
-        $query = 'select count(checkins.userid), checkincodes.id from enrollment
+        $query = 'select count(checkins.userid), checkincodes.id, checkincodes.code from enrollment
 left join checkins on enrollment.userid=checkins.userid and enrollment.classid=checkins.classid
 left join checkincodes on checkincodes.id=checkins.checkincodeid
 left join users on users.id=enrollment.userid
@@ -96,6 +102,8 @@ and (checkincodes.forclassday="' . mysql_real_escape_string($year) . '-' . mysql
           '-'.mysql_real_escape_string($list_day).'" and checkins.classid="'.  mysql_real_escape_string($_GET['id']).'"'; */
         $query_result = mysql_query($query) or die(mysql_error());
         $result = mysql_fetch_row($query_result);
+
+
 
         if ($isclassday) {
             $calendar.= '<span class="absences-number">' . (count($classusers) - $result[0]) . '</span>';

@@ -29,9 +29,13 @@ if (!empty($_REQUEST['action'])) {
     }
 
     if ($_REQUEST['action'] == 'opencheckin') {
-        mysql_query('UPDATE checkincodes SET checkinopen="true" WHERE classid="' . $classdata['id'] . '" and code="' . mysql_real_escape_string($_GET['code']) . '"');
+        mysql_query('UPDATE checkincodes SET checkinopen="true" WHERE classid="' . $classdata['id'] . '" and code="' . mysql_real_escape_string($_GET['code']) . '"') or die("0");
+        echo "1";
+        exit;
     } elseif ($_REQUEST['action'] == "closecheckin") {
-        mysql_query('UPDATE checkincodes SET checkinopen="false" WHERE classid="' . $classdata['id'] . '" and code="' . mysql_real_escape_string($_GET['code']) . '"');
+        mysql_query('UPDATE checkincodes SET checkinopen="false" WHERE classid="' . $classdata['id'] . '" and code="' . mysql_real_escape_string($_GET['code']) . '"') or die("0");
+        echo "1";
+        exit;
     }
 
     if ($_REQUEST['action'] == 'generatecheckin') {
@@ -137,6 +141,10 @@ while ($row = mysql_fetch_assoc($result)) {
                     $("#livecheckincount").html(data);
                 });
             }
+            function openclosecheckin(classid, code, action) {
+                $.get("viewclass.php?id=" + classid + "&action=" + action + "&code=" + code, function(data) {
+                });
+            }
             $(function() {
                 $("#codeday_text").datepicker({
                     showOn: "button",
@@ -155,11 +163,47 @@ while ($row = mysql_fetch_assoc($result)) {
                     altFormat: "yy-mm-dd"
                 });
             });
+            function setOpenCloseCheckinHandler() {
+                $(".openclosecheckin").unbind('click');
+                $(".openclosecheckin").click(function(ev) {
+                    ev.preventDefault();
+                    var action;
+                    var status=$(this).attr('status');
+                    if (status == 'closed') {
+                        action = 'opencheckin';
+                        $(".openclosecheckin[code='" + $(this).attr('code') + "']").attr('status', 'open').html('Open');
+                        $(".calendar-day[code='" + $(this).attr('code') + "']").attr('status', 'open');
+                    } else {
+                        action = 'closecheckin';
+                        $(".openclosecheckin[code='" + $(this).attr('code') + "']").attr('status', 'closed').html('Closed');
+                        $(".calendar-day[code='" + $(this).attr('code') + "']").attr('status', 'closed');
+
+                    }
+                    openclosecheckin($(this).attr('classid'), $(this).attr('code'), action);
+                });
+            }
             $(document).ready(function() {
                 updatecheckincount();
                 setInterval(function() {
                     updatecheckincount();
                 }, 10000);
+
+                setOpenCloseCheckinHandler();
+
+                $('.qrdialog').each(function() {
+
+                    var dialog = $(this).dialog({
+                        height: 'auto',
+                        width: 'auto',
+                        modal: true,
+                        autoOpen: false
+                    });
+
+                });
+                $('.openqr').click(function(ev) {
+                    $("#qrdialog-" + $(this).attr('code')).dialog('open');
+                    ev.preventDefault();
+                });
 
                 $("#attendancedialog").dialog({
                     autoOpen: false,
@@ -228,10 +272,11 @@ while ($row = mysql_fetch_assoc($result)) {
                                 for ($i = 0; $row = mysql_fetch_assoc($result); $i++) {
                                     echo '<li>' . $row['code'] . ' for ' . $row['forclassday'] . ' ';
                                     if ($row['checkinopen'] == 'true') {
-                                        echo '[<a href="' . $_SERVER['PHP_SELF'] . '?action=closecheckin&id=' . $classdata['id'] . '&code=' . $row['code'] . '">Open</a>]<br /><img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=' . $row['code'] . '&choe=UTF-8" />';
+                                        echo '[<a href="#" class="openclosecheckin" status="open" classid="' . $classdata['id'] . '" code="' . $row['code'] . '">Open</a>]';
                                     } else {
-                                        echo '[<a href="' . $_SERVER['PHP_SELF'] . '?action=opencheckin&id=' . $classdata['id'] . '&code=' . $row['code'] . '">Closed</a>]';
+                                        echo '[<a href="#" class="openclosecheckin" status="closed" classid="' . $classdata['id'] . '" code="' . $row['code'] . '">Closed</a>]';
                                     }
+                                    echo '<a href="#" code="' . $row['code'] . '" class="openqr">[QR Code]</a><div class="qrdialog" id="qrdialog-' . $row['code'] . '" style="display:none" title="Checkin for ' . $row['forclassday'] . '"><img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=' . $row['code'] . '&choe=UTF-8" /></div>';
                                     echo '</li>';
                                 }
                             } else {
@@ -266,9 +311,9 @@ while ($row = mysql_fetch_assoc($result)) {
                     <h2>Enrollment Code</h2>
                     Enrollment code for this course is <b><?php echo $classdata['enrollmentcode'] ?></b> [<?php
                     if ($classdata['enrollmentopen'] == 'true') {
-                        echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=closeenrollment&id=' . $_GET['id'] . '">Open</a>';
+                        echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=closeenrollment&id=' . $_GET['id'] . '#EnrollCodes" >Open</a>';
                     } else {
-                        echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=openenrollment&id=' . $_GET['id'] . '">Closed</a>';
+                        echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=openenrollment&id=' . $_GET['id'] . '#EnrollCodes" >Closed</a>';
                     }
                     ?>] <br />
                     <form action="" method="get"><input type="hidden" name="id" value="<?php echo $classdata['id'] ?>" /><input type="hidden" name="action" value="newenrollmentcode" /><input type="submit" value="Generate New Enrollment Code" /></form>
