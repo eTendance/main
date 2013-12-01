@@ -256,7 +256,7 @@ while ($row = mysql_fetch_assoc($result)) {
                     <div class="errormsg"><?php if (isset($checkingenerationerror)) echo $checkingenerationerror; ?></div>
                     <form action="" method="post">
                         <input type="hidden" name="action" value="generatecheckin" />
-                        Class Day: <input type="text" id="codeday_text" name="codeday" value="<?php echo date("m-d-Y"); ?>" /><input type="hidden" name="codeday" id="codeday" /><br />
+                        Class Day: <input type="text" id="codeday_text" name="codeday" value="<?php echo date("m-d-Y"); ?>" /><input type="hidden" name="codeday" id="codeday" value="<?php echo date("Y-m-d"); ?>" /><br />
                         Status: <input type="radio" name="open" value="true" checked="checked"/>Open <input type="radio" name="open" value="false" /> Closed
                         <br /><input type="submit" name="submit" value="Generate Code" />
                     </form>
