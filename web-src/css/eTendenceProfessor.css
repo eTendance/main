@@ -1,4 +1,4 @@
-nav
+header
 {
 	background-color:red;
 	position: absolute;
@@ -7,18 +7,18 @@ nav
 	width:100%;
 	border-bottom:2px solid #ccc;
 }
-nav ul
+header ul
 {
 	list-style:none;
 	margin:0;
 	padding: 0.1%;
 }
-nav li
+header li
 {
 	float:right;
 	margin-right:10px;
 }
-nav #breadcrumbs {
+header #breadcrumbs {
     background-color:#ccc;
     clear:both;
     font-size:1.5em;
