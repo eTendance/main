@@ -72,16 +72,36 @@ if (!empty($_REQUEST['action'])) {
         $query = 'SELECT * FROM users WHERE username="' . mysql_real_escape_string($_POST['username']) . '" and usertype="p"';
         $result = mysql_query($query);
         if (mysql_num_rows($result) > 0) {
-            if ($row['usertype']) {
-                $sql = 'INSERT INTO  classowners (`professorid`,`classid`,`superowner`) values("' . mysql_real_escape_string($_POST['username']) . '","' . $classdata['id'] . '","false");';
-                $result = mysql_query($sql) or $addmanagererror = "There was an error adding this user as a manager. Please make sure this user is not already a manager.";
+            $row = mysql_fetch_assoc($result);
+            if ($row['usertype'] == 'p') {
+                $sql = 'INSERT INTO  classowners (`professorid`,`classid`,`superowner`) values("' . mysql_real_escape_string($row['id']) . '","' . $classdata['id'] . '","false");';
+                if ($result = mysql_query($sql)) {
+                    $addmanagererror = "Manager added successfully.";
+                } else {
+                    $addmanagererror = "There was an error adding this user as a manager. Please make sure this user is not already a manager.";
+                }
             } else {
-                $addmanagererror = "The username specified does not exist or is not a professor.";
+                $addmanagererror = "The username specified is not a professor.";
             }
-            $NOREDIR = true;
+        } else {
+            $addmanagererror = "The username specified does not exist.";
         }
+        $NOREDIR = true;
     }
 
+    if ($_REQUEST['action'] == 'deletemanager' && isset($_REQUEST['managerid'])) {
+        $query = 'DELETE FROM classowners WHERE professorid="' . mysql_real_escape_string($_REQUEST['managerid']) . '" and classid="' . $classdata['id'] . '"';
+        mysql_query($query);
+        exit;
+    }
+
+    if ($_REQUEST['action'] == 'deletestudent' && isset($_REQUEST['studentid'])) {
+        $query = 'DELETE FROM enrollment WHERE userid="' . mysql_real_escape_string($_REQUEST['studentid']) . '" and classid="' . $classdata['id'] . '"';
+        if(mysql_query($query)===false){
+            echo mysql_error();
+        }
+        exit;
+    }
 
     if ($_REQUEST['action'] == "getabsentjson") {
         $query = 'select * from enrollment
@@ -108,8 +128,9 @@ and (checkincodes.forclassday="' . mysql_real_escape_string($_REQUEST['date']) .
 
 
 
-    if (!isset($NOREDIR))
+    if (!isset($NOREDIR)) {
         header('Location: ' . $_SERVER['PHP_SELF'] . '?id=' . $_GET['id']);
+    }
 }
 
 
@@ -145,6 +166,20 @@ while ($row = mysql_fetch_assoc($result)) {
                 $.get("viewclass.php?id=" + classid + "&action=" + action + "&code=" + code, function(data) {
                 });
             }
+            function deletemanager(classid, managerid, action) {
+                $.get("viewclass.php?id=" + classid + "&action=" + action + "&managerid=" + managerid, function(data) {
+                });
+                $("#manager-" + managerid).fadeOut();
+            }
+            function deletestudent(classid, studentid, action) {
+                var confirm = window.confirm('Are you sure you would like to remove this student from the class? Their attendance data will be preserved in the event they register for this class in the future.');
+                if (confirm === true) {
+                    $.get("viewclass.php?id=" + classid + "&action=" + action + "&studentid=" + studentid, function(data) {
+                        console.log(data);
+                    });
+                    $("#student-" + studentid).fadeOut();
+                }
+            }
             $(function() {
                 $("#codeday_text").datepicker({
                     showOn: "button",
@@ -168,7 +203,7 @@ while ($row = mysql_fetch_assoc($result)) {
                 $(".openclosecheckin").click(function(ev) {
                     ev.preventDefault();
                     var action;
-                    var status=$(this).attr('status');
+                    var status = $(this).attr('status');
                     if (status == 'closed') {
                         action = 'opencheckin';
                         $(".openclosecheckin[code='" + $(this).attr('code') + "']").attr('status', 'open').html('Open');
@@ -202,6 +237,16 @@ while ($row = mysql_fetch_assoc($result)) {
                 });
                 $('.openqr').click(function(ev) {
                     $("#qrdialog-" + $(this).attr('code')).dialog('open');
+                    ev.preventDefault();
+                });
+
+                $('.deletemanager').click(function(ev) {
+                    deletemanager("<?php echo $classdata['id']; ?>", $(this).attr('managerid'), 'deletemanager');
+                    ev.preventDefault();
+                });
+
+                $('.deletestudent').click(function(ev) {
+                    deletestudent("<?php echo $classdata['id']; ?>", $(this).attr('studentid'), 'deletestudent');
                     ev.preventDefault();
                 });
 
@@ -276,7 +321,7 @@ while ($row = mysql_fetch_assoc($result)) {
                                     } else {
                                         echo '[<a href="#" class="openclosecheckin" status="closed" classid="' . $classdata['id'] . '" code="' . $row['code'] . '">Closed</a>]';
                                     }
-                                    echo '<a href="#" code="' . $row['code'] . '" class="openqr">[QR Code]</a><div class="qrdialog" id="qrdialog-' . $row['code'] . '" style="display:none" title="Checkin for ' . $row['forclassday'] . '"><img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=' . $row['code'] . '&choe=UTF-8" /></div>';
+                                    echo '<a href="#" code="' . $row['code'] . '" class="openqr">[QR Code]</a><div class="qrdialog" id="qrdialog-' . $row['code'] . '" style="display:none" title="Checkin for ' . $row['forclassday'] . '">Scan the code below using the mobile application to checkin.<br /><img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=' . $row['code'] . '&choe=UTF-8" /></div>';
                                     echo '</li>';
                                 }
                             } else {
@@ -296,8 +341,9 @@ while ($row = mysql_fetch_assoc($result)) {
                     <h2>Students</h2>
                     <?php
                     foreach ($classusers as $user) {
-                        echo $user['firstname'] . ' ' . $user['lastname'];
-                        echo '<br />';
+                        echo '<div id="student-'.$user['id'].'">';
+                        echo $user['firstname'] . ' ' . $user['lastname'] . ' [<a href="#" class="deletestudent" studentid="' . $user['id'] . '">Unregister</a>]';
+                        echo '</div>';
                     }
                     ?>
 
@@ -323,6 +369,18 @@ while ($row = mysql_fetch_assoc($result)) {
                         <h2>Class Managers</h2>
                         <div>
                             Enter the username of another manager of the class. This person will be able to manage this class as you do, but will not have the ability to add or remove class managers.
+                            <ul>
+                                <?php
+                                $query = 'SELECT users.*,classowners.superowner FROM classowners join users on users.id=classowners.professorid WHERE classid="' . $classdata['id'] . '"';
+                                $result = mysql_query($query);
+                                while ($row = mysql_fetch_array($result)) {
+                                    echo '<li id="manager-' . $row['id'] . '">' . $row['username'];
+                                    if ($row['superowner'] == 'false') {
+                                        echo ' [<a href="#" class="deletemanager" managerid="' . $row['id'] . '">Delete</a>]';
+                                    }
+                                }
+                                ?>
+                            </ul>
                             <br />
                             <div><?php
                                 if (isset($addmanagererror)) {
