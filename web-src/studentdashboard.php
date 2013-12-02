@@ -80,22 +80,15 @@ $result = mysql_query($query);
 
 while ($row = mysql_fetch_assoc($result)) {
     echo '<li>' . $row['name'] . ' - ' . $row['firstname'] . ' ' . $row['lastname'] . '</li>';
-    echo '<br>';
     
-    $absent_query = 'SELECT checkincodes.forclassday FROM checkincodes JOIN
-            enrollment LEFT JOIN checkins ON enrollment.userid =
-            checkins.userid AND enrollment.classid = checkins.classid
-			WHERE checkins.checkintime IS NULL AND enrollment.userid = "'.
-    		$_SESSION['userdata']['id'] . '" AND enrollment.classid = "'.
-    		$row['id'];
-    $absent_result = mysql_query($absent_query) or die(mysql_error());
+    $dates_absent = mysql_query("SELECT forclassday from (SELECT * from checkins where checkins.userid = '". $_SESSION['userdata']['id'] ."')  AS attendance RIGHT JOIN checkincodes ON( attendance.checkincodeid = checkincodes.id) WHERE checkincodes.classid='".$row['id']."' AND checkincodeid IS NULL ");
     
-    /*if(mysql_num_rows($absent_result) > 0){
-		while($absent_row = mysql_fetch_assoc($absent_result)) {
+    if(mysql_num_rows($dates_absent) > 0){
+		while($absent_row = mysql_fetch_assoc($dates_absent)) {
     		echo $absent_row['forclassday'];
     		echo '<br>';
     	}
-    }*/
+    }
 }
 ?>
 </ul>
@@ -158,20 +151,14 @@ Enter the code provided by your professor.
                 while ($row = mysql_fetch_assoc($result)) {
                     echo '<li>' . $row['name'] . ' - ' . $row['firstname'] . ' ' . $row['lastname'] . '</li>';
                     
-                    $absent_query = 'SELECT checkincodes.forclassday FROM checkincodes JOIN
-            			enrollment LEFT JOIN checkins ON enrollment.userid =
-            			checkins.userid AND enrollment.classid = checkins.classid
-						WHERE checkins.checkintime IS NULL AND enrollment.userid = "'.
-    					$_SESSION['userdata']['id'] . '" AND enrollment.classid = "'.
-    					$row['id'];
-                    $absent_result = mysql_query($absent_query) or die(mysql_error());
-                    
-                    /*if(mysql_num_rows($absent_result) > 0){
-                    	while($absent_row = mysql_fetch_assoc($absent_result) && mysql_num_rows($absent_result) > 0) {
-                    		echo $absent_row['forclassday'];
-                    		echo '<br>';
-                    	}
-                    }*/
+                    $dates_absent = mysql_query("SELECT forclassday from (SELECT * from checkins where checkins.userid = '". $_SESSION['userdata']['id'] ."')  AS attendance RIGHT JOIN checkincodes ON( attendance.checkincodeid = checkincodes.id) WHERE checkincodes.classid='".$row['id']."' AND checkincodeid IS NULL ");
+    
+    				if(mysql_num_rows($dates_absent) > 0){
+						while($absent_row = mysql_fetch_assoc($dates_absent)) {
+    						echo $absent_row['forclassday'];
+    						echo '<br>';
+    					}
+    				}
                  }
 		}
 		else
