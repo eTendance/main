@@ -77,6 +77,15 @@ $query = 'SELECT classes.*, classowners.professorid, users.firstname, users.last
     WHERE enrollment.userid="' . $_SESSION['userdata']['id'] . '"';
 $result = mysql_query($query);
 
+$absent_query = 'SELECT DISTINCT checkincodes.forclassday FROM enrollment
+        		LEFT JOIN checkins ON enrollment.userid=checkins.userid
+        		AND enrollment.classid=checkins.classid LEFT JOIN
+        		checkincodes ON checkincodes.id=checkins.checkincodeid
+        		LEFT JOIN users ON users.id=enrollment.userid WHERE
+        		checkincodes.forclassday IS NOT NULL AND users.id !="'
+				. $_SESSION['userdata']['id'] . '"';
+$absent_result = mysql_query($absent_query);
+
 while ($row = mysql_fetch_assoc($result)) {
     echo '<li>' . $row['name'] . ' - ' . $row['firstname'] . ' ' . $row['lastname'] . '</li>';
 }
@@ -134,6 +143,14 @@ Enter the code provided by your professor.
     join users on classowners.professorid=users.id 
     WHERE enrollment.userid="' . $_SESSION['userdata']['id'] . '"';
                 $result = mysql_query($query);
+                
+                $absent_query = 'SELECT DISTINCT checkincodes.forclassday FROM enrollment
+    LEFT JOIN checkins ON enrollment.userid=checkins.userid
+    AND enrollment.classid=checkins.classid LEFT JOIN
+    checkincodes ON checkincodes.id=checkins.checkincodeid
+    LEFT JOIN users ON users.id=enrollment.userid WHERE
+    checkincodes.forclassday IS NOT NULL AND users.id !="'. $_SESSION['userdata']['id'] . '"';
+                $absent_result = mysql_query($absent_query);
 
 		if(mysql_num_rows($result) > 0)
 		{
