@@ -76,18 +76,26 @@ $query = 'SELECT classes.*, classowners.professorid, users.firstname, users.last
     join users on classowners.professorid=users.id 
     WHERE enrollment.userid="' . $_SESSION['userdata']['id'] . '"';
 $result = mysql_query($query);
-
-$absent_query = 'SELECT DISTINCT checkincodes.forclassday FROM enrollment
-        		LEFT JOIN checkins ON enrollment.userid=checkins.userid
-        		AND enrollment.classid=checkins.classid LEFT JOIN
-        		checkincodes ON checkincodes.id=checkins.checkincodeid
-        		LEFT JOIN users ON users.id=enrollment.userid WHERE
-        		checkincodes.forclassday IS NOT NULL AND users.id !="'
-				. $_SESSION['userdata']['id'] . '"';
-$absent_result = mysql_query($absent_query);
+        		
 
 while ($row = mysql_fetch_assoc($result)) {
     echo '<li>' . $row['name'] . ' - ' . $row['firstname'] . ' ' . $row['lastname'] . '</li>';
+    echo '<br>';
+    
+    $absent_query = 'SELECT DISTINCT checkincodes.forclassday, FROM enrollment
+		LEFT JOIN checkins ON enrollment.userid=checkins.userid
+    	AND enrollment.classid=checkins.classid LEFT JOIN
+    	checkincodes ON checkincodes.id=checkins.checkincodeid
+    	LEFT JOIN users ON users.id=enrollment.userid WHERE
+    	checkincodes.forclassday IS NULL AND 
+        enrollment.classid = "' . $row['id'] . '" AND 
+        users.id !="'. $_SESSION['userdata']['id'] . '"';
+    $absent_result = mysql_query($absent_query);
+    
+    while($absent_row = mysql_fetch_assoc($absent_result)) {
+    	echo $absent_row['forclassday'];
+    	echo '<br>';
+    }
 }
 ?>
 </ul>
@@ -144,18 +152,25 @@ Enter the code provided by your professor.
     WHERE enrollment.userid="' . $_SESSION['userdata']['id'] . '"';
                 $result = mysql_query($query);
                 
-                $absent_query = 'SELECT DISTINCT checkincodes.forclassday FROM enrollment
-    LEFT JOIN checkins ON enrollment.userid=checkins.userid
-    AND enrollment.classid=checkins.classid LEFT JOIN
-    checkincodes ON checkincodes.id=checkins.checkincodeid
-    LEFT JOIN users ON users.id=enrollment.userid WHERE
-    checkincodes.forclassday IS NOT NULL AND users.id !="'. $_SESSION['userdata']['id'] . '"';
-                $absent_result = mysql_query($absent_query);
 
 		if(mysql_num_rows($result) > 0)
 		{
                 while ($row = mysql_fetch_assoc($result)) {
                     echo '<li>' . $row['name'] . ' - ' . $row['firstname'] . ' ' . $row['lastname'] . '</li>';
+                    
+                    $absent_query = 'SELECT DISTINCT checkincodes.forclassday, enrollment.classid FROM enrollment
+						LEFT JOIN checkins ON enrollment.userid=checkins.userid
+    					AND enrollment.classid=checkins.classid LEFT JOIN
+    					checkincodes ON checkincodes.id=checkins.checkincodeid
+    					LEFT JOIN users ON users.id=enrollment.userid WHERE
+    					checkincodes.forclassday IS NULL AND users.id !="'
+                    	. $_SESSION['userdata']['id'] . '"';
+                    $absent_result = mysql_query($absent_query);
+                    
+                    while($absent_row = mysql_fetch_assoc($absent_result)) {
+                    	echo $absent_row['forclassday'];
+                    	echo '<br>';
+                    }
                  }
 		}
 		else
