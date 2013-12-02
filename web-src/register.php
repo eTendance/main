@@ -30,7 +30,7 @@ if (isset($_POST['firstname'])) {
     if (!isset($error)) {
         mysql_query('INSERT INTO users (firstname,lastname,email,username,password,usertype) values("' . mysql_real_escape_string($_POST['firstname']) . '","' . mysql_real_escape_string($_POST['lastname']) . '","'
                         . mysql_real_escape_string($_POST['email']) . '","' . mysql_real_escape_string($_POST['username']) . '","' . mysql_real_escape_string($_POST['password']) . '","' . mysql_real_escape_string($_POST['type']) . '")') or die(mysql_error());
-        header('Location: index.php');
+        echo "Account created succesfully!";
     } else {
         echo $error[0];
     }
