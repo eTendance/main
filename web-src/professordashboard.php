@@ -21,13 +21,6 @@ if(isset($_POST['createclass'])){
 }
 if(isset($_GET['action'])){
     
-    if($_GET['action']=='deleteclass' && !empty($_GET['classid'])){
-        //delete the class, mysql will take care of deleting from the other tables because of foreign keys
-        $query='DELETE FROM classes left join classowners on classes.id=classowners.classid WHERE classowners.classid="'.  mysql_real_escape_string($_GET['classid']).'" and classowners.professorid="'.$_SESSION['userdata']['id'].'"';
-        mysql_query($query) or die(mysql_error());
-        //die($query);
-        showdashboard();
-    }
     
 }
 
@@ -68,7 +61,7 @@ if(isset($_GET['action'])){
 //select courses that this professor owns
 $result = mysql_query('SELECT classes.id,classes.name FROM classes join classowners on classes.id=classowners.classid WHERE professorid="'.  mysql_real_escape_string($_SESSION['userdata']['id']).'"') or die(mysql_error());
 for($i=0; $row=mysql_fetch_assoc($result);$i++){
-    	echo '<li>'.$row['name'] . ' <a href="viewclass.php?id='.$row['id'].'">View Class</a> <a href="professordashboard.php?action=deleteclass&amp;classid='.$row['id'].'">Delete class</a></li>';
+    	echo '<li>'.$row['name'] . ' <a href="viewclass.php?id='.$row['id'].'">View Class</a> <a href="viewclass.php?action=deleteclass&amp;id='.$row['id'].'" onclick="return confirm(\'Are you sure you wish to delete '.$row['name'].'? This action cannot be undone. All enrollment and attendance data will be permanently deleted.\')">Delete class</a></li>';
 }
 ?>
             </ul>

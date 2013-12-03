@@ -33,7 +33,7 @@ $(document).ready(function() {
             success: function(data)
             {
                 if (data == "1") {
-                    window.location.replace("professordashboard.php");
+                    window.location.replace("professordashboard.php"+(location.search));
                 } else if (data == "0") {
                     alert("Login failure. Please check your username and password.");
                 } else {

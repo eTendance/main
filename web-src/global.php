@@ -17,16 +17,16 @@ function check_auth($reqtype) {
     if (isset($_SESSION['et_logged_in'])) {
         if ($_SESSION['userdata']['usertype'] != $reqtype) {
             if ($_SESSION['userdata']['usertype'] == 'p') {
-                header("Location: professordashboard.php");
+                header("Location: professordashboard.php?".$_SERVER['QUERY_STRING']);
                 exit;
             }
             if ($_SESSION['userdata']['usertype'] == 's') {
-                header("Location: studentdashboard.php");
+                header("Location: studentdashboard.php?".$_SERVER['QUERY_STRING']);
                 exit;
             }
         }
     } else {
-        header("Location: login.php");
+        header("Location: index.php?".$_SERVER['QUERY_STRING']);
     }
 }
 

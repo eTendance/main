@@ -97,7 +97,7 @@ if (!empty($_REQUEST['action'])) {
 
     if ($_REQUEST['action'] == 'deletestudent' && isset($_REQUEST['studentid'])) {
         $query = 'DELETE FROM enrollment WHERE userid="' . mysql_real_escape_string($_REQUEST['studentid']) . '" and classid="' . $classdata['id'] . '"';
-        if(mysql_query($query)===false){
+        if (mysql_query($query) === false) {
             echo mysql_error();
         }
         exit;
@@ -125,6 +125,14 @@ and (checkincodes.forclassday="' . mysql_real_escape_string($_REQUEST['date']) .
     }
 
 
+    if ($_GET['action'] == 'deleteclass') {
+        //delete the class, mysql will take care of deleting from the other tables because of foreign keys
+        $query = 'DELETE FROM classes WHERE id="' . mysql_real_escape_string($_GET['id']) . '"';
+        mysql_query($query) or die(mysql_error());
+        //die($query);
+        showdashboard();
+    }
+
 
 
 
@@ -148,7 +156,7 @@ while ($row = mysql_fetch_assoc($result)) {
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
+        <title>eTendance - Viewing <?php echo $classdata['name'] ?></title>
         <link rel="stylesheet" type="text/css" href="css/viewClass.css" />
         <link rel="stylesheet" type="text/css" href="css/eTendenceProfessor.css" />
         <link rel="stylesheet" type="text/css" href="css/calendar.css" />
@@ -341,7 +349,7 @@ while ($row = mysql_fetch_assoc($result)) {
                     <h2>Students</h2>
                     <?php
                     foreach ($classusers as $user) {
-                        echo '<div id="student-'.$user['id'].'">';
+                        echo '<div id="student-' . $user['id'] . '">';
                         echo $user['firstname'] . ' ' . $user['lastname'] . ' [<a href="#" class="deletestudent" studentid="' . $user['id'] . '">Unregister</a>]';
                         echo '</div>';
                     }
@@ -361,7 +369,7 @@ while ($row = mysql_fetch_assoc($result)) {
                     } else {
                         echo '<a href="' . $_SERVER['PHP_SELF'] . '?action=openenrollment&id=' . $_GET['id'] . '#EnrollCodes" >Closed</a>';
                     }
-                    ?>] <br />
+                    ?>] <br /><br />Enrollment link (email to students): <a href="http://etendance.kleq.net/studentdashboard.php?action=enroll&amp;enrollmentcode=<?php echo $classdata['enrollmentcode'] ?>">http://etendance.kleq.net/studentdashboard.php?action=enroll&amp;enrollmentcode=<?php echo $classdata['enrollmentcode'] ?></a><br /><br />
                     <form action="" method="get"><input type="hidden" name="id" value="<?php echo $classdata['id'] ?>" /><input type="hidden" name="action" value="newenrollmentcode" /><input type="submit" value="Generate New Enrollment Code" /></form>
                 </div>
                 <?php if ($classdata['superowner'] == 'true'): ?>

@@ -21,8 +21,6 @@ if(isset($_POST['username'])){
       $_SESSION['et_logged_in'] = true;
       $_SESSION['userdata'] = mysql_fetch_array($result);
       
-      //header("Location: professordashboard.php");
-      
   } else {
       
       $_SESSION['et_logged_in'] = false;
@@ -31,5 +29,4 @@ if(isset($_POST['username'])){
   }
     
 }
-
 ?>

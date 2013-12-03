@@ -15,6 +15,7 @@
             <form action="login.php" method="post" id="topLoginForm">
                 <input placeholder="Username" type="text" name="username" id="username" value="" maxlength="30"/> 
                 <input placeholder="Password" type="password" name="password" id="password" value="" maxlength="30"/>
+                <input type="hidden" id="querystring" name="qs" value="<?php echo $_SERVER['QUERY_STRING']; ?>" />
                 <input type="submit" id="loginButton" value="Login" class="submit"/>
                 <div id="forgotten">
                     <a href="forgotten.php">Forgot your Username or Password?</a>
