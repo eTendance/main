@@ -140,7 +140,7 @@ if (!empty($_REQUEST['action'])) {
                                 while ($absent_row = mysql_fetch_assoc($dates_absent)) {
                                     echo '<li>' . $absent_row['forclassday'] . '</li>';
                                 }
-                                echo "</ul>";
+                                echo "</ul></div>";
                             }
                         }
                     } else {
