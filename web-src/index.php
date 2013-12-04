@@ -3,7 +3,9 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" type="text/css" href="css/etendenceFront.css" />
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script type="text/javascript" src='js/checkhomepageforms.js'></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>eTendence</title>
@@ -21,7 +23,7 @@
                     <a href="forgotten.php">Forgot your Username or Password?</a>
                 </div>
             </form>
-            
+
         </header>
 
         <div id="container">
@@ -91,5 +93,9 @@
                 </div>
             </div>
         </div>
+        <div id="login-required" title="Login Required">
+            You must login before you can enroll in a course. If you do not yet have an account, use the registration form to create one then login with your new credentials.
+        </div>
+        <div id="ui-message" title="Message"></div>
     </body>
 </html>

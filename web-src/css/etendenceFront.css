@@ -146,3 +146,6 @@ div[title="large"] label
 	margin-right:auto;
 	height:auto;
 }
+input.error {
+    border:2px outset red;
+}

@@ -1,6 +1,44 @@
-
+(function($) {
+    $.QueryString = (function(a) {
+        if (a == "")
+            return {};
+        var b = {};
+        for (var i = 0; i < a.length; ++i)
+        {
+            var p = a[i].split('=');
+            if (p.length != 2)
+                continue;
+            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+        }
+        return b;
+    })(window.location.search.substr(1).split('&'))
+})(jQuery);
 
 $(document).ready(function() {
+
+    $("#login-required").dialog({
+        modal: true,
+        autoOpen: false,
+        buttons: {
+            Ok: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+    $("#ui-message").dialog({
+        modal: true,
+        autoOpen: false,
+        buttons: {
+            Ok: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+
+    if ($.QueryString["action"] == "enroll") {
+        $("#login-required").dialog('open');
+    }
+
     $("#theform").submit(function(e) {
 
         var url = "register.php"; // the script where you handle the form input.
@@ -12,7 +50,8 @@ $(document).ready(function() {
                 data: $("#theform").serialize(), // serializes the form's elements.
                 success: function(data)
                 {
-                    alert(data); // show response from the php script.
+                    $("#ui-message").html(data); // show response from the php script.
+                    $("#ui-message").dialog('open');
                     $("#theform")[0].reset();
                     document.getElementById("username").focus();
                 }
@@ -33,12 +72,14 @@ $(document).ready(function() {
             success: function(data)
             {
                 if (data == "1") {
-                    window.location.replace("professordashboard.php"+(location.search));
+                    $("#ui-message").html("System is logging you in...");
+                    window.location.replace("professordashboard.php" + (location.search));
                 } else if (data == "0") {
-                    alert("Login failure. Please check your username and password.");
+                    $("#ui-message").html("Login failure. Please check your username and password.");
                 } else {
-                    alert("The system encountered an error. Please contact the site administrator.");
+                    $("#ui-message").html("The system encountered an error. Please contact the site administrator.");
                 }
+                $("#ui-message").dialog('open');
                 console.log(data);
             }
         });
@@ -67,7 +108,7 @@ function validateRegForm() {
             && isValidEmail("email", "Enter a valid email!")
             && isLengthMinMax("usernameS", "User name should have 8 to 16 chars!", 8, 16)
             && isLengthMinMax("passwordS", "Enter a valid password (8 to 16 chars)!", 8, 16)
-            && passwordCheck("passwordS","passwordConf","The passwords entered do not match!"));
+            && passwordCheck("passwordS", "passwordConf", "The passwords entered do not match!"));
 }
 
 function validateForm() {
@@ -94,7 +135,7 @@ function passwordCheck(inputId, confId, errorMsg) {
     var errorElement = document.getElementById(inputId + "Error");
     var inputValue = inputElement.value.trim();
     var confValue = confElement.value.trim();
-    var isValid = (inputValue==confValue);  // boolean
+    var isValid = (inputValue == confValue);  // boolean
     showMessage(isValid, inputElement, errorMsg, errorElement);
     return isValid;
 }

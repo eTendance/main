@@ -20,6 +20,7 @@ if (!empty($_REQUEST['action'])) {
                 if (mysql_num_rows($result) == 0) {
                     $query = 'INSERT INTO enrollment (classid,userid) values("' . mysql_real_escape_string($row['id']) . '","' . $_SESSION['userdata']['id'] . '")';
                     mysql_query($query);
+                    $enrollmenterror = 'You have been enrolled successfully!';
                 } else {
                     $enrollmenterror = 'You are already enrolled in this class.';
                 }
@@ -62,6 +63,7 @@ if (!empty($_REQUEST['action'])) {
         if (!isset($checkinerror)) {
             $query = 'INSERT INTO checkins (`userid`,`classid`,`checkincodeid`) values("' . $_SESSION['userdata']['id'] . '","' . $row_checkincode['classid'] . '","' . $row_checkincode['id'] . '")';
             mysql_query($query) or die(mysql_error());
+            $checkinerror[0]="Checked in sucessfully!";
         }
     }
 }
@@ -76,10 +78,10 @@ if (!empty($_REQUEST['action'])) {
         <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
-                   $(".openabsenceswindow").click(function(ev){
-                       ev.preventDefault();
-                       $("#absencesdialog-" + $(this).attr('classid')).dialog('open');
-                   });
+                $(".openabsenceswindow").click(function(ev) {
+                    ev.preventDefault();
+                    $("#absencesdialog-" + $(this).attr('classid')).dialog('open');
+                });
                 $('.absencesdialog').each(function() {
 
                     var dialog = $(this).dialog({
@@ -90,6 +92,28 @@ if (!empty($_REQUEST['action'])) {
                     });
 
                 });
+                if ($("#enrollmenterror").html() != "") {
+                    $("#enrollmenterror").dialog({
+                        modal: true,
+                        autoOpen: true,
+                        buttons: {
+                            Ok: function() {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                }
+                if ($("#checkinerror").html() != "") {
+                    $("#checkinerror").dialog({
+                        modal: true,
+                        autoOpen: true,
+                        buttons: {
+                            Ok: function() {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                }
             });
         </script>
     </head>
@@ -106,7 +130,7 @@ if (!empty($_REQUEST['action'])) {
         <div id="container">
             <div id="add">
                 <h2>Enroll in a Class</h2>
-                <div><?php echo isset($enrollmenterror) ? $enrollmenterror : ""; ?></div>
+                <div id="enrollmenterror" title="Enrollment"><?php echo isset($enrollmenterror) ? $enrollmenterror : ""; ?></div>
                 <p>Enter the enrollment code provided by your professor to enroll in a course.</p>
                 <form action="studentdashboard.php" method="POST">
                     <input type="hidden" name="action" value="enroll" />
@@ -132,11 +156,13 @@ if (!empty($_REQUEST['action'])) {
                             echo '<li>' . $row['name'] . ' - ' . $row['firstname'] . ' ' . $row['lastname'];
                             if ($num_absences > 0) {
                                 echo ' (<a href="#" class="openabsenceswindow" classid="' . $row['id'] . '">' . $num_absences . " absences</a>)";
+                            } else {
+                                echo ' (0 absences)';
                             }
                             echo '</li>';
 
                             if ($num_absences > 0) {
-                                echo '<div title="Absences for '.$row['name'].'" class="absencesdialog" id="absencesdialog-' . $row['id'] . '"><h2>Days Absent:</h2><ul>';
+                                echo '<div title="Absences for ' . $row['name'] . '" class="absencesdialog" id="absencesdialog-' . $row['id'] . '"><h2>Days Absent:</h2><ul>';
                                 while ($absent_row = mysql_fetch_assoc($dates_absent)) {
                                     echo '<li>' . $absent_row['forclassday'] . '</li>';
                                 }
@@ -151,7 +177,7 @@ if (!empty($_REQUEST['action'])) {
             </div>
             <div id="checkIn">
                 <h2>Check In to class</h2>
-                <div><?php echo isset($checkinerror) ? $checkinerror[0] : ""; ?></div>
+                <div id="checkinerror" title="Class Checkin"><?php echo isset($checkinerror) ? $checkinerror[0] : ""; ?></div>
                 <form action="" method="post">
                     <input type="hidden" name="action" value="checkin" />
                     <input type="text" name="checkincode" id="checkincode" value="" maxlength="30" placeholder="Checkin Pin"/>
@@ -159,5 +185,6 @@ if (!empty($_REQUEST['action'])) {
                 </form>
             </div>
         </div>
+
     </body>
 </html>
