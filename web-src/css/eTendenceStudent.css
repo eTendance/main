@@ -110,6 +110,10 @@ input[type="text"]
 {
     margin-left:10%;
 }
+#add p
+{
+    margin-left:3%;
+}
 #classes
 {
 	border-radius:1em;
