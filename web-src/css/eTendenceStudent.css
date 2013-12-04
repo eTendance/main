@@ -136,9 +136,10 @@ input[type="text"]
 	border:solid;
 	float:left;
 	clear:left;
-	width:30%;
+	width:35%;
         margin-top:5%;
         margin-left:2.5%;
+	margin-right:2.5%;
 }
 #checkIn h2
 {

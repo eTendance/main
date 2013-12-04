@@ -181,7 +181,7 @@ if (!empty($_REQUEST['action'])) {
                 <form action="" method="post">
                     <input type="hidden" name="action" value="checkin" />
                     <input type="text" name="checkincode" id="checkincode" value="" maxlength="30" placeholder="Checkin Pin"/>
-                    <input type="submit" value="Checkin" id="check-In" class="submit"/>
+                    <br><input type="submit" value="Checkin" id="check-In" class="submit"/>
                 </form>
             </div>
         </div>
