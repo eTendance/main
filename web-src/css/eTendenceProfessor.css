@@ -81,6 +81,11 @@ nav li a
 body
 {
 	padding-top: 1%;
+	font-family: Verdana, Arial, Helvetica, Futura, sans-serif; 
+    font-size: 1em; 
+    padding:0; 
+    margin:0;
+
 }
 #add
 {
