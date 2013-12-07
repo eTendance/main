@@ -13,6 +13,7 @@
     <body>
         <header>
             <img src="img/eTendance-Logo.png" alt="eTendence Logo" id="logoPlacement" height="100em" />
+            <img src="img/logo.png" alt="eTendence Logo 2" id="logoPlacement2" height="100em" />
 
             <form action="login.php" method="post" id="topLoginForm">
                 <input placeholder="Username" type="text" name="username" id="username" value="" maxlength="30"/> 
