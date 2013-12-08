@@ -32,12 +32,12 @@ body
 #forgotName
 {
 	margin-left:20%;
-	border-radius: 1em;
 	float:left;
 	width:25%;
+	text-align: center;
+	border-radius: 1em;
 	background-color:#2281e1;
 	border:solid #63a9f1;
-	text-align: center;
 }
 #forgotPass
 {

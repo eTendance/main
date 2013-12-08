@@ -95,8 +95,9 @@ input[type="text"]
 	border-radius:1em;
 	float:left;
 	width:45%;
-	background-color:cyan;
-	border:solid;
+	border-radius: 1em;
+	background-color:#2281e1;
+	border:solid #63a9f1;
         margin-left:2.5%;
 	margin-top:10%;
 	padding-bottom:3%;
@@ -119,11 +120,11 @@ input[type="text"]
 	border-radius:1em;
 	float:right;
 	width:45%;
-	background-color:cyan;
-	border:solid;
 	margin-right:2.5%;
 	margin-top:10%;
 	wrap:normal;
+	background-color:#2281e1;
+	border:solid #63a9f1;
 }
 #classes h2
 {
@@ -136,11 +137,11 @@ input[type="text"]
 #checkIn
 {
 	border-radius:1em;
-	background-color:cyan;
-	border:solid;
+	background-color:#2281e1;
+	border:solid #63a9f1;
 	float:left;
 	clear:left;
-	width:35%;
+	width:40%;
         margin-top:5%;
         margin-left:2.5%;
 	margin-right:2.5%;
@@ -190,5 +191,6 @@ body{
     font-size: 1em; 
     padding:0; 
     margin:0;
+    background:#f9f9f9;
 
 }
