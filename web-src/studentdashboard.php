@@ -145,7 +145,7 @@ if (!empty($_REQUEST['action'])) {
     join enrollment on classes.id=enrollment.classid 
     join classowners on classes.id=classowners.classid 
     join users on classowners.professorid=users.id 
-    WHERE enrollment.userid="' . $_SESSION['userdata']['id'] . '"';
+    WHERE enrollment.userid="' . $_SESSION['userdata']['id'] . '" group by classes.id';
                     $result = mysql_query($query);
 
 
