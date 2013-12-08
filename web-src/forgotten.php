@@ -64,5 +64,6 @@
 				</ul>
 			</form>
 		</div>
+		<p>Please note that users who sign in with Google cannot use this feature.</p>
 	</body>
 </html>

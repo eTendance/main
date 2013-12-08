@@ -2,9 +2,17 @@
 require_once('global.php');
 
 if(isset($_GET['logout'])){
-    $_SESSION=array();
-    session_destroy();
-    header('Location: index.php');
+    if(isset($_SESSION['gplusuer'])) {
+      unset($_SESSION['access_token']);
+      unset($_SESSION['gplusuer']);
+      session_destroy();
+      #header('Location: http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']);
+      header('Location: https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']);
+    } else {
+        $_SESSION=array();
+        session_destroy();
+        header('Location: index.php');
+    }
 }
 
 if(isset($_SESSION['et_logged_in']) && $_SESSION['et_logged_in']==true){

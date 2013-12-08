@@ -95,11 +95,9 @@ input[type="text"]
 	border-radius:1em;
 	float:left;
 	width:45%;
-	border-radius: 1em;
-	background-color:#2281e1;
-	border:solid #63a9f1;
-        margin-left:2.5%;
-	margin-top:10%;
+	background-color:#A9A9A9;
+	border:solid;
+	margin-top:13%;
 	padding-bottom:3%;
 	wrap:normal;
 }
@@ -120,11 +118,10 @@ input[type="text"]
 	border-radius:1em;
 	float:right;
 	width:45%;
-	margin-right:2.5%;
-	margin-top:10%;
+	background-color:#A9A9A9;
+	border:solid;
+	margin-top:13%;
 	wrap:normal;
-	background-color:#2281e1;
-	border:solid #63a9f1;
 }
 #classes h2
 {
@@ -137,13 +134,13 @@ input[type="text"]
 #checkIn
 {
 	border-radius:1em;
-	background-color:#2281e1;
-	border:solid #63a9f1;
+	background-color:#A9A9A9;
+	border:solid;
 	float:left;
 	clear:left;
-	width:40%;
+	width:35%;
         margin-top:5%;
-        margin-left:2.5%;
+        margin-left:4%;
 	margin-right:2.5%;
 }
 #checkIn h2
@@ -153,6 +150,7 @@ input[type="text"]
 #checkIn form
 {
     margin-left:10%;
+    margin-bottom:3%;
 }
 #classes form ul
 {
@@ -191,6 +189,5 @@ body{
     font-size: 1em; 
     padding:0; 
     margin:0;
-    background:#f9f9f9;
 
 }

@@ -38,7 +38,7 @@ if(isset($_GET['action'])){
                 <li><span id="profName">Welcome, <?php echo $_SESSION['userdata']['firstname'] . ' ' . $_SESSION['userdata']['lastname'] ?><form action="login.php" method="get"><input type="hidden" name="logout" value="1" /><input type="submit" value="Logout" id="loginButton" class="submit"/></form></span></li>
             </ul>
             
-            <div id="breadcrumbs">Professor Dashboard</div>
+            <div id="breadcrumbs">eTendance Professor Dashboard</div>
         </header>
 	<div id="container">
         <div id="add" class="dashboardbox">
@@ -55,7 +55,7 @@ if(isset($_GET['action'])){
             </div>
         </div>
         <div id="classes" class="dashboardbox">
-            <h2>Classes</h2>
+            <h2>Your Classes</h2>
             <ul>
             <?php
 //select courses that this professor owns

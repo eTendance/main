@@ -38,6 +38,12 @@ li > #loginButton
 {
 	border:none;
 }
+#classes
+{
+    position:relative;
+    margin-top:13%;
+    margin-left:3%;
+}
 #create-class
 {
 	width:20%;
@@ -85,12 +91,12 @@ body
     font-size: 1em; 
     padding:0; 
     margin:0;
-    background:#f9f9f9;
 
 }
 #add
 {
 	width:35%;
+	margin-top:13%;
 }
 #add div
 {
@@ -195,7 +201,7 @@ body
     	border-radius:1em;
 	float:left;
 	width:50%;
-	background-color:salmon;
+	background-color:#A9A9A9;
 	border:solid;
         margin:1%;
 margin-top:90px;
